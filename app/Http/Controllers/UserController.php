@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\UserRepostory;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     protected $userRepository;
-    public function __construct(UserRepostory $userRepository){
+    public function __construct(UserRepository $userRepository){
         $this->userRepository = $userRepository;
     }
 
@@ -52,7 +52,7 @@ class UserController extends Controller
     public function show($id)
     {
         //
-    }
+    } 
 
     /**
      * Show the form for editing the specified resource.
