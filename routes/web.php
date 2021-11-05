@@ -22,3 +22,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('projet', ProjetController::class);
 Route::resource('indicateur', IndicateurController::class);
+

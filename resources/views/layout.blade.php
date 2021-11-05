@@ -241,11 +241,20 @@
 <!-- DataTables -->
 <script src="{!! asset('assets/plugins/datatables/jquery.dataTables.js') !!}"></script>
 <script src="{!! asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') !!}"></script>
+<<<<<<< HEAD
+=======
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+>>>>>>> 7a199033420b52855938384fde968450957bfdd4
 <script>
     $(function () {
         $("#example1").DataTable({
             "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
+<<<<<<< HEAD
             }
         });
         $('#example2').DataTable({
@@ -253,6 +262,26 @@
             "lengthChange": false,
             "searching": false,
             "ordering": true,
+=======
+            },
+            "ordering": false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        });
+        $('#example2').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
+            },
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": false,
+>>>>>>> 7a199033420b52855938384fde968450957bfdd4
             "info": true,
             "autoWidth": false
 
