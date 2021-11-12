@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- <title>AdminLTE 6 | Dashboard</title> -->
-     <title>Questionnaire Enda ECOPOP</title>
+     <title>RFA</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -74,9 +74,13 @@
                document.getElementById('logout-form').submit();">
                     {{ __('Déconnexion') }}
                 </a>
-                 {{--  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @auth
+
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
-                </> --}}
+                </form>
+                @endauth
 
 
             </li>
@@ -122,71 +126,25 @@
                         </a>
 
                     </li>
-
-
-
-
-                    <li class="nav-item">
-                        {{-- <a href="" class="nav-link">
-                            <i class="fas fa-database"></i>
-
-                            <p>
-                                Categorie
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{route('categorie.create')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Ajouter</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('categorie.index') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>lister</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                     <li class="nav-item">
                         <a href="" class="nav-link">
-                            <i class="fas fa-question"></i>
+                            <i class="fas fa-map-marked-alt"></i>
 
                             <p>
-                                Question
+                                Projet
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('question.create')}}" class="nav-link">
+                                <a href="{{ route('projet.create') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Ajouter</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('question.index') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>lister</p>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
-
-                    <li class="nav-item has-treeview menu-open">
-                        <a href="{{ route('personne.index') }}" class="nav-link active">
-                            <i class="nav-icon fas fa-user"></i>
-
-                            <p>
-                                Personne
-                            </p>
-                        </a>
- --}}
-                    </li>
-
-
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

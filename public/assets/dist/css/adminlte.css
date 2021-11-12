@@ -22519,7 +22519,11 @@ html.maximized-card {
   background: #e9ecef;
   display: -ms-flexbox;
   display: flex;
+<<<<<<< HEAD
   /* height: 100vh; */
+=======
+  height: 100vh;
+>>>>>>> d9df8418a80a3d97e3557917baa6de659fca1dec
   -ms-flex-pack: center;
   justify-content: center;
 }
