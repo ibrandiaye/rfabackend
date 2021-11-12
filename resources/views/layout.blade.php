@@ -275,14 +275,9 @@
             "lengthChange": false,
             "searching": false,
             "ordering": false,
-<<<<<<< HEAD
-            "info": true,
-            "autoWidth": false
-=======
             "info": false,
             "autoWidth": true,
             "scrollX": true,
->>>>>>> 954aa164ba662016bb4aedfd113e039246af4660
 
         });
     });
