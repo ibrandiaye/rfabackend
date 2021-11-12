@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Unité</label>
+                                        <label>Unité de Mesure</label>
                                         <input type="text" name="unite"  value="{{ old('unite') }}" class="form-control"  >
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>Titre</label>
+                                            <label>Unité de mesure</label>
                                             <input type="text" name="titre[]"  value="{{ old('titre') }}" class="form-control"  required>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
             $(".addRow").click(function() {
                 $(".conteneur").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur en Chiffre :</label>"+
                     "<input type='number' name='quantite[]'  value='{{ old('quantite') }}' class='form-control'  required >"+
-                    "<label class='fieldlabels'>qsdds :</label>"+
+                    "<label class='fieldlabels'>Unité de Mesure :</label>"+
                     "<input type='text' name='titre[]'  value='{{ old('titre') }}' class='form-control' required> "+
                     "<button type='button' class='btn btn-danger remove-tr'>Supprimer</button></div></div>");
             });

@@ -16,4 +16,7 @@ class Indicateur extends Model
     public function desegrages(){
         return $this->hasMany(Desagrege::class);
     }
+    public function resultats(){
+        return $this->hasMany(Resultat::class);
+    }
 }
