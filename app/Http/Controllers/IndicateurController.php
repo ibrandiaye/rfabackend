@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\IndicateurRepository;
 use App\Repositories\ProjetRepository;
 use Illuminate\Http\Request;
+use App\Desagrege;
 
 class IndicateurController extends Controller
 {
@@ -67,6 +68,18 @@ class IndicateurController extends Controller
             'projet_id'=> 'Nom du projet obligatoire',
         ]);
         $indicateurs = $this->indicateurRepository->store($request->all());
+        if( count($request['quantite']) > 0){
+            $arrlength = count($request['quantite']);
+            $quantites = $request['quantite'];
+            $titres = $request['titre'];
+            for ($i=0; $i < $arrlength; $i++) {
+                $desagrege = new Desagrege();
+                $desagrege->quantite = $quantites[$i];
+                $desagrege->titre = $titres[$i];
+                $desagrege->indicateur_id = $indicateurs->id;
+                $desagrege->save();
+            }
+          }
         return redirect('indicateur');
 
     }

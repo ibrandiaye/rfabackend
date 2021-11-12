@@ -59,6 +59,7 @@
                             <td>{{ $indicateur->indicateur }}</td>
                             <td>{{ $indicateur->donneeref }}</td>
                             <td>{{ $indicateur->cible }}</td>
+                            <td>{{ $indicateur->methode }}</td>
                             <td>{{ $indicateur->frequence }}</td>
                             <td>{{ $indicateur->responsable }}</td>
                             <td>{{ $indicateur->projet->nom }}</td>

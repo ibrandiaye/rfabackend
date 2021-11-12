@@ -8,7 +8,7 @@ class Indicateur extends Model
 {
     protected $fillable = [
         'objectif','indicateur','donneeref','cible','methode','frequence','responsable',
-        'projet_id'
+        'projet_id','unite'
     ];
     public function projet(){
         return $this->belongsTo(Projet::class);

@@ -48,6 +48,12 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
+                                        <label>Durée</label>
+                                        <input type="text" name="duree"  value="{{ $projet->duree }}" class="form-control"  required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
                                         <label>Objectif</label>
                                         <textarea name="objectif"  class="form-control" > {{ $projet->objectif }}</textarea>
                                     </div>

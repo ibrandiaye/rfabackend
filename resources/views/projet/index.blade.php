@@ -42,6 +42,7 @@
                             <th>#</th>
                             <th>Nom Projet</th>
                             <th>Objectif</th>
+                            <th>Durée</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -51,6 +52,7 @@
                             <td>{{ $projet->id }}</td>
                             <td>{{ $projet->nom }}</td>
                             <td>{{ $projet->objectif }}</td>
+                            <td>{{ $projet->duree }} mois</td>
                             <td>
                                 <a href="{{ route('projet.edit', $projet->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['projet.destroy', $projet->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}

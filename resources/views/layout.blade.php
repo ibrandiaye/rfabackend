@@ -142,7 +142,36 @@
                                     <p>Ajouter</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('projet.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>lister</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="fas fa-map-marked-alt"></i>
 
+                            <p>
+                                Indicateur
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('indicateur.create') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ajouter</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('indicateur.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>lister</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -223,7 +252,13 @@
             "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
             },
-            "ordering": false,
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "autoWidth": false,
+            "scrollX": true,
             dom: 'Bfrtip',
             buttons: [
                 'copyHtml5',
@@ -240,8 +275,14 @@
             "lengthChange": false,
             "searching": false,
             "ordering": false,
+<<<<<<< HEAD
             "info": true,
             "autoWidth": false
+=======
+            "info": false,
+            "autoWidth": true,
+            "scrollX": true,
+>>>>>>> 954aa164ba662016bb4aedfd113e039246af4660
 
         });
     });
