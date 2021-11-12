@@ -43,7 +43,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Objectif</label>
-                                        <textarea name="objectif" class="form-control" > {{ $indicateur->objectif }}</textarea>
+                                        <textarea name="objectif" class="form-control" required> {{ $indicateur->objectif }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

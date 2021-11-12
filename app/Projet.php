@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Projet extends Model
 {
     protected $fillable = [
-        'nom','objectif'
+        'nom','objectif','duree'
     ];
 
     public function indicateurs(){

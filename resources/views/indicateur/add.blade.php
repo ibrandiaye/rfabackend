@@ -41,7 +41,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Objectif</label>
-                                        <textarea name="objectif" class="form-control" > {{ old('objectif') }}</textarea>
+                                        <textarea name="objectif" class="form-control" required> {{ old('objectif') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -59,7 +59,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Cibles en fin de projet  </label>
-                                        <input type="text" name="cible"  value="{{ old('cible') }}" class="form-control"  required>
+                                        <input type="number" name="cible"  value="{{ old('cible') }}" class="form-control"  required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Unité</label>
+                                        <input type="text" name="unite"  value="{{ old('unite') }}" class="form-control"  >
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -77,7 +83,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>Fréquence de collecte des données</label>
+                                            <label>Titre</label>
                                             <input type="text" name="titre[]"  value="{{ old('titre') }}" class="form-control"  required>
                                         </div>
                                     </div>

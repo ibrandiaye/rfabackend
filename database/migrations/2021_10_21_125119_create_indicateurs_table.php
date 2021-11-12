@@ -18,7 +18,7 @@ class CreateIndicateursTable extends Migration
             $table->longText('objectif');
             $table->longText('indicateur');
             $table->integer('donneeref');
-            $table->text('cible');
+            $table->integer('cible');
             $table->text('methode');
             $table->text('frequence');
             $table->text('responsable');
@@ -26,6 +26,7 @@ class CreateIndicateursTable extends Migration
             $table->foreign('projet_id')
             ->references('id')
             ->on('projets');
+            $table->text('unite')->nullable();
             $table->timestamps();
         });
     }
