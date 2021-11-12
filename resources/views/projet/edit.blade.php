@@ -49,7 +49,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Durée</label>
-                                        <input type="text" name="duree"  value="{{ $projet->duree }}" class="form-control"  required>
+                                        <input type="number" name="duree"  value="{{ $projet->duree }}" class="form-control"  required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
