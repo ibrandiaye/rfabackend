@@ -46,6 +46,12 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
+                                        <label>Durée</label>
+                                        <input type="text" name="duree"  value="{{ old('duree') }}" class="form-control"  required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
                                         <label>Objectif</label>
                                         <textarea name="objectif"    class="form-control" > {{ old('objectif') }}</textarea>
                                     </div>
