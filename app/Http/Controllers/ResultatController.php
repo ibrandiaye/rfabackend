@@ -6,16 +6,21 @@ use App\Repositories\ResultatRepository;
 use App\Repositories\IndicateurRepository;
 use Illuminate\Http\Request;
 use App\Desagrege;
+use App\ResultatDetail;
 
 class ResultatController extends Controller
 {
     protected $resultatRepository;
     protected $indicateurRepository;
+    protected $desagregeRepository;
+    protected $resultatDetailRepository;
 
-    public function __construct(ResultatRepository $resultatRepository, IndicateurRepository $indicateurRepository){
+    public function __construct(ResultatRepository $resultatRepository, IndicateurRepository $indicateurRepository,
+    ResultatDetail $resultatDetailRepository){
         $this->middleware('auth');
         $this->resultatRepository =$resultatRepository;
         $this->indicateurRepository = $indicateurRepository;
+        $this->resultatDetailRepository = $resultatDetailRepository;
     }
 
     /**
@@ -38,6 +43,10 @@ class ResultatController extends Controller
     {
         $indicateurs = $this->indicateurRepository->getAll();
         return view('resultat.add',compact('indicateurs'));
+    }
+    public function getDesagregeByIndicateur($indicateur_id){
+        $desagreges = $this->desagregeRepository->getDesagregeByIndicateur($indicateur_id);
+        return response()->json($desagreges);
     }
 
     /**
