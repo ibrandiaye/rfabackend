@@ -11,4 +11,7 @@ class Desagrege extends Model
     public function indicateur(){
         return $this->belongsTo(Indicateur::class);
     }
+    public function resultatDetails(){
+        return $this->hasMany(ResultatDetail::class);
+    }
 }
