@@ -84,6 +84,35 @@
 
 
 @endsection
+@section('script')
+<script type=text/javascript>
+    $("#volume_id").change(function () {
+
+        //var selectedClasse = $(this).children("option:selected").val();
+    var idv =  $("#volume_id").children("option:selected").val();
+        //alert("You have selected the country - " + idv);
+        var numero_id = "";
+        $.ajax({
+            type:'GET',
+            url:'/numero/volume/'+idv,
+            data:'_token = <?php echo csrf_token() ?>',
+            success:function(data) {
+
+                numero_id += " <option value=''>Sélectionner</option>";
+                $.each(data,function(index,row){
+
+                    numero_id +="<option value="+row.id+">"+row.numn+"</option>";
+                    //alert(row.id)
+                });
+                $("#numero_id").empty();
+                $("#numero_id").append(numero_id);
+            }
+        });
+
+    });
+</script>
+
+@endsection
 
 
 
