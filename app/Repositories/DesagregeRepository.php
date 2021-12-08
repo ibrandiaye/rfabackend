@@ -12,8 +12,8 @@ class DesagregeRepository extends RessourceRepository{
     }
 
     public function getDesagregeByIndicateur($id){
-        return DB::table('desegrages')
-        ->where('indeicateur_id',$id)
+        return DB::table('desagreges')
+       ->where('indicateur_id',$id)
         ->get();
     }
 }

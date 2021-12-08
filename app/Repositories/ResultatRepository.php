@@ -9,4 +9,9 @@ class ResultatRepository extends RessourceRepository{
     {
         $this->model = $resultat;
     }
+
+    public function listResultatWithRelation(){
+        return Resultat::with(['indicateur','indicateur.projet','resultatDetails','resultatDetails.desagrege',''])
+        ->get();
+    }
 }

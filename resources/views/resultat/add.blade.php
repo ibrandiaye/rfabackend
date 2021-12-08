@@ -40,9 +40,24 @@
                                 @endif
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Valeur en chiffre</label>
+                                        <label>indicateur</label>
+                                        <select class="form-control" id="indicateur_id" name="indicateur_id" required="">
+                                            <option value="">Selectionnez</option>
+                                            @foreach ($indicateurs as $indicateur)
+                                            <option value="{{$indicateur->id}}">{{$indicateur->indicateur}}</option>
+                                                @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Valeur Total</label>
                                         <textarea name="rts" class="form-control" required> {{ old('rts') }}</textarea>
                                     </div>
+                                </div>
+                                <div class="containers">
+
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -57,17 +72,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>indicateur</label>
-                                        <select class="form-control" name="indicateur_id" required="">
-                                            @foreach ($indicateurs as $indicateur)
-                                            <option value="{{$indicateur->id}}">{{$indicateur->nom}}</option>
-                                                @endforeach
 
-                                        </select>
-                                    </div>
-                                </div>
+
                                 <div>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>
@@ -86,23 +92,23 @@
 @endsection
 @section('script')
 <script type=text/javascript>
-    $("#volume_id").change(function () {
+    $("#indicateur_id").change(function () {
 
         //var selectedClasse = $(this).children("option:selected").val();
-    var idv =  $("#volume_id").children("option:selected").val();
+    var idv =  $("#indicateur_id").children("option:selected").val();
         //alert("You have selected the country - " + idv);
         var numero_id = "";
         $.ajax({
             type:'GET',
-            url:'/numero/volume/'+idv,
+            url:'/desagrege/by/indicateur/'+idv,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
 
                 numero_id += " <option value=''>Sélectionner</option>";
                 $.each(data,function(index,row){
-
-                    numero_id +="<option value="+row.id+">"+row.numn+"</option>";
-                    //alert(row.id)
+                    $(".containers").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur pour "+row.titre+":</label>"+
+                    "<input type='number' name='valeur[]'  value='{{ old('valeur') }}' class='form-control'  required >"+
+                    "<input type='hidden' name='desagrege_id[]'  value="+row.id+" class='form-control'  required >");
                 });
                 $("#numero_id").empty();
                 $("#numero_id").append(numero_id);

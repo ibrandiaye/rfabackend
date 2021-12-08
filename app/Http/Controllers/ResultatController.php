@@ -6,6 +6,7 @@ use App\Repositories\ResultatRepository;
 use App\Repositories\IndicateurRepository;
 use Illuminate\Http\Request;
 use App\Desagrege;
+use App\Repositories\DesagregeRepository;
 use App\ResultatDetail;
 
 class ResultatController extends Controller
@@ -16,11 +17,12 @@ class ResultatController extends Controller
     protected $resultatDetailRepository;
 
     public function __construct(ResultatRepository $resultatRepository, IndicateurRepository $indicateurRepository,
-    ResultatDetail $resultatDetailRepository){
+    ResultatDetail $resultatDetailRepository, DesagregeRepository $desagregeRepository){
         $this->middleware('auth');
         $this->resultatRepository =$resultatRepository;
         $this->indicateurRepository = $indicateurRepository;
         $this->resultatDetailRepository = $resultatDetailRepository;
+        $this->desagregeRepository =$desagregeRepository;
     }
 
     /**
@@ -69,6 +71,20 @@ class ResultatController extends Controller
             'indicateur_id'=> 'Indicateur obligatoire',
         ]);
         $resultats = $this->resultatRepository->store($request->all());
+        if( count($request['valeur']) > 0){
+        $arrlength = count($request['valeur']);
+        $valeurs = $request['valeur'];
+        $desagreges = $request['desagrege_id'];
+        //$titres = $request['titre'];
+        for ($i=0; $i < $arrlength; $i++) {
+            $resultatDetail = new ResultatDetail();
+            $resultatDetail->valeur = $valeurs[$i];
+            $resultatDetail->resultat_id = $resultats->id;
+            $resultatDetail->desagrege_id = $desagreges[$i];
+            $resultatDetail->save();
+        }
+      }
+
         return redirect('resultat');
 
     }

@@ -6,16 +6,21 @@ use App\Repositories\IndicateurRepository;
 use App\Repositories\ProjetRepository;
 use Illuminate\Http\Request;
 use App\Desagrege;
+use App\Repositories\ResultatDetailRepository;
+use App\ResultatDetail;
 
 class IndicateurController extends Controller
 {
     protected $indicateurRepository;
     protected $projetRepository;
+    protected $resultatDetailRepository;
 
-    public function __construct(IndicateurRepository $indicateurRepository, ProjetRepository $projetRepository){
+    public function __construct(IndicateurRepository $indicateurRepository, ProjetRepository $projetRepository,
+    ResultatDetailRepository $resultatDetailRepository){
         $this->middleware('auth');
         $this->indicateurRepository =$indicateurRepository;
         $this->projetRepository = $projetRepository;
+        $this->resultatDetailRepository = $resultatDetailRepository;
     }
 
     /**
