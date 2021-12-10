@@ -39,7 +39,7 @@
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th>#</th>
+
                             <th>Objectif</th>
                             <th>indicateur</th>
                             <th>Données de référence</th>
@@ -54,7 +54,6 @@
                     <tbody>
                     @foreach ($indicateurs as $indicateur)
                         <tr>
-                            <td>{{ $indicateur->id }}</td>
                             <td>{{ $indicateur->objectif }}</td>
                             <td>{{ $indicateur->indicateur }}</td>
                             <td>{{ $indicateur->donneeref }}</td>
@@ -68,7 +67,7 @@
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
-
+                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id]) }}" class="btn btn-info">Résultats</a>
 
 
                             </td>

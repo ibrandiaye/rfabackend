@@ -9,4 +9,10 @@ class IndicateurRepository extends RessourceRepository{
     {
         $this->model = $indicateur;
     }
+    public function getIndicateurByProjet($projet_id){
+        return Indicateur::with(['projet'])
+        ->where('projet_id',$projet_id)
+        ->get();
+
+    }
 }

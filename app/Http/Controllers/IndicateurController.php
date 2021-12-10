@@ -137,4 +137,8 @@ class IndicateurController extends Controller
         $this->indicateurRepository->destroy($id);
         return redirect('indicateur');
     }
+    public function getIndicateurByProjet($projet_id){
+        $indicateurs = $this->indicateurRepository->getIndicateurByProjet($projet_id);
+        return view('indicateur.index',compact('indicateurs'));
+    }
 }

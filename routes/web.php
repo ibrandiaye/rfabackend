@@ -25,3 +25,5 @@ Route::resource('projet', ProjetController::class);
 Route::resource('indicateur', IndicateurController::class);
 Route::resource('resultat', ResultatController::class);
 Route::get('desagrege/by/indicateur/{indicateur_id}','ResultatController@getDesagregeByIndicateur');
+Route::get('projet/indicateur/{projet_id}','IndicateurController@getIndicateurByProjet')->name('projet.indicateur');
+Route::get('indicateur/resultat/{indicateur}','ResultatController@getResultatByIndicateur')->name('indicateur.resultat');

@@ -276,12 +276,12 @@
             "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
             },
-            "paging": true,
-            "lengthChange": false,
+           "paging": true,
+            "lengthChange": true,
             "searching": true,
             "ordering": true,
-            "info": false,
-            "autoWidth": false,
+           "info": true,
+            "autoWidth": true,
             "scrollX": true,
             dom: 'Bfrtip',
             buttons: [

@@ -59,7 +59,7 @@
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
 
-
+                                <a href="{{ route('projet.indicateur', ['projet_id'=>$projet->id]) }}" class="btn btn-info">Indicateur</a>
 
                             </td>
 

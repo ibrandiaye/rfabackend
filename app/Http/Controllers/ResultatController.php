@@ -32,7 +32,7 @@ class ResultatController extends Controller
      */
     public function index()
     {
-        $resultats = $this->resultatRepository->getAll();
+        $resultats = $this->resultatRepository->listResultatWithRelation();
         return view('resultat.index',compact('resultats'));
     }
 
@@ -136,5 +136,10 @@ class ResultatController extends Controller
     {
         $this->resultatRepository->destroy($id);
         return redirect('resultat');
+    }
+    public function getResultatByIndicateur($indicateur){
+        $resultats = $this->resultatRepository->getResultatByIndicateur($indicateur);
+        return view('resultat.index',compact('resultats'));
+
     }
 }

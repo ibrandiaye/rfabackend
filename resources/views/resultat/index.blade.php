@@ -39,27 +39,27 @@
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Projet</th>
                             <th>Nom indicateur</th>
                             <th>valeur Total</th>
                             <th>Desagrege</th>
                             <th>Date début </th>
-                            
+                            <th>Date Fin </th>
+                            <th>action</th>
+
                         </tr>
                     </thead>
                     <tbody>
                     @foreach ($resultats as $resultat)
                         <tr>
-                            <td>{{ $resultat->id }}</td>
-                            <td>{{ $resultat->objectif }}</td>
-                            <td>{{ $resultat->resultat }}</td>
-                            <td>{{ $resultat->donneeref }}</td>
-                            <td>{{ $resultat->cible }}</td>
-                            <td>{{ $resultat->methode }}</td>
-                            <td>{{ $resultat->frequence }}</td>
-                            <td>{{ $resultat->responsable }}</td>
-                            <td>{{ $resultat->projet->nom }}</td>
+                            <td>{{ $resultat->indicateur->projet->nom }}</td>
+                            <td>{{ $resultat->indicateur->indicateur }}</td>
+                            <td>{{ $resultat->rts }}</td>
+                            <td>@foreach ($resultat->resultatDetails as $resultatDetail )
+                                {{ $resultatDetail->valeur }} {{ $resultatDetail->desagrege->titre }},
+                            @endforeach</td>
+                            <td>{{ $resultat->debut }}</td>
+                            <td>{{ $resultat->fin }}</td>
                             <td>
                                 <a href="{{ route('resultat.edit', $resultat->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['resultat.destroy', $resultat->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
