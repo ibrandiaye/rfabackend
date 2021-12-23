@@ -101,7 +101,8 @@
                                         <input type="text" name="responsable"  value="{{ old('responsable') }}" class="form-control"  required>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <input type="hidden" name="projet_id" value="{{ $projet_id }}">
+                               {{--   <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Projet</label>
                                         <select class="form-control" name="projet_id" required="">
@@ -111,7 +112,7 @@
 
                                         </select>
                                     </div>
-                                </div>
+                                </div>  --}}
                                 <div>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>

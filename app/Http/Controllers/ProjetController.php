@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ProjetRepository;
+use App\Repositories\RegionRepository;
 use Illuminate\Http\Request;
+use App\Zone;
+use Illuminate\Support\Facades\DB;
 
 class ProjetController extends Controller
 {
     protected $projetRepository;
+    protected $regionRepository;
 
-    public function __construct(ProjetRepository $projetRepository){
+    public function __construct(ProjetRepository $projetRepository, RegionRepository $regionRepository){
         $this->middleware('auth');
         $this->projetRepository =$projetRepository;
+        $this->regionRepository = $regionRepository;
     }
 
     /**
@@ -21,7 +26,7 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        $projets = $this->projetRepository->getAll();
+        $projets = $this->projetRepository->getAllProjetsWithRelations();
         return view('projet.index',compact('projets'));
     }
 
@@ -32,7 +37,8 @@ class ProjetController extends Controller
      */
     public function create()
     {
-        return view('projet.add');
+        $regions = $this->regionRepository->getAll();
+        return view('projet.add',compact('regions'));
     }
 
     /**
@@ -48,7 +54,15 @@ class ProjetController extends Controller
         ],[
             'nom.required' => 'Nom du projet obligatoire',
         ]);
+        $length = sizeof($request['zone']);
         $projets = $this->projetRepository->store($request->all());
+        $zones = $request['zone'];
+        for ($i=0; $i < $length ; $i++) {
+            $zone = new Zone();
+            $zone->projet_id = $projets->id;
+            $zone->region_id = $zones[$i];
+            $zone->save();
+        }
         return redirect('projet');
 
     }
@@ -73,8 +87,24 @@ class ProjetController extends Controller
      */
     public function edit($id)
     {
-        $projet = $this->projetRepository->getById($id);
-        return view('projet.edit',compact('projet'));
+        $projet = $this->projetRepository->getOneProjetsWithRelations($id);
+        $regions = $this->regionRepository->getAll();
+        $index = 0;
+        $tab = array();
+        $lenght = sizeof($regions);
+        foreach ($regions as $key => $region) {
+            $in= false;
+           foreach ($projet->zones as $key => $zone) {
+                if($zone->region_id==$region->id){
+                    $in = true;
+                }
+
+           }
+           $tab[$index]= $in;
+           $index++;
+        }
+      //  dd($tab);
+        return view('projet.edit',compact('projet','regions','tab'));
     }
 
     /**
@@ -87,6 +117,15 @@ class ProjetController extends Controller
     public function update(Request $request, $id)
     {
         $this->projetRepository->update($id, $request->all());
+        $length = sizeof($request['zone']);
+        DB::table('zones')->where('projet_id',$id)->delete();
+        $zones = $request['zone'];
+        for ($i=0; $i < $length ; $i++) {
+            $zone = new Zone();
+            $zone->projet_id = $id;
+            $zone->region_id = $zones[$i];
+            $zone->save();
+        }
         return redirect('projet');
     }
 

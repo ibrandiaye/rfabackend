@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Resultat extends Model
 {
     protected $fillable = [
-        'rts','debut','fin','indicateur_id'
+        'rts','debut','fin','indicateur_id','commune_id'
     ];
     public function indicateur(){
         return $this->belongsTo(Indicateur::class);

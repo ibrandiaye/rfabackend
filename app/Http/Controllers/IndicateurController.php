@@ -39,10 +39,11 @@ class IndicateurController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($projet_id)
     {
-        $projets = $this->projetRepository->getAll();
-        return view('indicateur.add',compact('projets'));
+       // $projets = $this->projetRepository->getAll();
+
+        return view('indicateur.add',compact('projet_id'));
     }
 
     /**
@@ -140,5 +141,17 @@ class IndicateurController extends Controller
     public function getIndicateurByProjet($projet_id){
         $indicateurs = $this->indicateurRepository->getIndicateurByProjet($projet_id);
         return view('indicateur.index',compact('indicateurs'));
+    }
+    public function getIndicateurAndResultat($projet_id){
+        $indicateurs = $this->indicateurRepository->getIndicateurByProjetAndResultat($projet_id);
+        $sumIndicateurs = $this->indicateurRepository->getSumIndicateurByProjet($projet_id);
+        foreach ($indicateurs as $key => $indicateur) {
+             foreach ($sumIndicateurs as $key1 => $sumIndicateur) {
+                if($indicateur->indicateur === $sumIndicateur->indicateur){
+                    $indicateurs[$key]->sum = $sumIndicateur->rts;
+                }
+             }
+        }
+         return view('indicateur.fiche',compact('indicateurs'));
     }
 }

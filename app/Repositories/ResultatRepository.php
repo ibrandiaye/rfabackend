@@ -19,5 +19,6 @@ class ResultatRepository extends RessourceRepository{
         ->where('indicateur_id',$indicateur)
         ->get();
     }
+    
 
 }

@@ -72,7 +72,18 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Commune</label>
+                                        <select class="form-control" id="commune_id" name="commune_id" required="">
+                                            <option value="">Selectionnez</option>
+                                            @foreach ($communes as $commune)
+                                            <option value="{{$commune->id}}">{{$commune->nomc}}</option>
+                                                @endforeach
 
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div>
                                     <center>

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', '| projet')
+@section('title', '| commune')
 
 
 @section('content')
@@ -9,12 +9,12 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-info">GESTION DES PROJETS</h1>
+                                <h1 class="m-0 text-info">GESTION DES Communes</h1>
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('projet.create') }}" role="button" class="btn btn-primary">ENREGISTRER projet</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('commune.create') }}" role="button" class="btn btn-primary">ENREGISTRER commune</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -34,38 +34,34 @@
 
 <div class="col-12">
     <div class="card border-danger border-0">
-        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES PROJETS</div>
+        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES Commune</div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nom Projet</th>
-                            <th>Objectif</th>
-                            <th>Durée</th>
-                            <th>Zones d'intervation</th>
+                            <th>Nom commune</th>
+                            <th>Nom departement</th>
+                            <th>latitude</th>
+                            <th>Longitude</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($projets as $projet)
+                    @foreach ($communes as $commune)
                         <tr>
-                            <td>{{ $projet->id }}</td>
-                            <td>{{ $projet->nom }}</td>
-                            <td>{{ $projet->objectif }}</td>
-                            <td>{{ $projet->duree }} mois</td>
+                            <td>{{ $commune->id }}</td>
+                            <td>{{ $commune->nomc }}</td>
+                            <td>{{ $commune->departement->nomc }}</td>
+                            <td>{{ $commune->latitudec }}</td>
+                            <td>{{ $commune->longitudec }}</td>
                             <td>
-                                @foreach ($projet->zones as $zone)
-                                    {{ $zone->region->nom }},
-                                @endforeach
-                            </td>
-                            <td>
-                                <a href="{{ route('projet.edit', $projet->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                {!! Form::open(['method' => 'DELETE', 'route'=>['projet.destroy', $projet->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
+                                <a href="{{ route('commune.edit', $commune->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                {!! Form::open(['method' => 'DELETE', 'route'=>['commune.destroy', $commune->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
 
-                                <a href="{{ route('projet.indicateur', ['projet_id'=>$projet->id]) }}" class="btn btn-info">Indicateur</a>
+
 
                             </td>
 

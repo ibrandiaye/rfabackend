@@ -6,6 +6,7 @@ use App\Repositories\ResultatRepository;
 use App\Repositories\IndicateurRepository;
 use Illuminate\Http\Request;
 use App\Desagrege;
+use App\Repositories\CommuneRepository;
 use App\Repositories\DesagregeRepository;
 use App\ResultatDetail;
 
@@ -15,14 +16,16 @@ class ResultatController extends Controller
     protected $indicateurRepository;
     protected $desagregeRepository;
     protected $resultatDetailRepository;
+    protected $communeRepository;
 
     public function __construct(ResultatRepository $resultatRepository, IndicateurRepository $indicateurRepository,
-    ResultatDetail $resultatDetailRepository, DesagregeRepository $desagregeRepository){
+    ResultatDetail $resultatDetailRepository, DesagregeRepository $desagregeRepository,CommuneRepository $communeRepository){
         $this->middleware('auth');
         $this->resultatRepository =$resultatRepository;
         $this->indicateurRepository = $indicateurRepository;
         $this->resultatDetailRepository = $resultatDetailRepository;
         $this->desagregeRepository =$desagregeRepository;
+        $this->communeRepository = $communeRepository;
     }
 
     /**
@@ -64,11 +67,13 @@ class ResultatController extends Controller
             'debut'=> 'required|date',
             'fin'=> 'required|date',
             'indicateur_id'=> 'required|integer',
+            'commune_id'=>'required|integer'
         ],[
             'rts'=> 'Valeur obligatoire',
             'debut'=> 'Date Debut obligatoire',
             'fin'=> 'Date Fin obligatoire',
             'indicateur_id'=> 'Indicateur obligatoire',
+            'commune_id'=> 'Commune obligatoire',
         ]);
         $resultats = $this->resultatRepository->store($request->all());
         if( count($request['valeur']) > 0){
@@ -141,5 +146,11 @@ class ResultatController extends Controller
         $resultats = $this->resultatRepository->getResultatByIndicateur($indicateur);
         return view('resultat.index',compact('resultats'));
 
+    }
+    public function createByProject($projet_id)
+    {
+        $indicateurs = $this->indicateurRepository->getIndicateurByProjet($projet_id);
+        $communes = $this->communeRepository->getCommuneByProject($projet_id);
+        return view('resultat.add',compact('indicateurs','communes'));
     }
 }

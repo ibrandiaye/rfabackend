@@ -13,4 +13,10 @@ class Projet extends Model
     public function indicateurs(){
         return $this->hasMany(Indicateur::class);
     }
+    public function zones(){
+        return $this->hasMany(Zone::class);
+    }
+    public function activites(){
+        return $this->hasMany(Activite::class);
+    }
 }

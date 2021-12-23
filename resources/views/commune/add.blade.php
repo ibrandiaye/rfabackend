@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\create.blade.php --}}
 @extends('layout')
 
-@section('title', '| Enregister projet')
+@section('title', '| Enregister Département')
 
 @section('content')
 
@@ -12,22 +12,22 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">GESTION DES Projets</h1>
+                        <h1 class="m-0 text-info">GESTION DES COMMUNES</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('projet.index') }}" role="button" class="btn btn-primary">Formulaire d'enregistrement des projets</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('commune.index') }}" role="button" class="btn btn-primary">LISTE D'ENREGISTREMENT DES communes</a></li>
 
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-        <form action="{{ route('projet.store') }}" method="POST">
+        <form action="{{ route('commune.store') }}" method="POST">
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UN PROJET</div>
+                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UNE COMMUNE</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -40,34 +40,32 @@
                                 @endif
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Nom du Projet</label>
-                                        <input type="text" name="nom"  value="{{ old('nom') }}" class="form-control"  required>
+                                        <label>Nom Commune</label>
+                                        <input type="text" name="nomc"  value="{{ old('nomc') }}" class="form-control" min="1" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Durée</label>
-                                        <input type="number" name="duree"  value="{{ old('duree') }}" class="form-control"  required>
+                                        <label>Latitude</label>
+                                        <input type="number" name="latitudec"  value="{{ old('latitudec') }}" step="any" class="form-control" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Objectif</label>
-                                        <textarea name="objectif"    class="form-control" > {{ old('objectif') }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
 
-                                    <div class="form-group">
-                                        @foreach ($regions as $region )
-                                        <div class="custom-control custom-checkbox">
-                                          <input class="custom-control-input" name="zone[]" type="checkbox" id="customCheckbox{{ $region->id }}" value="{{ $region->id }}">
-                                          <label for="customCheckbox{{ $region->id }}" class="custom-control-label">{{ $region->nom }}</label>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Longitude</label>
+                                            <input type="number" name="longitudec"  value="{{ old('longitudec') }}" step="any" class="form-control" required>
                                         </div>
-                                        @endforeach
                                     </div>
+                                    <div class="col-lg-6">
+                                        <label>Nom Région</label>
+                                        <select class="form-control" name="departement_id" required="">
+                                            @foreach ($departements as $departement)
+                                            <option value="{{$departement->id}}">{{$departement->nomd}}</option>
+                                                @endforeach
 
-                                </div>
+                                        </select>
+                                    </div>
 
                                 <div>
                                     <center>
