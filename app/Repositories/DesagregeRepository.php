@@ -16,4 +16,8 @@ class DesagregeRepository extends RessourceRepository{
        ->where('indicateur_id',$id)
         ->get();
     }
+    public function deleteDesagregeByIndicateur($id){
+        return Desagrege::where('indicateur_id',$id)
+        ->delete();
+    }
 }

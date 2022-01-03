@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ActiviteRepository;
+use App\Repositories\CommuneRepository;
+use App\Repositories\ProjetRepository;
 use App\Repositories\SuiviActiviteRepository;
 use Illuminate\Http\Request;
 
@@ -10,11 +12,16 @@ class SuiviActiviteController extends Controller
 {
     protected $activiteRepository;
     protected $suiviActiviteRepository;
+    protected $projetRepository;
+    protected $communeRepository;
 
-    public function __construct(ActiviteRepository $activiteRepository, SuiviActiviteRepository $suiviActiviteRepository)
+    public function __construct(ActiviteRepository $activiteRepository, SuiviActiviteRepository $suiviActiviteRepository,
+    ProjetRepository $projetRepository,CommuneRepository $communeRepository)
     {
         $this->activiteRepository = $activiteRepository;
-        $this->suiviActiviteRepository = $activiteRepository;
+        $this->suiviActiviteRepository = $suiviActiviteRepository;
+        $this->projetRepository = $projetRepository;
+        $this->communeRepository = $communeRepository;
     }
     /**
      * Display a listing of the resource.
@@ -31,10 +38,12 @@ class SuiviActiviteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($projet_id)
     {
-        $activites = $this->activiteRepository->getAll();
-        return view('suiviActivite.add',compact('activites'));
+        $activites = $this->activiteRepository->getActiviteByProjets($projet_id);
+        $projet= $this->projetRepository->getById($projet_id);
+        $communes = $this->communeRepository->getCommuneByProject($projet_id);
+        return view('suiviActivite.add',compact('activites','projet_id','projet','communes'));
     }
 
     /**
@@ -45,7 +54,15 @@ class SuiviActiviteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'niveaur'=> 'required|string',
+            'resultat'=> 'required|string',
+            'activite_id'=> 'required|string',
+            'dater'=> 'required|date',
+        ]);
+        $suiviActivite = $this->suiviActiviteRepository->store($request->all());
+        return redirect()->route('suiviactivite.projet',['projet_id'=>$request['projet_id']]);
+
     }
 
     /**
@@ -56,7 +73,7 @@ class SuiviActiviteController extends Controller
      */
     public function show($id)
     {
-        //
+        $suiviActivite = $this->suiviActiviteRepository->getById($id);
     }
 
     /**
@@ -65,9 +82,13 @@ class SuiviActiviteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$projet_id)
     {
-        //
+        $suiviActivite = $this->suiviActiviteRepository->getById($id);
+        $projet = $this->projetRepository->getById($projet_id);
+        $activites = $this->activiteRepository->getActiviteByProjets($projet_id);
+        $communes  = $this->communeRepository->getCommuneByProject($projet_id);
+        return view('suiviActivite.edit',compact('suiviActivite','activites','projet','projet_id','communes'));
     }
 
     /**
@@ -79,7 +100,8 @@ class SuiviActiviteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->suiviActiviteRepository->update($id,$request->all());
+        return redirect()->route('suiviactivite.projet',['projet_id'=>$request['projet_id']]);
     }
 
     /**
@@ -92,4 +114,17 @@ class SuiviActiviteController extends Controller
     {
         //
     }
+    public function getSuiviActiviteByProjet($projet_id){
+        $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);
+        $projet = $this->projetRepository->getById($projet_id);
+        $nbSuiviActivite = $this->suiviActiviteRepository->countSuiviActivite($projet_id);
+
+        $nbActivite = $this->activiteRepository->countActivite($projet_id);
+        //dd($nbActivite);
+        $nbEcart = $nbActivite - $nbSuiviActivite;
+        return view('suiviActivite.index',compact('suiviActivites','projet','projet_id','nbSuiviActivite',
+    'nbActivite','nbEcart'));
+
+    }
+
 }

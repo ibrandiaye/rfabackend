@@ -10,4 +10,10 @@ class Commune extends Model
     public function departement(){
         return $this->belongsTo(Departement::class);
     }
+    public function suiviActivites(){
+        return $this->hasMany(SuiviActivite::class);
+    }
+    public function resultats(){
+        return $this->hasMany(Resultat::class);
+    }
 }

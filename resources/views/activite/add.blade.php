@@ -1,5 +1,5 @@
 {{-- \resources\views\permissions\create.blade.php --}}
-@extends('welcome')
+@extends('layout')
 
 @section('title', '| Enregister Activité')
 
@@ -15,7 +15,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('activite.index') }}" role="button" class="btn btn-primary">LISTE D'ENREGISTREMENT DES Activités</a></li>
 
                         </ol>

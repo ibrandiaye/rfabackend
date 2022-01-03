@@ -25,10 +25,10 @@
                 </div><!-- /.container-fluid -->
             </div>
 
-        {!! Form::model($projet, ['method'=>'PATCH','route'=>['projet.update', $projet->id]]) !!}
+        {!! Form::model($resultat, ['method'=>'PATCH','route'=>['resultat.update', $resultat->id]]) !!}
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION TABLE</div>
+                        <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION RESULTAT</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -39,60 +39,67 @@
                                         </ul>
                                     </div>
                                 @endif
-
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Objectif</label>
-                                        <textarea name="objectif" class="form-control" required> {{ $indicateur->objectif }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Nom du indicateur</label>
-                                        <input type="text" name="indicateur"  value="{{ $indicateur->indicateur }}" class="form-control"  required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Données de référence </label>
-                                        <input type="text" name="donneeref"  value="{{ $indicateur->donneeref }}" class="form-control"  required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Cibles en fin de projet  </label>
-                                        <input type="text" name="cible"  value="{{ $indicateur->cible }}" class="form-control"  required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Méthode de collecte des données</label>
-                                        <input type="text" name="methode"  value="{{ $indicateur->methode }}" class="form-control"  required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Fréquence de collecte des données</label>
-                                        <input type="text" name="frequence"  value="{{ $indicateur->frequence }}" class="form-control"  required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Respondsable de la collecte des données</label>
-                                        <input type="text" name="responsable"  value="{{ $indicateur->responsable }}" class="form-control"  required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Projet</label>
-                                        <select class="form-control" name="projet_id" required="">
-                                            @foreach ($projets as $projet)
-                                            <option {{old('projet_id', $indicateur->distributeur_id) == $projet->id ? 'selected' : ''}} value="{{$projet->id}}">{{$projet->nom}}</option>
+                                        <label>indicateur</label>
+                                        <select class="form-control" id="indicateur_id" name="indicateur_id" required="">
+                                            <option value="">Selectionnez</option>
+                                            @foreach ($indicateurs as $indicateur)
+                                            <option value="{{$indicateur->id}}" {{ $indicateur->id == $resultat->indicateur_id ? 'selected' : ''}} >{{$indicateur->indicateur}}</option>
                                                 @endforeach
 
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Valeur Total</label>
+                                        <input type="number" name="rts" value="{{ $resultat->rts }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="containers">
+                                    @foreach ($resultatDetails as $resultatDetail )
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Valeur pour {{ $resultatDetail->titre }}</label>
+                                            <input type="number" name='valeur[]'  value='{{ $resultatDetail->valeur }}' class='form-control'  required>
+                                            <input type='hidden' name='desagrege_id[]'  value="{{ $resultatDetail->desagrege_id }}" class='form-control'  required >
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Observation</label>
+                                        <textarea name="observation" class="form-control" required> {{ $resultat->observation }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Date Debut </label>
+                                        <input type="date" name="debut"  value="{{ $resultat->debut }}" class="form-control"  required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Date Fin </label>
+                                        <input type="date" name="fin"  value="{{ $resultat->fin }}" class="form-control"  required>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Commune</label>
+                                        <select class="form-control" id="commune_id" name="commune_id" required="">
+                                            <option value="">Selectionnez</option>
+                                            @foreach ($communes as $commune)
+                                            <option value="{{$commune->id}}" {{ $commune->id == $resultat->commune_id ? 'selected' : ''}}>{{$commune->nomc}}</option>
+                                                @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="{{ $projet_id }}" name="projet_id">
                                 <div>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> MODIFIER</button>
@@ -109,3 +116,33 @@
     </div>
 
 @endsection
+@section('script')
+<script type=text/javascript>
+    $("#indicateur_id").change(function () {
+
+        //var selectedClasse = $(this).children("option:selected").val();
+    var idv =  $("#indicateur_id").children("option:selected").val();
+        //alert("You have selected the country - " + idv);
+        var numero_id = "";
+        $.ajax({
+            type:'GET',
+            url:'/desagrege/by/indicateur/'+idv,
+            data:'_token = <?php echo csrf_token() ?>',
+            success:function(data) {
+
+                numero_id += " <option value=''>Sélectionner</option>";
+                $.each(data,function(index,row){
+                    $(".containers").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur pour "+row.titre+":</label>"+
+                    "<input type='number' name='valeur[]'  value='{{ old('valeur') }}' class='form-control'  required >"+
+                    "<input type='hidden' name='desagrege_id[]'  value="+row.id+" class='form-control'  required >");
+                });
+                $("#numero_id").empty();
+                $("#numero_id").append(numero_id);
+            }
+        });
+
+    });
+</script>
+
+@endsection
+

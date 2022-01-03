@@ -43,6 +43,7 @@
                             <th>Nom indicateur</th>
                             <th>valeur Total</th>
                             <th>Desagrege</th>
+                            <th>Observation</th>
                             <th>Date début </th>
                             <th>Date Fin </th>
                             <th>action</th>
@@ -58,6 +59,7 @@
                             <td>@foreach ($resultat->resultatDetails as $resultatDetail )
                                 {{ $resultatDetail->valeur }} {{ $resultatDetail->desagrege->titre }},
                             @endforeach</td>
+                            <td>{{ $resultat->observation }}</td>
                             <td>{{ $resultat->debut }}</td>
                             <td>{{ $resultat->fin }}</td>
                             <td>

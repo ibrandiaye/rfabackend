@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/dashboard/{projet_id}', 'HomeController@dashboard')->name('dashboard');
 
 Auth::routes();
 
@@ -28,6 +26,7 @@ Route::resource('region', RegionController::class);
 Route::resource('departement', DepartementController::class);
 Route::resource('commune', CommuneController::class);
 Route::resource('activite', ActiviteController::class);
+Route::resource('suiviActivite', suiviActiviteController::class);
 Route::get('desagrege/by/indicateur/{indicateur_id}','ResultatController@getDesagregeByIndicateur');
 Route::get('projet/indicateur/{projet_id}','IndicateurController@getIndicateurByProjet')->name('projet.indicateur');
 Route::get('indicateur/resultat/{indicateur}','ResultatController@getResultatByIndicateur')->name('indicateur.resultat');
@@ -37,4 +36,6 @@ Route::get('liste/activite/projet/{id}','ActiviteController@getActiviteByprojet'
 Route::get('indicateur/projet/{projet_id}','IndicateurController@create')->name('indicateur.projet');
 Route::get('resultat/projet/{projet_id}','ResultatController@createByProject')->name('resultat.projet');
 Route::get('fiche/indicateur/projet/{projet_id}','IndicateurController@getIndicateurAndResultat')->name('fiche.indicateur.projet');
-
+Route::get('suiviactivite/by/projet/{projet_id}','SuiviActiviteController@getSuiviActiviteByProjet')->name('suiviactivite.projet');
+Route::get('suiviactivite/create/{projet_id}','SuiviActiviteController@create')->name('suiviactivite1.create');
+Route::get('suiviactivite/edit/{id}/{projet_id}','SuiviActiviteController@edit')->name('suiviactivite.edit');

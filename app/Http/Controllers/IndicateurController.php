@@ -6,6 +6,7 @@ use App\Repositories\IndicateurRepository;
 use App\Repositories\ProjetRepository;
 use Illuminate\Http\Request;
 use App\Desagrege;
+use App\Repositories\DesagregeRepository;
 use App\Repositories\ResultatDetailRepository;
 use App\ResultatDetail;
 
@@ -14,13 +15,15 @@ class IndicateurController extends Controller
     protected $indicateurRepository;
     protected $projetRepository;
     protected $resultatDetailRepository;
+    protected $desagregeRepository;
 
     public function __construct(IndicateurRepository $indicateurRepository, ProjetRepository $projetRepository,
-    ResultatDetailRepository $resultatDetailRepository){
+    ResultatDetailRepository $resultatDetailRepository, DesagregeRepository $desagregeRepository){
         $this->middleware('auth');
         $this->indicateurRepository =$indicateurRepository;
         $this->projetRepository = $projetRepository;
         $this->resultatDetailRepository = $resultatDetailRepository;
+        $this->desagregeRepository = $desagregeRepository;
     }
 
     /**
@@ -86,7 +89,7 @@ class IndicateurController extends Controller
                 $desagrege->save();
             }
           }
-        return redirect('indicateur');
+          return redirect()->route('fiche.indicateur.projet',['projet_id'=>$request['projet_id']]);
 
     }
 
@@ -111,7 +114,9 @@ class IndicateurController extends Controller
     public function edit($id)
     {
         $indicateur = $this->indicateurRepository->getById($id);
-        return view('indicateur.edit',compact('indicateur'));
+        $desagreges = $this->desagregeRepository->getDesagregeByIndicateur($id);
+       // dd($desagreges);
+        return view('indicateur.edit',compact('indicateur','desagreges'));
     }
 
     /**
@@ -123,8 +128,24 @@ class IndicateurController extends Controller
      */
     public function update(Request $request, $id)
     {
+       // $this->desagregeRepository->deleteDesagregeByIndicateur($id);
+        if( count($request['quantite']) > 0){
+            $arrlength = count($request['quantite']);
+            $quantites = $request['quantite'];
+            $titres = $request['titre'];
+            $desgrages_ids = $request['desgrage_ids'];
+            for ($i=0; $i < $arrlength; $i++) {
+               /* $desagrege = new Desagrege();
+                $desagrege->quantite = $quantites[$i];
+                $desagrege->titre = $titres[$i];
+                $desagrege->indicateur_id = $id;*/
+                $request->merge(['quantite'=> $quantites[$i],'titre'=>$titres[$i],'indicateur_id'=>$id]);
+                $this->desagregeRepository->update($desgrages_ids[$i],$request->only(['quantite','titre','indicateur_id']));
+               // $desagrege->save();
+            }
+        }
         $this->indicateurRepository->update($id, $request->all());
-        return redirect('indicateur');
+        return redirect()->route('fiche.indicateur.projet',['projet_id'=>$request['projet_id']]);
     }
 
     /**
@@ -140,7 +161,7 @@ class IndicateurController extends Controller
     }
     public function getIndicateurByProjet($projet_id){
         $indicateurs = $this->indicateurRepository->getIndicateurByProjet($projet_id);
-        return view('indicateur.index',compact('indicateurs'));
+        return view('indicateur.index',compact('indicateurs','projet_id'));
     }
     public function getIndicateurAndResultat($projet_id){
         $indicateurs = $this->indicateurRepository->getIndicateurByProjetAndResultat($projet_id);
@@ -148,10 +169,10 @@ class IndicateurController extends Controller
         foreach ($indicateurs as $key => $indicateur) {
              foreach ($sumIndicateurs as $key1 => $sumIndicateur) {
                 if($indicateur->indicateur === $sumIndicateur->indicateur){
-                    $indicateurs[$key]->sum = $sumIndicateur->rts;
+                        $indicateurs[$key]->sum = $sumIndicateur->rts;
                 }
              }
         }
-         return view('indicateur.fiche',compact('indicateurs'));
+         return view('indicateur.fiche',compact('indicateurs','projet_id'));
     }
 }

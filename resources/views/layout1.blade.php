@@ -25,7 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
       <a href="{{ route('home')}}" class="navbar-brand">
-        <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('assets/dist/img/enda.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">ECOPOP</span>
       </a>
@@ -48,6 +48,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="{{ route('projet.create') }}" class="dropdown-item">Ajouter Projet </a></li>
               <li><a href="{{ route('projet.index') }}" class="dropdown-item">Liste Projets</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Plan Stratégique</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="#" class="dropdown-item">Ajouter Activité </a></li>
+              <li><a href="#" class="dropdown-item">Liste Activités</a></li>
             </ul>
           </li>
         <li class="nav-item dropdown">
@@ -87,7 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
 
       <!-- Right navbar links -->
-      <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+{{--        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -177,7 +184,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
               class="fas fa-th-large"></i></a>
         </li>
-      </ul>
+      </ul>  --}}
     </div>
   </nav>
   <!-- /.navbar -->

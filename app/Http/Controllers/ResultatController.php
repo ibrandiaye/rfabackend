@@ -9,6 +9,7 @@ use App\Desagrege;
 use App\Repositories\CommuneRepository;
 use App\Repositories\DesagregeRepository;
 use App\ResultatDetail;
+use App\Repositories\ResultatDetailRepository;
 
 class ResultatController extends Controller
 {
@@ -19,7 +20,7 @@ class ResultatController extends Controller
     protected $communeRepository;
 
     public function __construct(ResultatRepository $resultatRepository, IndicateurRepository $indicateurRepository,
-    ResultatDetail $resultatDetailRepository, DesagregeRepository $desagregeRepository,CommuneRepository $communeRepository){
+    ResultatDetailRepository $resultatDetailRepository, DesagregeRepository $desagregeRepository,CommuneRepository $communeRepository){
         $this->middleware('auth');
         $this->resultatRepository =$resultatRepository;
         $this->indicateurRepository = $indicateurRepository;
@@ -115,7 +116,13 @@ class ResultatController extends Controller
     public function edit($id)
     {
         $resultat = $this->resultatRepository->getById($id);
-        return view('resultat.edit',compact('resultat'));
+        $resultatDetails = $this->resultatDetailRepository->getResultatDetailByResultat($id);
+       // dd($resultatDetails);
+       $projet = $this->resultatDetailRepository->getProjetIdByResultat($id);
+        $indicateurs = $this->indicateurRepository->getIndicateurByProjet($projet->projet_id);
+        $communes = $this->communeRepository->getCommuneByProject($projet->projet_id);
+        $projet_id = $projet->projet_id;
+        return view('resultat.edit',compact('resultat','resultatDetails','indicateurs','communes','projet_id'));
     }
 
     /**
@@ -127,8 +134,22 @@ class ResultatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->resultatRepository->update($id, $request->all());
-        return redirect('resultat');
+        $this->resultatDetailRepository->deleteResultatById($id);
+        if( count($request['valeur']) > 0){
+            $arrlength = count($request['valeur']);
+            $valeurs = $request['valeur'];
+            $desagreges = $request['desagrege_id'];
+            //$titres = $request['titre'];
+            for ($i=0; $i < $arrlength; $i++) {
+                $resultatDetail = new ResultatDetail();
+                $resultatDetail->valeur = $valeurs[$i];
+                $resultatDetail->resultat_id = $id;
+                $resultatDetail->desagrege_id = $desagreges[$i];
+                $resultatDetail->save();
+            }
+          }
+        $this->resultatRepository->update($id, $request->only(['rts','debut','fin','indicateur_id','commune_id','observation']));
+        return redirect()->route('indicateur.resultat',['indicateur'=>$request['indicateur_id']]);
     }
 
     /**
@@ -151,6 +172,6 @@ class ResultatController extends Controller
     {
         $indicateurs = $this->indicateurRepository->getIndicateurByProjet($projet_id);
         $communes = $this->communeRepository->getCommuneByProject($projet_id);
-        return view('resultat.add',compact('indicateurs','communes'));
+        return view('resultat.add',compact('indicateurs','communes','projet_id'));
     }
 }

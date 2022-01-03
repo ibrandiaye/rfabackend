@@ -35,8 +35,8 @@
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet->id]) }}" role="button" class="btn btn-primary">Menu</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('activite.create') }}" role="button" class="btn btn-primary">Liste des activités</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('suiviActivite.create',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Liste des activités</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -53,7 +53,56 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    <div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ $nbActivite }}</h3>
 
+                <p>Activités prévus</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-calendar"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>{{ $nbSuiviActivite }}</h3>
+
+              <p>Activités realisé</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3>{{ $nbEcart }}</h3>
+
+              <p>Activites non realisé</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+    </div>
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
@@ -74,7 +123,9 @@
             </div>
     </div>
     </div>
+
 <div class="col-12">
+
     <div class="card border-danger border-0">
         <div class="card-header bg-info text-center">Nom Projet : {{ $projet->nom }}</div>
             <div class="card-body">
@@ -82,24 +133,22 @@
                     <thead>
                         <tr>
                             <th>Activité</th>
-                            <th>Date Début</th>
-                            <th>Date Fin</th>
-                            <th>Responsable</th>
+                            <th>Date</th>
                             <th>Resultat</th>
+                            <th>Observation</th>
                             {{--  <th>Etat</th>  --}}
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($activites as $activite)
+                    @foreach ($suiviActivites as $suiviActivite)
                         <tr>
-                            <td>{{ $activite->nom }}</td>
-                            <td>{{ $activite->debut }}</td>
-                            <td>{{ $activite->fin }}</td>
-                            <td>{{ $activite->responsable }}</td>
-                            <td>{!! $activite->rts !!}</td>
+                            <td>{{ $suiviActivite->noma }}</td>
+                            <td>{{ $suiviActivite->dater }}</td>
+                            <td>{!! $suiviActivite->resultat !!}</td>
+                            <td>{!! $suiviActivite->observation !!}</td>
                            {{--   <td>
-                                @if($activite->etat=='realise')
+                                @if($suiviActivite->etat=='realise')
                                 <span class="badge badge-success">
                                     Réalisé
                                     </span>
@@ -110,9 +159,9 @@
                             @endif
                             </td>  --}}
                             <td>
-                                <a href="{{ route('activite.edit', $activite->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                <a href="{{ route('activite.show', $activite->id) }}" role="button" class="btn btn-success"><i class="fas fa-eye"></i></a>
-                                {!! Form::open(['method' => 'DELETE', 'route'=>['activite.destroy', $activite->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
+                                <a href="{{ route('suiviactivite.edit', [$suiviActivite->id,$projet->id]) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('suiviActivite.show', $suiviActivite->id) }}" role="button" class="btn btn-success"><i class="fas fa-eye"></i></a>
+                                {!! Form::open(['method' => 'DELETE', 'route'=>['suiviActivite.destroy', $suiviActivite->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
 
@@ -155,15 +204,15 @@
           },
           // initialView: 'dayGridMonth',
            events : [
-               @foreach($activites as $activite)
+               @foreach($suiviActivites as $suiviActivite)
 
                {
 
-                   title : '{{ $activite->nom}}',
+                   title : '{{ $suiviActivite->noma}}',
 
-                   start : '{{ $activite->debut }}',
-                   end: '{{$activite->fin }}',
-                   url : '{{ route('activite.show', $activite->id) }}'
+                   start : '{{ $suiviActivite->dater }}',
+                   end: '{{$suiviActivite->dater }}',
+                  // url : '{{ route('suiviActivite.show', $suiviActivite->id) }}'
                },
 
                @endforeach
@@ -178,15 +227,15 @@
             locale: 'fr',
            // initialView: 'dayGridMonth',
             events : [
-                @foreach($activites as $activite)
+                @foreach($suiviActivites as $suiviActivite)
 
                 {
 
-                    title : '{{ $activite->nom}}',
+                    title : '{{ $suiviActivite->nom}}',
 
-                    start : '{{ $activite->debut }}',
-                    end: '{{$activite->fin }}',
-                    url : '{{ route('activite.show', $activite->id) }}'
+                    start : '{{ $suiviActivite->debut }}',
+                    end: '{{$suiviActivite->fin }}',
+                    url : '{{ route('suiviActivite.show', $suiviActivite->id) }}'
                 },
 
                 @endforeach

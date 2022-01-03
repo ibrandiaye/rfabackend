@@ -87,10 +87,37 @@
             </a>
               </div>
               <div class="col-12 col-sm-6">
+                <a href="{{ route('suiviactivite1.create', ['projet_id'=>$projet->id]) }}">
+                <div class="info-box bg-light">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Suivi des activités</span>
+                  </div>
+                </div>
+            </a>
+              </div>
+              <div class="col-12 col-sm-6">
                 <a href="{{ route('fiche.indicateur.projet', ['projet_id'=>$projet->id]) }}">
                 <div class="info-box bg-light">
                   <div class="info-box-content">
                     <span class="info-box-text text-center text-muted">Fiches de suivi des indicateurs</span>
+                  </div>
+                </div>
+            </a>
+              </div>
+              <div class="col-12 col-sm-6">
+                <a href="{{ route('suiviactivite.projet', ['projet_id'=>$projet->id]) }}">
+                <div class="info-box bg-light">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Fiche de suivi des activités</span>
+                  </div>
+                </div>
+            </a>
+              </div>
+              <div class="col-12 col-sm-6">
+                <a href="{{ route('dashboard', ['projet_id'=>$projet->id]) }}">
+                <div class="info-box bg-light">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">Tableau de Bord</span>
                   </div>
                 </div>
             </a>

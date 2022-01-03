@@ -24,4 +24,10 @@ class ProjetRepository extends RessourceRepository{
         ->where('id',$id)
         ->first();
     }
+    public function getProjetWithRelation($projet_id){
+        return Projet::with(['indicateurs','indicateurs.resultats','indicateurs.resultats.resultatDetails',
+        'activites','activites.suiviActivites','indicateurs.resultats.commune','activites.suiviActivites.commune'])
+        ->where('id',$projet_id)
+        ->first();
+    }
 }

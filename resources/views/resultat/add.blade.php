@@ -16,7 +16,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('resultat.index') }}" role="button" class="btn btn-primary">Formulaire d'enregistrement des resultats</a></li>
 
                         </ol>
@@ -53,11 +53,17 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Valeur Total</label>
-                                        <textarea name="rts" class="form-control" required> {{ old('rts') }}</textarea>
+                                        <input type="number" name="rts" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="containers">
 
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Observation</label>
+                                        <textarea name="observation" class="form-control" required> {{ old('observation') }}</textarea>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
