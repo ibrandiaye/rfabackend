@@ -41,7 +41,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Activite</label>
-                                    <select class="form-control" name="activite_id">
+                                    <select class="form-control" name="activite_id" required>
                                         <option value="">Faites un choix</option>
                                         @foreach($activites as $activite)
                                         <option value="{{ $activite->id }}" {{old('activite_id', $suiviActivite->activite_id) == $activite->id ? 'selected' : ''}}>{{ $activite->nom }}</option>
@@ -52,7 +52,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Niveau  de réalisation</label>
-                                    <select class="form-control" name="niveaur">
+                                    <select class="form-control" name="niveaur" required>
                                         <option value="">Faites un choix</option>
                                         <option value="realise" {{old('niveaur', $suiviActivite->niveaur) == 'realise' ? 'selected' : ''}} >realise</option>
                                         <option value="non realise" {{old('niveaur', $suiviActivite->niveaur) == 'non realise' ? 'selected' : ''}}>non realise</option>

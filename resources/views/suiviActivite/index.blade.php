@@ -106,7 +106,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Caliendrier Réservation</h3>
+                <h3 class="card-title">Calendrier des activités</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -136,7 +136,8 @@
                             <th>Date</th>
                             <th>Resultat</th>
                             <th>Observation</th>
-                            {{--  <th>Etat</th>  --}}
+                            <th>Niveau de réalisation</th>
+                            <th>Rapport d’activité</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -147,17 +148,12 @@
                             <td>{{ $suiviActivite->dater }}</td>
                             <td>{!! $suiviActivite->resultat !!}</td>
                             <td>{!! $suiviActivite->observation !!}</td>
-                           {{--   <td>
-                                @if($suiviActivite->etat=='realise')
-                                <span class="badge badge-success">
-                                    Réalisé
-                                    </span>
-                               @else
-                               <span class="badge badge-danger">
-                                   non Réalisé
-                               </span>
-                            @endif
-                            </td>  --}}
+                            <td>
+                               {{ $suiviActivite->niveaur }}
+                            </td>
+                            <td>@if($suiviActivite->rapport)
+                                <a href="{{ asset('rp/'.$suiviActivite->rapport) }}" target="blank">Rapport</a>
+                            @endif</td>
                             <td>
                                 <a href="{{ route('suiviactivite.edit', [$suiviActivite->id,$projet->id]) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 <a href="{{ route('suiviActivite.show', $suiviActivite->id) }}" role="button" class="btn btn-success"><i class="fas fa-eye"></i></a>

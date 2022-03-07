@@ -43,6 +43,7 @@
                             <th>Nom Projet</th>
                             <th>Objectif</th>
                             <th>Durée</th>
+                            <th>Type Cadre</th>
                             <th>Zones d'intervation</th>
                             <th>Actions</th>
                         </tr>
@@ -53,7 +54,8 @@
                             <td>{{ $projet->id }}</td>
                             <td>{{ $projet->nom }}</td>
                             <td>{{ $projet->objectif }}</td>
-                            <td>{{ $projet->duree }} mois</td>
+                            <td>{{ $projet->typecadre }}</td>
+                            <td>{{ $projet->duree }} ans</td>
                             <td>
                                 @foreach ($projet->zones as $zone)
                                     {{ $zone->region->nom }},

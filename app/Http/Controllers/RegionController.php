@@ -10,6 +10,7 @@ class RegionController extends Controller
     protected $regionRepository;
 
     public function __construct(RegionRepository $regionRepository){
+        $this->middleware('auth');
         $this->regionRepository =$regionRepository;
     }
 

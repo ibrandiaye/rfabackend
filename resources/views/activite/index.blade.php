@@ -57,7 +57,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Caliendrier Réservation</h3>
+                <h3 class="card-title">Calendrier des activités</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -85,7 +85,7 @@
                             <th>Date Début</th>
                             <th>Date Fin</th>
                             <th>Responsable</th>
-                            <th>Resultat</th>
+                            <th>Resultats attendus</th>
                             {{--  <th>Etat</th>  --}}
                             <th>Actions</th>
                         </tr>
@@ -131,6 +131,42 @@
             </div>
 
         </div>
+    </div>
+    <!-- Timelime example  -->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- The time line -->
+        <div class="timeline">
+            @foreach ($activites as $activite)
+          <!-- timeline time label -->
+          <div class="time-label">
+            <span class="bg-green">{{ \Carbon\Carbon::parse($activite->debut)->format('d/m/Y')  }}</span>
+          </div>
+          <!-- /.timeline-label -->
+          <!-- timeline item -->
+
+          <!-- timeline item -->
+          <div>
+            <i class="fas fa-calendar bg-maroon"></i>
+
+            <div class="timeline-item">
+              <span class="time"><i class="fas fa-clock"></i> {{ $activite->responsable }}</span>
+
+              <h3 class="timeline-header"><a href="#">{{ $activite->nom }}</a> </h3>
+
+              <div class="timeline-body">
+                {!! $activite->rts !!}
+              </div>
+            </div>
+          </div>
+          <!-- END timeline item -->
+          @endforeach
+          <div>
+            <i class="fas fa-clock bg-gray"></i>
+          </div>
+        </div>
+      </div>
+      <!-- /.col -->
     </div>
 </div>
 

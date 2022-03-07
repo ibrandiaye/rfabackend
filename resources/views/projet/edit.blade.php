@@ -59,6 +59,16 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Type Cadre</label>
+                                        <select class="form-control" name="typecadre" required="">
+                                            <option value="">Veuillez Selectionnez</option>
+                                            <option value="Cadre logique" {{old('typecadre', $projet->typecadre) == 'Cadre logique' ? 'selected' : ''}}>Cadre Logique</option>
+                                            <option value="Cadre de  resultat"  {{old('typecadre', $projet->typecadre) == 'Cadre de  resultat' ? 'selected' : ''}}>Cadre de  resultat</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
 
                                     <div class="form-group">
                                         @foreach ($regions as $key=> $region )

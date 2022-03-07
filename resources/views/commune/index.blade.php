@@ -52,7 +52,7 @@
                         <tr>
                             <td>{{ $commune->id }}</td>
                             <td>{{ $commune->nomc }}</td>
-                            <td>{{ $commune->departement->nomc }}</td>
+                            <td>{{ $commune->departement->nomd }}</td>
                             <td>{{ $commune->latitudec }}</td>
                             <td>{{ $commune->longitudec }}</td>
                             <td>

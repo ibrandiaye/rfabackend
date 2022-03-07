@@ -50,14 +50,14 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Valeur Total</label>
-                                        <input type="number" name="rts" class="form-control" required>
-                                    </div>
-                                </div>
                                 <div class="containers">
 
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Valeur atteinte</label>
+                                        <input type="number" name="rts" class="form-control" required>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -65,16 +65,16 @@
                                         <textarea name="observation" class="form-control" required> {{ old('observation') }}</textarea>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                {{--  <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Date Debut </label>
-                                        <input type="date" name="debut"  value="{{ old('debut') }}" class="form-control"  required>
+                                        <input type="date" name="debut" id="debut"  value="{{ old('debut') }}" class="form-control"  required>
                                     </div>
-                                </div>
+                                </div>  --}}
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Date Fin </label>
-                                        <input type="date" name="fin"  value="{{ old('fin') }}" class="form-control"  required>
+                                        <label>Date de la dernière mise à jour  </label>
+                                        <input type="date" name="fin"  id="fin" value="{{ old('fin') }}" class="form-control"  required>
                                     </div>
                                 </div>
 
@@ -90,7 +90,19 @@
                                         </select>
                                     </div>
                                 </div>
+                                @if($projet->typecadre=="Cadre de  resultat")
+                                <div class="col-lg-6">
+                                    <label>Année</label>
+                                    <select class="form-control" name="annee" required="">
+                                        <option value="">Selectionnez</option>
+                                        @for ($i=1; $i <= $projet->duree; $i++)
+                                        <option value="{{$i}}">annee {{$i}}</option>
+                                        @endfor
 
+                                    </select>
+                                </div>
+                                @endif
+                                <input type="hidden" name="projet_id" value="{{ $projet->id }}">
                                 <div>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>
@@ -108,34 +120,69 @@
 
 @endsection
 @section('script')
-<script type=text/javascript>
+<script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
+<script type='text/javascript'>
+    var duree=0;
     $("#indicateur_id").change(function () {
 
         //var selectedClasse = $(this).children("option:selected").val();
     var idv =  $("#indicateur_id").children("option:selected").val();
         //alert("You have selected the country - " + idv);
-        var numero_id = "";
+        $(".containers").empty();
         $.ajax({
             type:'GET',
             url:'/desagrege/by/indicateur/'+idv,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
 
-                numero_id += " <option value=''>Sélectionner</option>";
                 $.each(data,function(index,row){
                     $(".containers").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur pour "+row.titre+":</label>"+
                     "<input type='number' name='valeur[]'  value='{{ old('valeur') }}' class='form-control'  required >"+
                     "<input type='hidden' name='desagrege_id[]'  value="+row.id+" class='form-control'  required >");
                 });
-                $("#numero_id").empty();
-                $("#numero_id").append(numero_id);
+
+            }
+        });
+        $.ajax({
+            type:'GET',
+            url:'/indicateur/'+idv,
+            data:'_token = <?php echo csrf_token() ?>',
+            success:function(data) {
+                if(data.frequence=='Hebdomadaire')
+                    duree =7;
+                else if(data.frequence=='Mensuelle')
+                    duree =30;
+                else if(data.frequence=='Trimestrielle')
+                    duree =90;
+                else if(data.frequence=='Semestrielle')
+                    duree =180;
+                else if(data.frequence=='Annuelle')
+                    duree==365;
+
+
             }
         });
 
     });
+
+    $(document).ready(function () {
+
+        $("#debut").on('change',function(){
+            console.log(duree);
+           var date = $("#debut").val();
+           var new_date = moment(date).add(duree, 'days');
+           $("#fin").val(new_date.format('YYYY-MM-DD'));
+           console.log(new_date);
+          });
+    });
 </script>
 
 @endsection
+
+
+
+
+
 
 
 

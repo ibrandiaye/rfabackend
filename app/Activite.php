@@ -14,4 +14,7 @@ class Activite extends Model
     public function suiviActivites(){
         return $this->hasMany(SuiviActivite::class);
     }
+    public function indicateurActivites(){
+        return $this->hasMany(IndicateurActivite::class);
+    }
 }

@@ -18,7 +18,7 @@ Route::get('/dashboard/{projet_id}', 'HomeController@dashboard')->name('dashboar
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::resource('projet', ProjetController::class);
 Route::resource('indicateur', IndicateurController::class);
 Route::resource('resultat', ResultatController::class);
@@ -26,7 +26,7 @@ Route::resource('region', RegionController::class);
 Route::resource('departement', DepartementController::class);
 Route::resource('commune', CommuneController::class);
 Route::resource('activite', ActiviteController::class);
-Route::resource('suiviActivite', suiviActiviteController::class);
+Route::resource('suiviActivite', SuiviActiviteController::class);
 Route::get('desagrege/by/indicateur/{indicateur_id}','ResultatController@getDesagregeByIndicateur');
 Route::get('projet/indicateur/{projet_id}','IndicateurController@getIndicateurByProjet')->name('projet.indicateur');
 Route::get('indicateur/resultat/{indicateur}','ResultatController@getResultatByIndicateur')->name('indicateur.resultat');
@@ -39,3 +39,7 @@ Route::get('fiche/indicateur/projet/{projet_id}','IndicateurController@getIndica
 Route::get('suiviactivite/by/projet/{projet_id}','SuiviActiviteController@getSuiviActiviteByProjet')->name('suiviactivite.projet');
 Route::get('suiviactivite/create/{projet_id}','SuiviActiviteController@create')->name('suiviactivite1.create');
 Route::get('suiviactivite/edit/{id}/{projet_id}','SuiviActiviteController@edit')->name('suiviactivite.edit');
+Route::get('rappel','ActiviteController@rappel')->name('activite.rappe');
+Route::post('search/resultat','IndicateurController@getIndicateurAndResultatAndAnne')->name('search.resultat');
+Route::get('activite/indicateur/{id}','ActiviteController@getIndicateurByActivite');
+

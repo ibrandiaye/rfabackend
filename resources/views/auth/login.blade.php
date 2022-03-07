@@ -18,15 +18,35 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+<style>
+    body{
+        background-image: url('assets/dist/img/login.png') !important;
+        /* Background image is centered vertically and horizontally at all times */
+    background-position: center center !important;
+
+    /* Background image doesn't tile */
+    background-repeat: no-repeat !important;
+
+    /* Background image is fixed in the viewport so that it doesn't move when
+    the content's height is greater than the image's height */
+    background-attachment: fixed !important;
+
+    /* This is what makes the background image rescale based
+    on the container's size */
+    background-size: cover !important ;
+
+    /* Set a background color that will*/
+    background-color: #464646 !important;
+
+    }
+
+</style>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="index2.html"><b>Enda</b> ECOPOP</a>
-  </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Formulaire de connexion</p>
+      <p class="login-box-msg"><b>Plateforme de Suivi Evaluation des intervention de Enda ECOPOP</b></p>
 
       <form method="POST" action="{{ route('login') }}">
         @csrf

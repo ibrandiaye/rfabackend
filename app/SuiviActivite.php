@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SuiviActivite extends Model
 {
-    protected $fillable = ['niveaur','resultat','observation','activite_id','dater','commune_id'];
+    protected $fillable = ['niveaur','resultat','observation','activite_id','dater','commune_id','rapport'];
 
     public function activite(){
         return $this->belongsTo(Activite::class);

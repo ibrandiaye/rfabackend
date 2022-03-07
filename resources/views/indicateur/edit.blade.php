@@ -79,9 +79,9 @@
                                @foreach ($desagreges as $desagrege )
                                <div class="col-lg-6">
                                 <div class="form-group test">
-                                    <label>Valeur en Chiffre</label>
+                                    <label>Valeur Cible</label>
                                     <input type="number" name="quantite[]"  value="{{ $desagrege->quantite }}" class="form-control"  required>
-                                    <label>Unité de mesure</label>
+                                    <label>Niveau de dégrégation</label>
                                     <input type="text" name="titre[]"  value="{{ $desagrege->titre }}" class="form-control"  required>
                                     <input type="hidden" name="desgrage_ids[]"  value="{{ $desagrege->id }}" class="form-control"  required>
                                     {{--  <button type='button' class='btn btn-danger remove-tr'>Supprimer</button>  --}}
@@ -97,6 +97,16 @@
                                    <input type="text" name="frequence"  value="{{ $indicateur->frequence }}" class="form-control"  required>
                                </div>
                            </div>
+                          {{--   <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Type Cadre</label>
+                                <select class="form-control" name="typecadre" required="">
+                                    <option value="">Veuillez Selectionnez</option>
+                                    <option value="Cadre logique" {{old('typecadre', $indicateur->typecadre) == 'Cadre logique' ? 'selected' : ''}}>Cadre Logique</option>
+                                    <option value="Cadre de  resultat"  {{old('typecadre', $indicateur->typecadre) == 'Cadre de  resultat' ? 'selected' : ''}}>Cadre de  resultat</option>
+                                </select>
+                            </div>
+                        </div>  --}}
                            <div class="col-lg-6">
                                <div class="form-group">
                                    <label>Respondsable de la collecte des données</label>

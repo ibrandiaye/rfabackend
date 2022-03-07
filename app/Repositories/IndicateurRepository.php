@@ -32,4 +32,14 @@ class IndicateurRepository extends RessourceRepository{
         ->get();
 
     }
+    public function getIndicateurByProjetAndResultatAndAnne($projet_id,$annne){
+        return DB::table('resultats')
+        ->join('indicateurs','resultats.indicateur_id','=','indicateurs.id')
+        ->join('projets','indicateurs.projet_id','=','projets.id')
+        ->where([['projets.id',$projet_id],['resultats.annee',$annne]])
+        ->select('indicateurs.*','resultats.*')
+        ->get();
+
+    }
+
 }

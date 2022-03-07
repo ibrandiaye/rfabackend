@@ -18,6 +18,7 @@ class SuiviActiviteController extends Controller
     public function __construct(ActiviteRepository $activiteRepository, SuiviActiviteRepository $suiviActiviteRepository,
     ProjetRepository $projetRepository,CommuneRepository $communeRepository)
     {
+        $this->middleware('auth');
         $this->activiteRepository = $activiteRepository;
         $this->suiviActiviteRepository = $suiviActiviteRepository;
         $this->projetRepository = $projetRepository;
@@ -60,6 +61,13 @@ class SuiviActiviteController extends Controller
             'activite_id'=> 'required|string',
             'dater'=> 'required|date',
         ]);
+        if($request['rp']){
+            $destinationPath = 'rp/'; // upload path
+            $file = $request['rp'];
+            $docName = time().".". $file->getClientOriginalExtension();
+            $file->move($destinationPath, $docName);
+            $request->merge(['rapport'=>$docName]);
+        }
         $suiviActivite = $this->suiviActiviteRepository->store($request->all());
         return redirect()->route('suiviactivite.projet',['projet_id'=>$request['projet_id']]);
 
@@ -126,5 +134,7 @@ class SuiviActiviteController extends Controller
     'nbActivite','nbEcart'));
 
     }
+
+
 
 }

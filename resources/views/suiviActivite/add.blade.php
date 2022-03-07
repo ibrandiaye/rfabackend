@@ -24,7 +24,7 @@
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-        <form action="{{ route('suiviActivite.store') }}" method="POST">
+        <form action="{{ route('suiviActivite.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
              <div class="card border-danger border-0">
                         <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT Suivi Activite</div>
@@ -41,7 +41,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Activite</label>
-                                        <select class="form-control" name="activite_id">
+                                        <select class="form-control" id="activite_id" name="activite_id" required>
                                             <option value="">Faites un choix</option>
                                             @foreach($activites as $activite)
                                             <option value="{{ $activite->id }}">{{ $activite->nom }}</option>
@@ -52,7 +52,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Niveau  de réalisation</label>
-                                        <select class="form-control" name="niveaur">
+                                        <select class="form-control" name="niveaur" required>
                                             <option value="">Faites un choix</option>
                                             <option value="realise">realise</option>
                                             <option value="non realise">non realise</option>
@@ -78,6 +78,12 @@
                                     <label>Observation</label>
                                     <textarea class="textarea" name="observation" placeholder="Place some text here"
                                               style="width: 100%; height: 340px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Rapport</label>
+                                        <input type="file" name="rp"  class="form-control" >
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -108,7 +114,7 @@
 
 
 @endsection
-
+@section('script')
 <script src=" {{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script>
   $(function () {
@@ -116,3 +122,30 @@
     $('.textarea').summernote()
   })
 </script>
+
+<script type='text/javascript'>
+    $("#activite_id").change(function () {
+
+        //var selectedClasse = $(this).children("option:selected").val();
+    var idv =  $("#activite_id").children("option:selected").val();
+        //alert("You have selected the country - " + idv);
+        $(".containers").empty();
+        $.ajax({
+            type:'GET',
+            url:'/activite-indicateur/'+idv,
+            data:'_token = <?php echo csrf_token() ?>',
+            success:function(data) {
+                console.log(data);
+                $.each(data,function(index,row){
+                    $(".containers").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur pour "+row.titre+":</label>"+
+                    "<input type='number' name='valeur[]'  value='{{ old('valeur') }}' class='form-control'  required >"+
+                    "<input type='hidden' name='desagrege_id[]'  value="+row.id+" class='form-control'  required >");
+                });
+
+            }
+        });
+
+
+    });
+</script>
+@endsection

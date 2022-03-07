@@ -9,12 +9,13 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-info">GESTION DES resultatS</h1>
+                                <h1 class="m-0 text-info">GESTION DES RESULTATS</h1>
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('resultat.create') }}" role="button" class="btn btn-primary">ENREGISTRER resultat</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('go.menu', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">menu</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('fiche.indicateur.projet', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Fiche de suivi des indicateurs</a></li>
+                                    <li class="breadcrumb-item active"><a href="{{ route('resultat.create') }}" role="button" class="btn btn-primary">ENREGISTRER resultat</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -34,7 +35,7 @@
 
 <div class="col-12">
     <div class="card border-danger border-0">
-        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES resultatS</div>
+        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES RESULTATS</div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>

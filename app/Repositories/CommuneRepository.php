@@ -49,7 +49,7 @@ public function getCommuneByAndrealisation($projet_id){
     ->join('projets','suivi_activites.projet_id','=','projets.id')
     ->where('projets.id',$projet_id)
     //->groupBy('communes.nomc')
-    ->select('communes.*', 'indicateurs.*','resultats.*')
+    ->select('communes.*', 'suivi_activites.*','resultats.*')
     ->get();
 }
 

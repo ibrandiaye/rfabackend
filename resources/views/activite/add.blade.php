@@ -26,7 +26,7 @@
         <form action="{{ route('activite.store') }}" method="POST">
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UNE Activite</div>
+                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UNE ACTIVITE</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -39,7 +39,7 @@
                                 @endif
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>nom Activite</label>
+                                        <label>Nom Activite</label>
                                         <input type="text" name="nom"  value="{{ old('nom') }}" class="form-control"  required>
                                     </div>
                                 </div>
@@ -82,6 +82,17 @@
                                     <div class="form-group">
                                         <label>Email Responsable</label>
                                         <input type="email" name="email"  value="{{ old('email') }}" class="form-control"  required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Indicateur</label>
+                                    @foreach ( $indicateurs as $indicateur)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="radio1" name="indicateur[]" value="{{ $indicateur->id }}" >
+                                        <label class="form-check-label" for="radio1">{{ $indicateur->indicateur }}</label>
+                                      </div>
+                                    @endforeach
                                     </div>
                                 </div>
                                {{--   <div class="col-lg-6">

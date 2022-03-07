@@ -2,19 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\IndicateurActivite;
+use App\Mail\Contact;
 use App\Repositories\ActiviteRepository;
+use App\Repositories\IndicateurActiviteRepository;
+use App\Repositories\IndicateurRepository;
 use App\Repositories\ProjetRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ActiviteController extends Controller
 {
     private $activiteRepository;
     private $projetRepositoru;
+    private $indicateurRepository;
+    private $indicateurActiviteRepository;
 
-    public  function __construct(ActiviteRepository $activiteRepository,ProjetRepository $projetRepository)
+    public  function __construct(ActiviteRepository $activiteRepository,ProjetRepository $projetRepository,
+    IndicateurRepository $indicateurRepository,IndicateurActiviteRepository $indicateurActiviteRepository)
     {
+        $this->middleware('auth');
         $this->activiteRepository = $activiteRepository;
         $this->projetRepositoru = $projetRepository;
+        $this->indicateurRepository = $indicateurRepository;
+        $this->indicateurActiviteRepository = $indicateurActiviteRepository;
     }
     /**
      * Display a listing of the resource.
@@ -33,7 +45,8 @@ class ActiviteController extends Controller
      */
     public function create($projet_id)
     {
-        return view('activite.add',compact('projet_id'));
+        $indicateurs = $this->indicateurRepository->getIndicateurByProjet($projet_id);
+        return view('activite.add',compact('projet_id','indicateurs'));
     }
 
     /**
@@ -56,7 +69,19 @@ class ActiviteController extends Controller
         ],[
             'nom.required' => 'Nom du desagrege obligatoire',
         ]);
+        //dd($request['indicateur']);
         $activite = $this->activiteRepository->store($request->all());
+        if($request['indicateur']){
+            $arrlength = count($request['indicateur']);
+            $indicActi = $request['indicateur'];
+            for ($i=0; $i <$arrlength ; $i++) {
+                $indicateurActivite = new IndicateurActivite();
+                $indicateurActivite->indicateur_id=$indicActi[$i];
+                $indicateurActivite->activite_id = $activite->id;
+                $indicateurActivite->save();
+
+            }
+        }
         return  redirect()->route('go.menu',['projet_id'=>$activite->projet_id]);
 
     }
@@ -112,4 +137,31 @@ class ActiviteController extends Controller
         $projet = $this->projetRepositoru->getById($id);
         return view('activite.index',compact('activites','projet'));
     }
+
+    public function rappel(){
+        $activites = $this->activiteRepository->getActivite();
+        //dd($activites);
+        foreach ($activites as $key => $activite) {
+            $datediff = $this->activiteRepository->datediff($activite->debut,Carbon::now()->format('Y-m-d'));
+
+           if($datediff < 10){
+            $contenu = [
+
+                'title' => 'Mail depuis Letecode.com',
+                'body' => 'Ce mail est pour tester l\'envoi de mail depuis laravel',
+                'name'=> 'Ibra Ndiaye',
+                'email' =>'ibrandiaye@endaecopop.org',
+            ];
+
+            Mail::to($activite->email)->send(new Contact($contenu));
+
+            dd("Email envoyé avec succès.");
+           }
+        }
+
+    }
+    public function getIndicateurByActivite($id){
+        dd('acces');
+    }
+
 }

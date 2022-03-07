@@ -17,6 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  @yield('css')
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
@@ -53,31 +54,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Plan Stratégique</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="#" class="dropdown-item">Ajouter Activité </a></li>
-              <li><a href="#" class="dropdown-item">Liste Activités</a></li>
+              <li><a href="#" class="dropdown-item">Axes Stratégiques </a></li>
+              <li><a href="#" class="dropdown-item">Lignes d'Action</a></li>
             </ul>
           </li>
-        <li class="nav-item dropdown">
-            <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Region</a>
-            <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-              <li><a href="{{ route('region.create') }}" class="dropdown-item">Ajouter Region </a></li>
-              <li><a href="{{ route('region.index') }}" class="dropdown-item">Liste Region</a></li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Decoupage Administratif</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+
+              <!-- Level two dropdown-->
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Région</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                    <li><a href="{{ route('region.create') }}" class="dropdown-item">Ajouter Region </a></li>
+                    <li><a href="{{ route('region.index') }}" class="dropdown-item">Liste Region</a></li>
+                </ul>
+              </li>
+                <li class="dropdown-divider"></li>
+                <li class="dropdown-submenu dropdown-hover">
+                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Département</a>
+                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                        <li><a href="{{ route('departement.create') }}" class="dropdown-item">Ajouter Département </a></li>
+                        <li><a href="{{ route('departement.index') }}" class="dropdown-item">Liste Département</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown-divider"></li>
+                  <li class="dropdown-submenu dropdown-hover">
+                      <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Commune</a>
+                      <ul aria-labelledby="dropdownSubMenu4" class="dropdown-menu border-0 shadow">
+                        <li><a href="{{ route('commune.create') }}" class="dropdown-item">Ajouter Commune </a></li>
+                        <li><a href="{{ route('commune.index') }}" class="dropdown-item">Liste Commune</a></li>
+                      </ul>
+                    </li>
             </ul>
           </li>
-        <li class="nav-item dropdown">
-            <a id="dropdownSubMenu3" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Département</a>
-            <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-              <li><a href="{{ route('departement.create') }}" class="dropdown-item">Ajouter Département </a></li>
-              <li><a href="{{ route('departement.index') }}" class="dropdown-item">Liste Département</a></li>
-            </ul>
-          </li>
-        <li class="nav-item dropdown">
-            <a id="dropdownSubMenu4" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Commune</a>
-            <ul aria-labelledby="dropdownSubMenu4" class="dropdown-menu border-0 shadow">
-              <li><a href="{{ route('commune.create') }}" class="dropdown-item">Ajouter Commune </a></li>
-              <li><a href="{{ route('commune.index') }}" class="dropdown-item">Liste Commune</a></li>
-            </ul>
-          </li>
+
         </ul>
 
         {{--  <!-- SEARCH FORM -->
@@ -94,6 +105,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
 
       <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Messages Dropdown Menu -->
+
+
+
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="dropdown-item" href="#"
+               onclick="event.preventDefault();
+           document.getElementById('logout-form').submit();">
+                {{ __('Déconnexion') }}
+            </a>
+            @auth
+
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            @endauth
+
+
+        </li>
+
+    </ul>
 {{--        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">

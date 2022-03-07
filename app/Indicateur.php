@@ -19,4 +19,7 @@ class Indicateur extends Model
     public function resultats(){
         return $this->hasMany(Resultat::class);
     }
+    public function indicateurActivites(){
+        return $this->hasMany(IndicateurActivite::class);
+    }
 }

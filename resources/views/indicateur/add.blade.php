@@ -12,7 +12,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">GESTION DES indicateurs</h1>
+                        <h1 class="m-0 text-info">GESTION DES INDICATEURS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
         <form action="{{ route('indicateur.store') }}" method="POST">
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UN indicateur</div>
+                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UN INDICATEUR</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -68,14 +68,8 @@
                                         <input type="text" name="unite"  value="{{ old('unite') }}" class="form-control"  >
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Méthode de collecte des données</label>
-                                        <input type="text" name="methode"  value="{{ old('methode') }}" class="form-control"  required>
-                                    </div>
-                                </div>
                                 <div class="conteneur">
-                                    <div class="col-lg-6">
+                                    {{-- <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Valeur en Chiffre</label>
                                             <input type="number" name="quantite[]"  value="{{ old('quantite') }}" class="form-control"  required>
@@ -86,13 +80,33 @@
                                             <label>Unité de mesure</label>
                                             <input type="text" name="titre[]"  value="{{ old('titre') }}" class="form-control"  required>
                                         </div>
-                                    </div>
-                                    <button type="button"  class="btn btn-success addRow">AJOUTER</button></h2>
+                                    </div> --}}
+                                    <button type="button"  class="btn btn-success addRow">désagreger</button></h2>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
+                                        <label>Méthode de collecte des données</label>
+                                        <input type="text" name="methode"  value="{{ old('methode') }}" class="form-control"  required>
+                                    </div>
+                                </div>
+                               {{--   <div class="col-lg-6">
+                                    <div class="form-group">
                                         <label>Fréquence de collecte des données</label>
                                         <input type="text" name="frequence"  value="{{ old('frequence') }}" class="form-control"  required>
+                                    </div>
+                                </div>  --}}
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Fréquence de collecte des données</label>
+                                        <select class="form-control" name="frequence" required="">
+                                            <option value="">Veuillez Selectionnez</option>
+                                            <option value="Hebdomadaire">Hebdomadaire</option>
+                                            <option value="Mensuelle">Mensuelle</option>
+                                            <option value="Trimestrielle">Trimestrielle</option>
+                                            <option value="Semestrielle">Semestrielle</option>
+                                            <option value="Annuelle">Annuelle</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -133,9 +147,9 @@
     <script>
         $(document).ready(function(){
             $(".addRow").click(function() {
-                $(".conteneur").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur en Chiffre :</label>"+
+                $(".conteneur").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur Cible :</label>"+
                     "<input type='number' name='quantite[]'  value='{{ old('quantite') }}' class='form-control'  required >"+
-                    "<label class='fieldlabels'>Unité de Mesure :</label>"+
+                    "<label class='fieldlabels'>Niveau de désagrégation :</label>"+
                     "<input type='text' name='titre[]'  value='{{ old('titre') }}' class='form-control' required> "+
                     "<button type='button' class='btn btn-danger remove-tr'>Supprimer</button></div></div>");
             });

@@ -16,8 +16,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('projet.index') }}" role="button" class="btn btn-primary">RETOUR</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('go.menu', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">menu</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('fiche.indicateur.projet', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Fiche de suivi des indicateurs</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Valeur Total</label>
+                                        <label>Valeur atteinte</label>
                                         <input type="number" name="rts" value="{{ $resultat->rts }}" class="form-control" required>
                                     </div>
                                 </div>
@@ -99,6 +99,18 @@
                                         </select>
                                     </div>
                                 </div>
+                                @if($projet->typecadre=="Cadre de  resultat")
+                                <div class="col-lg-6">
+                                    <label>Année</label>
+                                    <select class="form-control" name="annee" required="">
+                                        <option value="">Selectionnez</option>
+                                        @for ($i=1; $i <= $projet->duree; $i++)
+                                        <option value="{{$i}}" {{ $resultat->annee == 'annee '.$i ? 'selected' : ''}}>annee {{$i}}</option>
+                                        @endfor
+
+                                    </select>
+                                </div>
+                                @endif
                                 <input type="hidden" value="{{ $projet_id }}" name="projet_id">
                                 <div>
                                     <center>

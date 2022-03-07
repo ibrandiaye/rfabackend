@@ -20,6 +20,7 @@ class ResultatDetailRepository extends RessourceRepository{
     public function getProjetIdByResultat($id){
         return DB::table('resultats')
         ->join('indicateurs','resultats.indicateur_id','=','indicateurs.id')
+        ->where('resultats.id',$id)
         ->select('indicateurs.projet_id')
         ->first();
     }
