@@ -16,4 +16,7 @@ class Commune extends Model
     public function resultats(){
         return $this->hasMany(Resultat::class);
     }
+    public function villages(){
+        return $this->hasMany(Village::class);
+    }
 }
