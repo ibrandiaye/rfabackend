@@ -209,8 +209,9 @@ class IndicateurController extends Controller
      */
     public function destroy($id)
     {
+        $indicateur = $this->indicateurRepository->getById($id);
         $this->indicateurRepository->destroy($id);
-        return redirect('indicateur');
+        return redirect()->route('fiche.indicateur.projet',['projet_id'=>$indicateur->projet_id]);
     }
     public function getIndicateurByProjet($projet_id){
         $indicateurs = $this->indicateurRepository->getIndicateurByProjet($projet_id);
@@ -245,8 +246,9 @@ class IndicateurController extends Controller
         foreach ($sumIndicateurs as $key => $sumIndicateur) {
              foreach ( $listIndicateurs as $key1 => $indicateur) {
                 if($indicateur->indicateur === $sumIndicateur->indicateur){
+                        $cible =$this->cibleRepository->getCibleIndicateurAndPeriode($indicateur->id,$request['annee']+0);
                         $sumIndicateurs[$key]->sum = $sumIndicateur->rts;
-                        $sumIndicateurs[$key]->cible =  $indicateur->cible/$projet->duree;
+                        $sumIndicateurs[$key]->cible =  $cible->valeur;//$indicateur->cible/$projet->duree;
                         $sumIndicateurs[$key]->id = $indicateur->id;
                 }
              }

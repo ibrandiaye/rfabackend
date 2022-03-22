@@ -96,6 +96,8 @@ class ResultatController extends Controller
                 $resultats = $this->resultatRepository->store($request->all());
              }
 
+          }else{
+            $resultats = $this->resultatRepository->store($request->all());
           }
         if( $request['valeur']){
         $arrlength = count($request['valeur']);

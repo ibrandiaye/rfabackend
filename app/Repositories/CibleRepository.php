@@ -15,4 +15,9 @@ class CibleRepository extends RessourceRepository{
       ->where('indicateur_id',$indicateur_id)
       ->get();
   }
+  public function getCibleIndicateurAndPeriode($indicateur_id,$periode){
+    return DB::table('cibles')
+    ->where([['indicateur_id',$indicateur_id],['periode',$periode]])
+    ->first();
+}
 }

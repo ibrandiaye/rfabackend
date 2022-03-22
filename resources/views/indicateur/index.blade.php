@@ -64,9 +64,11 @@
                             <td>{{ $indicateur->projet->nom }}</td>
                             <td>
                                 <a href="{{ route('indicateur.edit', $indicateur->id) }}" role="button" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                               @if(count($indicateur->resultats)<=0)
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
+                                @endif
                                 <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id,'projet'=>$projet_id]) }}" class="btn btn-info">Résultats</a>
 
 
