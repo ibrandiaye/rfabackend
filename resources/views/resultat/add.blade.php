@@ -16,8 +16,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('resultat.index') }}" role="button" class="btn btn-primary">Formulaire d'enregistrement des resultats</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">Menu</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('resultat.index') }}" role="button" class="btn btn-success">Formulaire d'enregistrement des resultats</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -27,7 +27,7 @@
         <form action="{{ route('resultat.store') }}" method="POST">
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UN resultat</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE D'ENREGISTREMENT D'UN resultat</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">

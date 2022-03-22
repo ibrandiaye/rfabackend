@@ -24,8 +24,8 @@
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('indicateur.create') }}" role="button" class="btn btn-primary">Enregistrer indicateur</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">Menu</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('indicateur.create') }}" role="button" class="btn btn-success">Enregistrer indicateur</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -79,6 +79,35 @@
           </form>
         </fieldset>
         @endif
+
+            <form action="{{ route('search.periode.resultat') }}" method="POST">
+                @csrf
+                <div class="form-group">
+        <div class="col-sm-6">
+
+
+            <input type="hidden" id="from" name="from"  value="{{ old('from') }}"  required>
+            <input type="hidden" id="to" name="to"  value="{{ old('to') }}"  required>
+
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label> Periode:</label>
+                    <span class="input-group-text">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                  <input type="text" name="daterange" class="form-control float-right" id="reservation">
+                  <button type="submit" class="btn btn-success btn  "> Rechercher</button>
+                </div>
+                <!-- /.input group -->
+              </div>
+
+
+              <input id="projet_id" type="hidden" value="{{ $projet->id }}" name="projet_id">
+        </div>
+        </form>
+
       </div>
     <div class="col-12">
         <div class="row">
@@ -94,7 +123,7 @@
             @endforeach
         </div>
     <div class="card border-danger border-0">
-        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES INDICATEURS</div>
+        <div class="card-header bg-success text-center">LISTE D'ENREGISTREMENT DES INDICATEURS</div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
@@ -115,16 +144,16 @@
                             <td>{{ $indicateur->sum ?  $indicateur->sum  : 0}}</td>
                             <td>{{$indicateur->cible - $indicateur->sum }}</td>
                             <td>
-                               {{--  <a href="{{ route('indicateur.edit', $indicateur->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                               {{--  <a href="{{ route('indicateur.edit', $indicateur->id) }}" role="button" class="btn btn-success"><i class="fas fa-edit"></i></a>
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!} --}}
-                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id]) }}" class="btn btn-info">Résultats</a>
+                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id,'projet'=>$projet_id]) }}" class="btn btn-info">Résultats</a>
 
 
                             </td>
                             {{-- <td>
-                                <a href="{{ route('indicateur.edit', $indicateur->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('indicateur.edit', $indicateur->id) }}" role="button" class="btn btn-success"><i class="fas fa-edit"></i></a>
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
@@ -221,6 +250,61 @@ const pie{{ $key }} = new Chart(ctxpie{{ $key }}, {
 
 @endforeach
 </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+<script>
+    $(function() {
+        const currentDate = new Date();
+        const currentDayOfMonth = currentDate.getDate();
+        const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+        const currentYear = currentDate.getFullYear();
+
+        $('#from').val( currentYear + "-" + (currentMonth + 1) + "-" + currentDayOfMonth  );
+        $('#to').val(currentYear+ "-" + (currentMonth + 1) + "-" +  currentDayOfMonth  );
+      $('input[name="daterange"]').daterangepicker({
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Appliquer",
+            "cancelLabel": "Annuler",
+            "fromLabel": "De",
+            "toLabel": "A",
+            "customRangeLabel": "Custom",
+            "weekLabel": "S",
+            "daysOfWeek": [
+                "Di",
+                "Lu",
+                "Ma",
+                "Me",
+                "Je",
+                "Ve",
+                "Sa"
+            ],
+            "monthNames": [
+                "Janvier",
+                "Fevrier",
+                "Mars",
+                "Avril",
+                "Mai",
+                "Juin",
+                "Juillet",
+                "Auout",
+                "Septembre",
+                "Octobre",
+                "Novembre",
+                "Decembre"
+            ]},
+        opens: 'left'
+      }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        $('#from').val(start.format('YYYY-MM-DD'));
+        $('#to').val(end.format('YYYY-MM-DD'));
+      });
+
+
+    });
+    </script>
 {{--  <script src="https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js"></script>
 
 <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.min.js"></script>

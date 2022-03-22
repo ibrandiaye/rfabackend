@@ -16,8 +16,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('region.index') }}" role="button" class="btn btn-primary">LISTE D'ENREGISTREMENT DES region</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('region.index') }}" role="button" class="btn btn-success">LISTE D'ENREGISTREMENT DES region</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -27,7 +27,7 @@
         <form action="{{ route('region.store') }}" method="POST">
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UNE CHAMBRE</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE D'ENREGISTREMENT D'UNE CHAMBRE</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">

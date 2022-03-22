@@ -15,8 +15,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$activite->projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('activite.index') }}" role="button" class="btn btn-primary">RETOUR</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$activite->projet_id]) }}" role="button" class="btn btn-success">Menu</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('activite.index') }}" role="button" class="btn btn-success">RETOUR</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -24,10 +24,10 @@
                 </div><!-- /.container-fluid -->
             </div>
 
-        {!! Form::model($activite, ['method'=>'PATCH','route'=>['activite.update', $activite->id]]) !!}
+        {!! Form::model($activite, ['method'=>'PATCH','route'=>['activite.update', $activite->id],'enctype'=>'multipart/form-data']) !!}
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'une activite</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE DE MODIFICATION D'une activite</div>
                         <div class="card-body">
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -94,7 +94,12 @@
                                     <input type="email" name="email"  value="{{  $activite->email }}" class="form-control"  required>
                                 </div>
                             </div>
-
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Fiche de Saisi</label>
+                                    <input type="file" name="fiche"  class="form-control" >
+                                </div>
+                            </div>
                             <input type="hidden" name="projet_id" value="{{ $activite->projet_id }}" required>
                             <div>
                                 <center>

@@ -26,6 +26,16 @@ class IndicateurRepository extends RessourceRepository{
                 ->where('projets.id',$projet_id)
                 ->get();
     }
+    public function getSumIndicateurByProjetAnne($projet_id,$anne) {
+        return DB::table('projets')
+                ->join('indicateurs','projets.id','=','indicateurs.projet_id')
+                ->join('resultats','indicateurs.id','=','resultats.indicateur_id')
+               // ->join('categories','reclamations.categorie_id','=','categories.id')
+                ->select('indicateurs.indicateur',DB::raw('sum(resultats.rts) as rts'))
+                ->groupBy('indicateurs.indicateur')
+                ->where([['projets.id',$projet_id],['resultats.annee',$anne]])
+                ->get();
+    }
     public function getIndicateurByProjetAndResultat($projet_id){
         return Indicateur::with(['projet','resultats','resultats.resultatDetails'])
         ->where('projet_id',$projet_id)
@@ -38,8 +48,30 @@ class IndicateurRepository extends RessourceRepository{
         ->join('projets','indicateurs.projet_id','=','projets.id')
         ->where([['projets.id',$projet_id],['resultats.annee',$annne]])
         ->select('indicateurs.*','resultats.*')
+       // ->groupBy('indicateurs.indicateur')
         ->get();
 
+    }
+    public function getIndicateurByProjetAndResultatByPeriode($projet_id,$from,$to){
+        return DB::table('resultats')
+        ->join('indicateurs','resultats.indicateur_id','=','indicateurs.id')
+        ->join('projets','indicateurs.projet_id','=','projets.id')
+        ->where('projets.id',$projet_id)
+        ->whereBetween('resultats.debut',[$from,$to])
+        ->select('resultats.*','indicateurs.*')
+        ->get();
+
+    }
+    public function getSumIndicateurByProjetyPeriode($projet_id,$from,$to) {
+        return DB::table('projets')
+                ->join('indicateurs','projets.id','=','indicateurs.projet_id')
+                ->join('resultats','indicateurs.id','=','resultats.indicateur_id')
+               // ->join('categories','reclamations.categorie_id','=','categories.id')
+                ->select('indicateurs.indicateur',DB::raw('sum(resultats.rts) as rts'))
+                ->groupBy('indicateurs.indicateur')
+                ->where('projets.id',$projet_id)
+                ->whereBetween('resultats.debut',[$from,$to])
+                ->get();
     }
 
 }

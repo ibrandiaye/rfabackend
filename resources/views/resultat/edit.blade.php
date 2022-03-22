@@ -16,8 +16,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('go.menu', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">menu</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('fiche.indicateur.projet', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Fiche de suivi des indicateurs</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('go.menu', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">menu</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('fiche.indicateur.projet', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">Fiche de suivi des indicateurs</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -28,7 +28,7 @@
         {!! Form::model($resultat, ['method'=>'PATCH','route'=>['resultat.update', $resultat->id]]) !!}
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION RESULTAT</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE DE MODIFICATION RESULTAT</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">

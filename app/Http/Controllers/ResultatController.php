@@ -132,7 +132,9 @@ class ResultatController extends Controller
      */
     public function show($id)
     {
+        //dd("df");
         $resultat = $this->resultatRepository->getById($id);
+
         return view('resultat.show',compact('resultat'));
     }
 
@@ -208,10 +210,12 @@ class ResultatController extends Controller
         $this->resultatRepository->destroy($id);
         return redirect()->back();
     }
-    public function getResultatByIndicateur($indicateur){
+    public function getResultatByIndicateur($indicateur,$projet){
+
         $resultats = $this->resultatRepository->getResultatByIndicateur($indicateur);
-        $indi = $this->indicateurRepository->getById($indicateur);
-        $projet_id = $indi->projet_id;
+       // dd($resultats);
+        //$indi = $this->indicateurRepository->getById($indicateur);
+        $projet_id = $projet;
         return view('resultat.index',compact('resultats','projet_id'));
 
     }

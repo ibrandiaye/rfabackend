@@ -13,9 +13,9 @@
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="{{ route('go.menu', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">menu</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('fiche.indicateur.projet', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Fiche de suivi des indicateurs</a></li>
-                                    <li class="breadcrumb-item active"><a href="{{ route('resultat.create') }}" role="button" class="btn btn-primary">ENREGISTRER resultat</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('go.menu', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">menu</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('fiche.indicateur.projet', ['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">Fiche de suivi des indicateurs</a></li>
+                                    <li class="breadcrumb-item active"><a href="{{ route('resultat.create') }}" role="button" class="btn btn-success">ENREGISTRER resultat</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -35,7 +35,7 @@
 
 <div class="col-12">
     <div class="card border-danger border-0">
-        <div class="card-header bg-info text-center">LISTE D'ENREGISTREMENT DES RESULTATS</div>
+        <div class="card-header bg-success text-center">LISTE D'ENREGISTREMENT DES RESULTATS</div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
@@ -64,7 +64,7 @@
                             <td>{{ $resultat->debut }}</td>
                             <td>{{ $resultat->fin }}</td>
                             <td>
-                                <a href="{{ route('resultat.edit', $resultat->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('resultat.edit', $resultat->id) }}" role="button" class="btn btn-info"><i class="fas fa-edit"></i></a>
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['resultat.destroy', $resultat->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}

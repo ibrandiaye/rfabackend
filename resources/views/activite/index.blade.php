@@ -35,8 +35,8 @@
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet->id]) }}" role="button" class="btn btn-primary">Menu</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('activite.create') }}" role="button" class="btn btn-primary">Liste des activités</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet->id]) }}" role="button" class="btn btn-success">Menu</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('activite.create') }}" role="button" class="btn btn-success">Liste des activités</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -54,8 +54,8 @@
         </div>
     @endif
 
-    <div class="col-lg-12">
-        <div class="card">
+     {{--<div class="col-lg-12">
+         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Calendrier des activités</h3>
 
@@ -73,10 +73,10 @@
 
             </div>
     </div>
-    </div>
+    </div>--}}
 <div class="col-12">
     <div class="card border-danger border-0">
-        <div class="card-header bg-info text-center">Nom Projet : {{ $projet->nom }}</div>
+        <div class="card-header bg-success text-center">Nom Projet : {{ $projet->nom }}</div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
@@ -86,7 +86,7 @@
                             <th>Date Fin</th>
                             <th>Responsable</th>
                             <th>Resultats attendus</th>
-                            {{--  <th>Etat</th>  --}}
+                             <th>Fiche de Saisi</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -98,6 +98,7 @@
                             <td>{{ $activite->fin }}</td>
                             <td>{{ $activite->responsable }}</td>
                             <td>{!! $activite->rts !!}</td>
+                            <td>@if($activite->fs)<a href="{{  asset('fiche/'.$activite->fs)  }}">Fiche de Saisi</a>@endif</td>
                            {{--   <td>
                                 @if($activite->etat=='realise')
                                 <span class="badge badge-success">
@@ -110,7 +111,7 @@
                             @endif
                             </td>  --}}
                             <td>
-                                <a href="{{ route('activite.edit', $activite->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('activite.edit', $activite->id) }}" role="button" class="btn btn-info"><i class="fas fa-edit"></i></a>
                                 <a href="{{ route('activite.show', $activite->id) }}" role="button" class="btn btn-success"><i class="fas fa-eye"></i></a>
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['activite.destroy', $activite->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
@@ -171,7 +172,7 @@
 </div>
 
 @endsection
-@section('script')
+{{--  @section('script')
 
 
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
@@ -227,9 +228,10 @@
 
                 @endforeach
             ]
-        })  --}}
+        })  -}}
     });
 
 </script>
 
 @endsection
+  --}}

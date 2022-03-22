@@ -22,4 +22,8 @@ class Indicateur extends Model
     public function indicateurActivites(){
         return $this->hasMany(IndicateurActivite::class);
     }
+    public function cibles()
+    {
+        return $this->hasMany(Cible::class);
+    }
 }

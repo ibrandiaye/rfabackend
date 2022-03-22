@@ -16,8 +16,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$indicateur->projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('projet.index') }}" role="button" class="btn btn-primary">RETOUR</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$indicateur->projet_id]) }}" role="button" class="btn btn-success">Menu</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('projet.index') }}" role="button" class="btn btn-success">RETOUR</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -28,7 +28,7 @@
         {!! Form::model($indicateur, ['method'=>'PATCH','route'=>['indicateur.update', $indicateur->id]]) !!}
         @csrf
         <div class="card border-danger border-0">
-                   <div class="card-header bg-info text-center">FORMULAIRE  De modification d'un  indicateur</div>
+                   <div class="card-header bg-success text-center">FORMULAIRE  De modification d'un  indicateur</div>
                        <div class="card-body">
                            @if ($errors->any())
                                <div class="alert alert-danger">
@@ -91,6 +91,17 @@
                                @endforeach
                                {{--  <button type="button"  class="btn btn-success addRow">AJOUTER</button></h2>  --}}
                            </div>
+                           @foreach ($cibles as $cible)
+
+                           <div class="col-lg-6">
+                               <div class="form-group">
+                                   <label>Cible année {{ $cible->periode }}</label>
+                                   <input type="number" name="valeurs[]"  value="{{ $cible->valeur}}" class="form-control"  required>
+                               </div>
+                           </div>
+                           <input type="hidden" name="periodes[]" required value="{{ $cible->periode }}">
+                           <input type="hidden" name="ids[]" required value="{{ $cible->id }}">
+                           @endforeach
                            <div class="col-lg-6">
                                <div class="form-group">
                                    <label>Fréquence de collecte des données</label>

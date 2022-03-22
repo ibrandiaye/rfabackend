@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuiviActivitesTable extends Migration
+class CreateCiblesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateSuiviActivitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('suivi_activites', function (Blueprint $table) {
+        Schema::create('cibles', function (Blueprint $table) {
             $table->id();
-            $table->string('niveaur');
-            $table->string('resultat');
-            $table->string('observation')->nullable();
-            $table->unsignedBigInteger('activite_id')->nullable();
-            $table->foreign('activite_id')
+            $table->double('valeur');
+            $table->string('periode');
+            $table->unsignedBigInteger('indicateur_id');
+            $table->foreign('indicateur_id')
             ->references('id')
-            ->on('activites');
+            ->on('indicateurs');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateSuiviActivitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suivi_activites');
+        Schema::dropIfExists('cibles');
     }
 }

@@ -96,7 +96,8 @@ class HomeController extends Controller
              }
         }
         $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);
+        $nbActiviteNonPrevu = $this->suiviActiviteRepository->countSuiviActiviteNonPrevu($projet_id);
         return view('welcome',compact('projet','projet_id','nbSuiviActivite',
-    'nbActivite','nbEcart','indicateurs','projets','listCommune','suiviActivites'));
+    'nbActivite','nbEcart','indicateurs','projets','listCommune','suiviActivites','nbActiviteNonPrevu'));
     }
 }

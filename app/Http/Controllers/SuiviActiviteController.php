@@ -6,7 +6,10 @@ use App\Repositories\ActiviteRepository;
 use App\Repositories\CommuneRepository;
 use App\Repositories\ProjetRepository;
 use App\Repositories\SuiviActiviteRepository;
+use App\Resultat;
+use App\ResultatDetail;
 use Illuminate\Http\Request;
+use LDAP\Result;
 
 class SuiviActiviteController extends Controller
 {
@@ -58,7 +61,7 @@ class SuiviActiviteController extends Controller
         $request->validate([
             'niveaur'=> 'required|string',
             'resultat'=> 'required|string',
-            'activite_id'=> 'required|string',
+           // 'activite_id'=> 'restring',
             'dater'=> 'required|date',
         ]);
         if($request['rp']){
@@ -68,7 +71,43 @@ class SuiviActiviteController extends Controller
             $file->move($destinationPath, $docName);
             $request->merge(['rapport'=>$docName]);
         }
-        $suiviActivite = $this->suiviActiviteRepository->store($request->all());
+        $suiviActivite = $this->suiviActiviteRepository->store($request->only(['niveaur',
+    'resultat','activite_id','dater','activite_id','rapport','commune_id','etat','activite','projet']));
+        if($request['rts']){
+            $arrlength = count($request['rts']);
+            $rts = $request['rts'];
+            $observations = $request['observation'];
+            $indicateurs = $request['indicateurs'];
+            for ($i=0; $i < $arrlength; $i++) {
+                 $resultat = new Resultat();
+                 $resultat->rts = $rts[$i];
+                 $resultat->observation = $observations[$i];
+                 $resultat->annee = $request['annee'];
+                 $resultat->debut = $request['dater'];
+                 $resultat->fin = $request['dater'];
+                 $resultat->commune_id = $request['commune_id'];
+                 $resultat->indicateur_id = $indicateurs[$i];
+                 $resultat->save();
+                 if( $request['valeur']){
+                    $arrlength1 = count($request['valeur']);
+                    $valeurs = $request['valeur'];
+                    $desagreges = $request['desagrege_id'];
+                    $indid = $request['indid'];
+                    for ($j=0; $j < $arrlength1; $j++) {
+                        if( $indid[$j]==$indicateurs[$i]){
+                            $resultatDetail = new ResultatDetail();
+                            $resultatDetail->valeur = $valeurs[$j];
+                            $resultatDetail->resultat_id = $resultat->id;
+                            $resultatDetail->desagrege_id = $desagreges[$j];
+                            $resultatDetail->save();
+                        }
+
+                    }
+                  }
+            }
+        }
+
+
         return redirect()->route('suiviactivite.projet',['projet_id'=>$request['projet_id']]);
 
     }
@@ -108,6 +147,13 @@ class SuiviActiviteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request['rp']){
+            $destinationPath = 'rp/'; // upload path
+            $file = $request['rp'];
+            $docName = time().".". $file->getClientOriginalExtension();
+            $file->move($destinationPath, $docName);
+            $request->merge(['rapport'=>$docName]);
+        }
         $this->suiviActiviteRepository->update($id,$request->all());
         return redirect()->route('suiviactivite.projet',['projet_id'=>$request['projet_id']]);
     }
@@ -130,8 +176,9 @@ class SuiviActiviteController extends Controller
         $nbActivite = $this->activiteRepository->countActivite($projet_id);
         //dd($nbActivite);
         $nbEcart = $nbActivite - $nbSuiviActivite;
+        $nbActiviteNonPrevu = $this->suiviActiviteRepository->countSuiviActiviteNonPrevu($projet_id);
         return view('suiviActivite.index',compact('suiviActivites','projet','projet_id','nbSuiviActivite',
-    'nbActivite','nbEcart'));
+    'nbActivite','nbEcart','nbActiviteNonPrevu'));
 
     }
 

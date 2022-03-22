@@ -35,8 +35,8 @@
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('suiviActivite.create',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Liste des activités</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">Menu</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('suiviActivite.create',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">Liste des activités</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -101,9 +101,23 @@
           </div>
         </div>
         <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ $nbActiviteNonPrevu }}</h3>
+
+                <p>Activités non prévu realisé</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
       </div>
     </div>
-    <div class="col-lg-12">
+   {{--   <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Calendrier des activités</h3>
@@ -122,12 +136,12 @@
 
             </div>
     </div>
-    </div>
+    </div>  --}}
 
 <div class="col-12">
 
     <div class="card border-danger border-0">
-        <div class="card-header bg-info text-center">Nom Projet : {{ $projet->nom }}</div>
+        <div class="card-header bg-success text-center">Nom Projet : {{ $projet->nom }}</div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
@@ -155,7 +169,7 @@
                                 <a href="{{ asset('rp/'.$suiviActivite->rapport) }}" target="blank">Rapport</a>
                             @endif</td>
                             <td>
-                                <a href="{{ route('suiviactivite.edit', [$suiviActivite->id,$projet->id]) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('suiviactivite.edit', [$suiviActivite->id,$projet->id]) }}" role="button" class="btn btn-info"><i class="fas fa-edit"></i></a>
                                 <a href="{{ route('suiviActivite.show', $suiviActivite->id) }}" role="button" class="btn btn-success"><i class="fas fa-eye"></i></a>
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['suiviActivite.destroy', $suiviActivite->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>

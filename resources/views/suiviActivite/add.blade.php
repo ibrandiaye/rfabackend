@@ -16,8 +16,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('suiviactivite.projet',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">LISTE D'ENREGISTREMENT DES Activités</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">Menu</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('suiviactivite.projet',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">LISTE D'ENREGISTREMENT DES Activités</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -27,7 +27,7 @@
         <form action="{{ route('suiviActivite.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT Suivi Activite</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE D'ENREGISTREMENT Suivi Activite</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -41,7 +41,29 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Activite</label>
-                                        <select class="form-control" id="activite_id" name="activite_id" required>
+                                        <select class="form-control" id="etat" name="etat" required>
+                                            <option value="">Faites un choix</option>
+                                            <option value="prevu">prévu réalisé</option>
+                                            <option value="non prevu">non prévu réalisé</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="projet" value="{{ $projet_id }}">
+                                <input type="hidden" name="projet_id" value="{{ $projet_id }}">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Date de Réalsation</label>
+                                        <input type="date" name="dater" id="from"  value="{{ old('dater') }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="" id="contenu">
+
+                                </div>
+
+                                <div class="col-lg-6" id="prev">
+                                    <div class="form-group">
+                                        <label>Activite</label>
+                                        <select class="form-control" id="activite_id" name="activite_id" >
                                             <option value="">Faites un choix</option>
                                             @foreach($activites as $activite)
                                             <option value="{{ $activite->id }}">{{ $activite->nom }}</option>
@@ -57,13 +79,6 @@
                                             <option value="realise">realise</option>
                                             <option value="non realise">non realise</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="projet_id" value="{{ $projet_id }}">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Date de Réalsation</label>
-                                        <input type="date" name="dater" id="from"  value="{{ old('dater') }}" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -98,6 +113,17 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="containers"></div>
+                                @if($projet->typecadre=='Cadre de  resultat')
+                                <div class='col-lg-6'><label>Année</label>
+                                    <select class='form-control' name='annee' required=''>
+                                        <option value=''>Selectionnez</option>
+                                            @for ($i=1; $i <= $projet->duree; $i++)
+                                                <option value='{{$i}}'>annee {{$i}}</option>
+                                            @endfor
+                                    </select>
+                                </div>
+                                @endif
                                 <div>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>
@@ -132,19 +158,57 @@
         $(".containers").empty();
         $.ajax({
             type:'GET',
-            url:'/activite-indicateur/'+idv,
+            url:'/activite/indicateur/'+idv,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
                 console.log(data);
                 $.each(data,function(index,row){
-                    $(".containers").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur pour "+row.titre+":</label>"+
-                    "<input type='number' name='valeur[]'  value='{{ old('valeur') }}' class='form-control'  required >"+
-                    "<input type='hidden' name='desagrege_id[]'  value="+row.id+" class='form-control'  required >");
+                    $(".containers").append("<h4>"+row.indicateur.indicateur+"</h4>"+
+                        "<input type='hidden' name='indicateurs[]' value="+row.indicateur.id+"><div class='col-lg-6'>"+
+                        "<div class='form-group'>"+
+                            " <label>Valeur atteinte</label> "+
+                            " <input type='number' name='rts[]' class='form-control' required> "+
+                            " </div> "+
+                            " </div> "+
+                            "<div class='col-lg-6'> "+
+                                "<div class='form-group'> "+
+                                    " <label>Observation</label> "+
+                                    " <textarea name='observation[]' class='form-control' required> </textarea> "+
+                                    "</div> "+
+                                    "</div>"
+
+                    );
+
+                    $.each(row.indicateur.desegrages,function(index1,row1){
+                        $(".containers").append( "<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur pour "+row1.titre+":</label>"+
+                        "<input type='number' name='valeur[]'  value='' class='form-control'  required >"+
+                        "<input type='hidden' name='desagrege_id[]'  value="+row1.id+" class='form-control'  required ></div></div>"+
+                         "<input type='hidden' name='indid[]' value="+row.indicateur_id+">"
+                        );
+
+                         });
                 });
 
             }
         });
 
+
+    });
+    $("#etat").change(function () {
+        valeurs = $('#etat').val();
+      //  alert(valeurs);*
+      if(valeurs=='non prevu'){
+          $('#contenu').append(" <div class='col-lg-6' id='nprev'>"+
+            "<div class='form-group'>"+
+                "<label>Titre Activite</label>"+
+                "<input type='text' name='activite'   class='form-control'  >"+
+                "</div>"+
+                "</div>");
+                $("#prev").hide();
+      }else{
+        $("#prev").show();
+        $("#contenu").empty();
+      }
 
     });
 </script>

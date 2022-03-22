@@ -15,8 +15,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('suiviactivite.projet',$projet_id) }}" role="button" class="btn btn-primary">RETOUR</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('suiviactivite.projet',$projet_id) }}" role="button" class="btn btn-success">RETOUR</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -27,7 +27,7 @@
         {!! Form::model($suiviActivite, ['method'=>'PATCH','route'=>['suiviActivite.update', $suiviActivite->id]]) !!}
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION D'une activite {{ $projet->nom }}</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE DE MODIFICATION D'une activite {{ $projet->nom }}</div>
                         <div class="card-body">
                             @if ($errors->any())
                                 <div class="alert alert-danger">

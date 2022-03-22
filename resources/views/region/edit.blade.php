@@ -16,8 +16,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-primary">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('region.index') }}" role="button" class="btn btn-primary">RETOUR</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('region.index') }}" role="button" class="btn btn-success">RETOUR</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -28,7 +28,7 @@
         {!! Form::model($region, ['method'=>'PATCH','route'=>['region.update', $region->id]]) !!}
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE DE MODIFICATION TABLE</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE DE MODIFICATION TABLE</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">

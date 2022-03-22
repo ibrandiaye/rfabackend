@@ -16,8 +16,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-primary">Menu</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('indicateur.index') }}" role="button" class="btn btn-primary">Formulaire d'enregistrement des indicateurs</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('go.menu',['projet_id'=>$projet_id]) }}" role="button" class="btn btn-success">Menu</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('indicateur.index') }}" role="button" class="btn btn-success">Formulaire d'enregistrement des indicateurs</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -27,7 +27,7 @@
         <form action="{{ route('indicateur.store') }}" method="POST">
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">FORMULAIRE D'ENREGISTREMENT D'UN INDICATEUR</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE D'ENREGISTREMENT D'UN INDICATEUR</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Données de référence </label>
+                                        <label>Valeur de référence </label>
                                         <input type="text" name="donneeref"  value="{{ old('donneeref') }}" class="form-control"  required>
                                     </div>
                                 </div>
@@ -83,6 +83,15 @@
                                     </div> --}}
                                     <button type="button"  class="btn btn-success addRow">désagreger</button></h2>
                                 </div>
+                                @for ($i=1; $i <= $projet->duree; $i++)
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Cible année {{ $i }}</label>
+                                        <input type="number" name="valeurs[]"  value="{{ old('valeurs') }}" class="form-control"  required>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="periodes[]" required value="{{ $i }}">
+                                @endfor
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Méthode de collecte des données</label>

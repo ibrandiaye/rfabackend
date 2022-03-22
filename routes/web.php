@@ -29,7 +29,7 @@ Route::resource('activite', ActiviteController::class);
 Route::resource('suiviActivite', SuiviActiviteController::class);
 Route::get('desagrege/by/indicateur/{indicateur_id}','ResultatController@getDesagregeByIndicateur');
 Route::get('projet/indicateur/{projet_id}','IndicateurController@getIndicateurByProjet')->name('projet.indicateur');
-Route::get('indicateur/resultat/{indicateur}','ResultatController@getResultatByIndicateur')->name('indicateur.resultat');
+Route::get('indicateur/resultat/{indicateur}/{projet}','ResultatController@getResultatByIndicateur')->name('indicateur.resultat');
 Route::get('menu/projet/{projet_id}','HomeController@goToMenu')->name('go.menu');
 Route::get('activite/projet/{projet_id}','ActiviteController@create')->name('activite.projet');
 Route::get('liste/activite/projet/{id}','ActiviteController@getActiviteByprojet')->name('liste.activite.projet');
@@ -42,4 +42,5 @@ Route::get('suiviactivite/edit/{id}/{projet_id}','SuiviActiviteController@edit')
 Route::get('rappel','ActiviteController@rappel')->name('activite.rappe');
 Route::post('search/resultat','IndicateurController@getIndicateurAndResultatAndAnne')->name('search.resultat');
 Route::get('activite/indicateur/{id}','ActiviteController@getIndicateurByActivite');
+Route::post('search/periode/indicateur','IndicateurController@getIndicateurAndResultatByPeriode')->name('search.periode.resultat');
 

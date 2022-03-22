@@ -28,4 +28,11 @@ class SuiviActiviteRepository extends RessourceRepository{
       //->get();
       ->count();
   }
+  public function countSuiviActiviteNonPrevu($projet_id)
+  {
+      return DB::table('suivi_activites')
+      ->where([['etat','non prevu'],['projet',$projet_id]])
+      //->get();
+      ->count();
+  }
 }

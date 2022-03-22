@@ -24,7 +24,7 @@
   <div class="row">
     <!-- /.col-md-6 -->
     <div class="col-lg-6">
-      <div class="card">
+      <div class="card card-success card-outline">
         <div class="card-header">
           <h5 class="card-title m-0">Planification</h5>
         </div>
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="col-lg-6">
-      <div class="card card-primary card-outline">
+      <div class="card card-success card-outline">
         <div class="card-header">
           <h5 class="card-title m-0">Suivi Evaluation</h5>
         </div>
@@ -95,9 +95,9 @@
       </div>
       <!-- /.col-md-6 -->
       <div class="col-lg-6">
-        <div class="card">
+        <div class="card card-success card-outline">
           <div class="card-header">
-            <h5 class="card-title m-0">Paramétrage</h5>
+            <h5 class="card-title m-0">Modude de Saisi Planification</h5>
           </div>
           <div class="card-body">
               <div class="row">
@@ -125,9 +125,9 @@
       </div>
 
       <div class="col-lg-6">
-        <div class="card card-primary card-outline">
+        <div class="card card-success card-outline">
           <div class="card-header">
-            <h5 class="card-title m-0">Paramétrage</h5>
+            <h5 class="card-title m-0">Module de Saisi Suivi Evaluation</h5>
           </div>
           <div class="card-body">
               <div class="row">

@@ -70,6 +70,13 @@ class ActiviteController extends Controller
             'nom.required' => 'Nom du desagrege obligatoire',
         ]);
         //dd($request['indicateur']);
+        if($request['fiche']){
+            $destinationPath = 'fiche/'; // upload path
+            $file = $request['fiche'];
+            $docName = time().".". $file->getClientOriginalExtension();
+            $file->move($destinationPath, $docName);
+            $request->merge(['fs'=>$docName]);
+        }
         $activite = $this->activiteRepository->store($request->all());
         if($request['indicateur']){
             $arrlength = count($request['indicateur']);
@@ -118,6 +125,13 @@ class ActiviteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request['fiche']){
+            $destinationPath = 'fiche/'; // upload path
+            $file = $request['fiche'];
+            $docName = time().".". $file->getClientOriginalExtension();
+            $file->move($destinationPath, $docName);
+            $request->merge(['fs'=>$docName]);
+        }
         $this->activiteRepository->update($id,$request->all());
         return redirect()->route('liste.activite.projet',['id'=>$request['projet_id']]);
     }
@@ -161,7 +175,8 @@ class ActiviteController extends Controller
 
     }
     public function getIndicateurByActivite($id){
-        dd('acces');
+        $indicateurs = $this->indicateurActiviteRepository->getByActivite($id);
+      return response()->json($indicateurs);
     }
 
 }

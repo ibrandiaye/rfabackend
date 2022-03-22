@@ -61,10 +61,7 @@
                 </div>
               </div>
             </div>
-            <div>
 
-            </div>
-            <!-- ./col -->
 
             <div class="col-lg-3 col-6">
               <!-- small box -->
@@ -76,6 +73,20 @@
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
+                </div>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>{{ $nbActiviteNonPrevu }}</h3>
+
+                  <p>Activités non prévu realisé</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
                 </div>
               </div>
             </div>
@@ -97,7 +108,7 @@
                 <div class="col-12">
 
                     <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">Fiche de suivi des activités de {{ $projet->nom }}</div>
+                        <div class="card-header bg-success text-center">Fiche de suivi des activités de {{ $projet->nom }}</div>
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                                     <thead>
@@ -145,7 +156,7 @@
                     </div>
                     <div class="col-12">
                     <div class="card border-danger border-0">
-                        <div class="card-header bg-info text-center">Fiche de suivi des indicateurs</div>
+                        <div class="card-header bg-success text-center">Fiche de suivi des indicateurs</div>
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-responsive-md table-striped text-center">
                                     <thead>
@@ -170,7 +181,7 @@
                                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                 {!! Form::close() !!} --}}
-                                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id]) }}" class="btn btn-info">Résultats</a>
+                                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id,'projet'=>$projets->id]) }}" class="btn btn-info">Résultats</a>
 
 
                                             </td>
@@ -179,7 +190,7 @@
                                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                 {!! Form::close() !!}
-                                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id]) }}" class="btn btn-info">Résultats</a>
+                                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id,'projet'=>$projets->id]) }}" class="btn btn-info">Résultats</a>
 
 
                                             </td> --}}
@@ -270,6 +281,7 @@ const myChart = new Chart(ctx, {
     }
 })
 
+
 var map = L.map('address-map').setView([parseFloat(document.getElementById('latitude').value),parseFloat(document.getElementById('longitude').value)],8);
 L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=r7UvRXibthwur7YWRkfQ',{
     attribution : '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
@@ -285,12 +297,13 @@ var greenIcon = L.icon({
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor --}}
 });
 @foreach ($listCommune as $commune )
-
+@if( !empty($commune->latitude ))
 var marker = L.marker([parseFloat({{ $commune->latitude }}),parseFloat({{ $commune->longitude }} )]).addTo(map);
 marker.bindPopup('  <h6> Commune de {{ $commune->nomc }}</h6>@foreach ($commune->indicateur as  $indicateur)'+
 '<p> Nom : {{ $indicateur->indicateur }}</p>'+
 '<p> Valeur atteint : {{ $indicateur->rts }}</p>'+
 '@endforeach' ).openPopup();
+@endif
 @endforeach
 
 
