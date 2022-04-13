@@ -69,18 +69,7 @@
                                     </div>
                                 </div>
                                 <div class="conteneur">
-                                    {{-- <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Valeur en Chiffre</label>
-                                            <input type="number" name="quantite[]"  value="{{ old('quantite') }}" class="form-control"  required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Unité de mesure</label>
-                                            <input type="text" name="titre[]"  value="{{ old('titre') }}" class="form-control"  required>
-                                        </div>
-                                    </div> --}}
+
                                     <button type="button"  class="btn btn-success addRow">désagreger</button></h2>
                                 </div>
                                 @for ($i=1; $i <= $projet->duree; $i++)

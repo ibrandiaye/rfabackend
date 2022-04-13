@@ -123,6 +123,16 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Lien du video</label>
+                                        <input type="url" name="video"  class="form-control" placeholder="ex: https://www.youtube.com/watch?v=NwwiBVk1X1o">
+                                    </div>
+                                </div>
+                                <div class="conteneur">
+
+                                    <button type="button"  class="btn btn-success addRow">Ajouter Image</button></h2>
+                                </div>
                                 <div class="containers"></div>
                                 @if($projet->typecadre=='Cadre de  resultat')
                                 <div class='col-lg-6'><label>Année</label>
@@ -245,5 +255,21 @@
         });
 
     });
+
+
+        $(document).ready(function(){
+            $(".addRow").click(function() {
+                $(".conteneur").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Image :</label>"+
+                    "<input type='file' name='images[]'  value='{{ old('quantite') }}' class='form-control'  required >"+
+                    "<button type='button' class='btn btn-danger remove-tr'>Supprimer</button></div></div>");
+            });
+
+            $(document).on('click', '.remove-tr', function(){
+                $(this).parent('div .test').remove();
+            });
+       });
+
+
+
 </script>
 @endsection

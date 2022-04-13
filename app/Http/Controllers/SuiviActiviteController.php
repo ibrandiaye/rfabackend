@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\Repositories\ActiviteRepository;
 use App\Repositories\CommuneRepository;
 use App\Repositories\ProjetRepository;
@@ -9,7 +10,7 @@ use App\Repositories\SuiviActiviteRepository;
 use App\Resultat;
 use App\ResultatDetail;
 use Illuminate\Http\Request;
-use LDAP\Result;
+
 
 class SuiviActiviteController extends Controller
 {
@@ -72,7 +73,7 @@ class SuiviActiviteController extends Controller
             $request->merge(['rapport'=>$docName]);
         }
         $suiviActivite = $this->suiviActiviteRepository->store($request->only(['niveaur',
-    'resultat','activite_id','dater','activite_id','rapport','commune_id','etat','activite','projet']));
+    'resultat','activite_id','dater','activite_id','rapport','commune_id','etat','activite','projet','video']));
         if($request['rts']){
             $arrlength = count($request['rts']);
             $rts = $request['rts'];
@@ -106,6 +107,21 @@ class SuiviActiviteController extends Controller
                     }
                   }
             }
+        }
+        if($request['images']){
+            $destinationPath = 'images/'; // upload path
+            $arrlength = count($request['images']);
+            $images = $request['images'];
+            for ($i=0; $i < $arrlength; $i++) {
+                $image = new Image();
+                $img =  $images[$i];
+                $docName = time().".". $img->getClientOriginalExtension();
+                $img->move($destinationPath, $docName);
+                $image->chemin = $docName;
+                $image->suivi_activite_id =  $suiviActivite->id;
+                $image->save();
+            }
+
         }
 
 
