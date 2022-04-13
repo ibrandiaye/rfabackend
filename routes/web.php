@@ -47,3 +47,4 @@ Route::get('activite/indicateur/{id}','ActiviteController@getIndicateurByActivit
 Route::post('search/periode/indicateur','IndicateurController@getIndicateurAndResultatByPeriode')->name('search.periode.resultat');
 Route::get('villages/commune/{commune_id}','VillageController@getByCommune')->name('villages.commune');
 Route::post('search/resultat/by/region','IndicateurController@getIndicateurAndResultatByRegion')->name('search.resultat.region');
+Route::get('galerie/activite/{projet}/{sv}','SuiviActiviteController@getImageByActivite')->name('galerie.suivi.activite');

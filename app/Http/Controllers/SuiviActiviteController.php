@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Image;
 use App\Repositories\ActiviteRepository;
 use App\Repositories\CommuneRepository;
+use App\Repositories\ImageRepository;
 use App\Repositories\ProjetRepository;
 use App\Repositories\SuiviActiviteRepository;
 use App\Resultat;
@@ -18,15 +19,18 @@ class SuiviActiviteController extends Controller
     protected $suiviActiviteRepository;
     protected $projetRepository;
     protected $communeRepository;
+    protected $imageRepository;
 
     public function __construct(ActiviteRepository $activiteRepository, SuiviActiviteRepository $suiviActiviteRepository,
-    ProjetRepository $projetRepository,CommuneRepository $communeRepository)
+    ProjetRepository $projetRepository,CommuneRepository $communeRepository,
+     ImageRepository $imageRepository)
     {
         $this->middleware('auth');
         $this->activiteRepository = $activiteRepository;
         $this->suiviActiviteRepository = $suiviActiviteRepository;
         $this->projetRepository = $projetRepository;
         $this->communeRepository = $communeRepository;
+        $this->imageRepository = $imageRepository;
     }
     /**
      * Display a listing of the resource.
@@ -115,7 +119,7 @@ class SuiviActiviteController extends Controller
             for ($i=0; $i < $arrlength; $i++) {
                 $image = new Image();
                 $img =  $images[$i];
-                $docName = time().".". $img->getClientOriginalExtension();
+                $docName = $i.time().".". $img->getClientOriginalExtension();
                 $img->move($destinationPath, $docName);
                 $image->chemin = $docName;
                 $image->suivi_activite_id =  $suiviActivite->id;
@@ -199,6 +203,10 @@ class SuiviActiviteController extends Controller
 
     }
 
-
+    public function getImageByActivite($projet,$sv){
+        $projet = $this->projetRepository->getById($projet);
+        $images = $this->imageRepository->getImageBySuiviActivite($sv);
+        return view('suiviActivite.galarie',compact('projet','images'));
+    }
 
 }

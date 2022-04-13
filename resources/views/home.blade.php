@@ -20,10 +20,10 @@
         <div class="card card-success card-outline">
             <div class="card-body">
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+            <div class="col-12  order-2 order-md-1">
               <div class="row">
                   @foreach ($projets as $projet)
-                  <div class="col-12 col-sm-4">
+                  <div class="col-12 col-sm-2">
                     <a href="{{ route('go.menu', ['projet_id'=> $projet->id]) }}">
                     <div class="info-box bg-light">
                       <div class="info-box-content">

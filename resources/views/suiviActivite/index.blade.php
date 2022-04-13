@@ -175,7 +175,7 @@
                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
 
-
+                                <a href="{{ route('galerie.suivi.activite', [$projet->id,$suiviActivite->id]) }}" role="button" class="btn btn-info"><i class="fas fa-image"></i></a>
 
                             </td>
 
