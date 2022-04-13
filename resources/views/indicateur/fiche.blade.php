@@ -108,6 +108,31 @@
         </div>
         </form>
 
+        <form action="{{ route('search.resultat.region') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label> Region:</label>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="far fa-map"></i>
+                    </span>
+                  </div>
+                  <select class="form-control" name="region_id" required="">
+                    <option value="">Selectionnez</option>
+                    @foreach ($regions as $region )
+                    <option value="{{ $region->id }}" > {{$region->nom}}</option>
+                    @endforeach
+
+                </select>
+                <input type="hidden" value="{{ $projet->id }}" name="projet_id">
+                  <button type="submit" class="btn btn-success btn btn-sm "> Rechercher</button>
+                </div>
+                <!-- /.input group -->
+              </div>
+    </form>
+
       </div>
     <div class="col-12">
         <div class="row">
@@ -188,30 +213,38 @@ const ctx{{ $key }} = document.getElementById('myChart{{ $key }}').getContext('2
 const myChart{{ $key }} = new Chart(ctx{{ $key }}, {
     type: 'bar',
     data: {
-        labels: ['Valeur Cible', 'Valeur atteinte', 'Ecart'],
+        labels: ['Indicateurs'],
         datasets: [{
-            label: 'Indicateur',
-            data: ['{{ $indicateur->cible }}', '{{ $indicateur->sum ?  $indicateur->sum  : 0}}', '{{$indicateur->cible - $indicateur->sum }}'],
-            backgroundColor: [
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderWidth: 1
+          label: 'Valeur Cible',
+          backgroundColor: 'rgba(255, 206, 86, 0.2)',
+          data: ['{{ $indicateur->cible }}']
+        }, {
+          label: 'Valeur Atteint',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          data: ['{{ $indicateur->sum ?  $indicateur->sum  : 0}}']
+        }, {
+          label: 'Valeur Ecart',
+          backgroundColor:'rgba(255, 99, 132, 0.2)',
+          data:[ '{{$indicateur->cible - $indicateur->sum }}']
         }]
-    },
-    options: {
+      },
+
+      options: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            fontColor: "#000080",
+          }
+        },
         scales: {
-            y: {
-                beginAtZero: true
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
             }
+          }]
         }
-    }
+      }
 });
 
 @endforeach

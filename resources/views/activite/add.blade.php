@@ -11,7 +11,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">Canevas de reporting</h1>
+                        <h1 class="m-0 text-info">Canevas de planification</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -44,6 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
+                                    <label>Periode</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text">
@@ -99,7 +100,7 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label>Fiche de Saisi</label>
+                                        <label>Fiche de collecte</label>
                                         <input type="file" name="fiche"  class="form-control" >
                                     </div>
                                 </div>

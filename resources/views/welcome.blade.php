@@ -40,7 +40,7 @@
                   <div class="inner">
                     <h3>{{ $nbActivite }}</h3>
 
-                    <p>Activités prévus</p>
+                    <p><b>Activités prévues</b></p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-calendar"></i>
@@ -54,7 +54,7 @@
                 <div class="inner">
                   <h3>{{ $nbSuiviActivite }}</h3>
 
-                  <p>Activités realisé</p>
+                  <p><b>Activités realisées</b></p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -69,7 +69,7 @@
                 <div class="inner">
                   <h3>{{ $nbEcart }}</h3>
 
-                  <p>Activites non realisé</p>
+                  <p><b>Activites non realisées</b></p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
@@ -83,7 +83,7 @@
                 <div class="inner">
                   <h3>{{ $nbActiviteNonPrevu }}</h3>
 
-                  <p>Activités non prévu realisé</p>
+                  <p><b>Activités non prévu realisées</b></p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -115,7 +115,7 @@
                                         <tr>
                                             <th>Activité</th>
                                             <th>Date</th>
-                                            <th>Resultat</th>
+                                            <th>Resultats obtenus</th>
                                             <th>Observation</th>
                                             <th>Niveau de réalisation</th>
                                             <th>Actions</th>
@@ -231,30 +231,38 @@ const ctx{{ $key }} = document.getElementById('myChart{{ $key }}').getContext('2
 const myChart{{ $key }} = new Chart(ctx{{ $key }}, {
     type: 'bar',
     data: {
-        labels: ['Valeur Cible', 'Valeur atteinte', 'Ecart'],
+        labels: ['Indicateurs'],
         datasets: [{
-            label: 'Indicateur',
-            data: ['{{ $indicateur->cible }}', '{{ $indicateur->sum ?  $indicateur->sum  : 0}}', '{{$indicateur->cible - $indicateur->sum }}'],
-            backgroundColor: [
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderWidth: 1
+          label: 'Valeur Cible',
+          backgroundColor: 'rgba(255, 206, 86, 0.2)',
+          data: ['{{ $indicateur->cible }}']
+        }, {
+          label: 'Valeur Atteint',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          data: ['{{ $indicateur->sum ?  $indicateur->sum  : 0}}']
+        }, {
+          label: ' Valeur Ecart',
+          backgroundColor:'rgba(255, 99, 132, 0.2)',
+          data:[ '{{$indicateur->cible - $indicateur->sum }}']
         }]
-    },
-    options: {
+      },
+
+      options: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            fontColor: "#000080",
+          }
+        },
         scales: {
-            y: {
-                beginAtZero: true
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
             }
+          }]
         }
-    }
+      }
 });
 @endforeach
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -296,12 +304,28 @@ var greenIcon = L.icon({
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor --}}
 });
+var redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
 @foreach ($listCommune as $commune )
 @if( !empty($commune->latitude ))
 var marker = L.marker([parseFloat({{ $commune->latitude }}),parseFloat({{ $commune->longitude }} )]).addTo(map);
 marker.bindPopup('  <h6> Commune de {{ $commune->nomc }}</h6>@foreach ($commune->indicateur as  $indicateur)'+
-'<p> Nom : {{ $indicateur->indicateur }}</p>'+
-'<p> Valeur atteint : {{ $indicateur->rts }}</p>'+
+'<strong>Indicateur</strong> : {{ $indicateur->indicateur }} <strong>(Valeur atteint : {{ $indicateur->rts }})</strong><br>'+
+'@endforeach' ).openPopup();
+@endif
+@endforeach
+@foreach ($listVillages as $village )
+@if( !empty($village->latitude ))
+var marker = L.marker([parseFloat({{ $village->latitude }}),parseFloat({{ $village->longitude }} )], {icon: redIcon}).addTo(map);
+marker.bindPopup('  <h6> Village/quartier de {{ $village->nomv }}</h6>@foreach ($village->indicateur as  $indicateur)'+
+'<strong>Indicateur</strong> : {{ $indicateur->indicateur }} <strong>(Valeur atteint : {{ $indicateur->rts }})</strong><br>'+
 '@endforeach' ).openPopup();
 @endif
 @endforeach

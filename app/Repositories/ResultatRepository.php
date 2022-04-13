@@ -11,14 +11,15 @@ class ResultatRepository extends RessourceRepository{
     }
 
     public function listResultatWithRelation(){
-        return Resultat::with(['indicateur','indicateur.projet','resultatDetails','resultatDetails.desagrege'])
+        return Resultat::with(['indicateur','commune','indicateur.projet','resultatDetails','resultatDetails.desagrege'])
         ->get();
     }
     public function getResultatByIndicateur($indicateur){
-        return Resultat::with(['indicateur','indicateur.projet','resultatDetails','resultatDetails.desagrege'])
+        return Resultat::with(['indicateur','commune','indicateur.projet','resultatDetails','resultatDetails.desagrege'])
         ->where('indicateur_id',$indicateur)
         ->get();
     }
+
 
 
 }

@@ -11,6 +11,7 @@ use App\Repositories\DesagregeRepository;
 use App\Repositories\ProjetRepository;
 use App\ResultatDetail;
 use App\Repositories\ResultatDetailRepository;
+use App\Repositories\VillageRepository;
 use Illuminate\Support\Facades\Redirect;
 
 class ResultatController extends Controller
@@ -21,10 +22,11 @@ class ResultatController extends Controller
     protected $resultatDetailRepository;
     protected $communeRepository;
     protected $projetRepository;
+    protected $villageRepository;
 
     public function __construct(ResultatRepository $resultatRepository, IndicateurRepository $indicateurRepository,
     ResultatDetailRepository $resultatDetailRepository, DesagregeRepository $desagregeRepository,CommuneRepository $communeRepository,
-    ProjetRepository $projetRepository){
+    ProjetRepository $projetRepository,VillageRepository $villageRepository){
         $this->middleware('auth');
         $this->resultatRepository =$resultatRepository;
         $this->indicateurRepository = $indicateurRepository;
@@ -32,6 +34,7 @@ class ResultatController extends Controller
         $this->desagregeRepository =$desagregeRepository;
         $this->communeRepository = $communeRepository;
         $this->projetRepository = $projetRepository;
+        $this->villageRepository = $villageRepository;
     }
 
     /**
@@ -90,11 +93,11 @@ class ResultatController extends Controller
             for ($i=0; $i < $arrlength; $i++) {
                 $quantite =  $quantite + $valeurs[$i];
             }
-            if($quantite > $request['rts'] || $quantite < $request['rts'] ){
+            /* if($quantite > $request['rts'] || $quantite < $request['rts'] ){
                 return  Redirect::back()->withErrors(['errors'=>'Valeur cible du projet different des désagrations']);
-             }else{
+             }else{ */
                 $resultats = $this->resultatRepository->store($request->all());
-             }
+            // }
 
           }else{
             $resultats = $this->resultatRepository->store($request->all());
@@ -108,9 +111,9 @@ class ResultatController extends Controller
         for ($i=0; $i < $arrlength; $i++) {
             $quantite =  $quantite + $valeurs[$i];
         }
-        if($quantite > $request['rts'] || $quantite < $request['rts'] ){
+        /* if($quantite > $request['rts'] || $quantite < $request['rts'] ){
             return  Redirect::back()->withErrors(['errors'=>'Valeur cible du projet different des désagrations']);
-         }
+         } */
         for ($i=0; $i < $arrlength; $i++) {
             $resultatDetail = new ResultatDetail();
             $resultatDetail->valeur = $valeurs[$i];
@@ -177,11 +180,11 @@ class ResultatController extends Controller
             for ($i=0; $i < $arrlength; $i++) {
                 $quantite =  $quantite + $valeurs[$i];
             }
-            if($quantite > $request['rts'] || $quantite < $request['rts'] ){
+            /* if($quantite > $request['rts'] || $quantite < $request['rts'] ){
                 return  Redirect::back()->withErrors(['errors'=>'Valeur cible du projet different des désagrations']);
-             }else{
+             }else{ */
                 $this->resultatDetailRepository->deleteResultatById($id);
-             }
+            //  }
 
           }
         if( $request['valeur']){

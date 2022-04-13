@@ -8,7 +8,7 @@ class Resultat extends Model
 {
     protected $fillable = [
         'rts','debut','fin','indicateur_id','commune_id','observation',
-        'annee'
+        'annee','village_id'
     ];
     public function indicateur(){
         return $this->belongsTo(Indicateur::class);

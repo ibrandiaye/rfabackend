@@ -47,6 +47,7 @@
                             <th>Observation</th>
                             <th>Date début </th>
                             <th>Date Fin </th>
+                            <th>Commune</th>
                             <th>action</th>
 
                         </tr>
@@ -63,6 +64,7 @@
                             <td>{{ $resultat->observation }}</td>
                             <td>{{ $resultat->debut }}</td>
                             <td>{{ $resultat->fin }}</td>
+                            <td>{{ $resultat->commune->nomc }}</td>
                             <td>
                                 <a href="{{ route('resultat.edit', $resultat->id) }}" role="button" class="btn btn-info"><i class="fas fa-edit"></i></a>
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['resultat.destroy', $resultat->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}

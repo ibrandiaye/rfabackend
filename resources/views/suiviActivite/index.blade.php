@@ -61,7 +61,7 @@
               <div class="inner">
                 <h3>{{ $nbActivite }}</h3>
 
-                <p>Activités prévus</p>
+                <p>Activités prévues</p>
               </div>
               <div class="icon">
                 <i class="ion ion-calendar"></i>
@@ -76,7 +76,7 @@
             <div class="inner">
               <h3>{{ $nbSuiviActivite }}</h3>
 
-              <p>Activités realisé</p>
+              <p>Activités realisées</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -92,7 +92,7 @@
             <div class="inner">
               <h3>{{ $nbEcart }}</h3>
 
-              <p>Activites non realisé</p>
+              <p>Activites non realisées</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -107,7 +107,7 @@
               <div class="inner">
                 <h3>{{ $nbActiviteNonPrevu }}</h3>
 
-                <p>Activités non prévu realisé</p>
+                <p>Activités non prévu realisées</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -146,12 +146,12 @@
                 <table id="example1" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th>Activité</th>
+                            <th>Activités</th>
                             <th>Date</th>
-                            <th>Resultat</th>
-                            <th>Observation</th>
+                            <th>Resultats obtenus</th>
+                            <th>Observations</th>
                             <th>Niveau de réalisation</th>
-                            <th>Rapport d’activité</th>
+                            <th>Rapports d’activités</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

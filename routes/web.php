@@ -19,6 +19,7 @@ Route::get('/dashboard/{projet_id}', 'HomeController@dashboard')->name('dashboar
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home.home');
 Route::resource('projet', ProjetController::class);
 Route::resource('indicateur', IndicateurController::class);
 Route::resource('resultat', ResultatController::class);
@@ -27,6 +28,7 @@ Route::resource('departement', DepartementController::class);
 Route::resource('commune', CommuneController::class);
 Route::resource('activite', ActiviteController::class);
 Route::resource('suiviActivite', SuiviActiviteController::class);
+Route::resource('village', VillageController::class);
 Route::get('desagrege/by/indicateur/{indicateur_id}','ResultatController@getDesagregeByIndicateur');
 Route::get('projet/indicateur/{projet_id}','IndicateurController@getIndicateurByProjet')->name('projet.indicateur');
 Route::get('indicateur/resultat/{indicateur}/{projet}','ResultatController@getResultatByIndicateur')->name('indicateur.resultat');
@@ -43,4 +45,5 @@ Route::get('rappel','ActiviteController@rappel')->name('activite.rappe');
 Route::post('search/resultat','IndicateurController@getIndicateurAndResultatAndAnne')->name('search.resultat');
 Route::get('activite/indicateur/{id}','ActiviteController@getIndicateurByActivite');
 Route::post('search/periode/indicateur','IndicateurController@getIndicateurAndResultatByPeriode')->name('search.periode.resultat');
-
+Route::get('villages/commune/{commune_id}','VillageController@getByCommune')->name('villages.commune');
+Route::post('search/resultat/by/region','IndicateurController@getIndicateurAndResultatByRegion')->name('search.resultat.region');

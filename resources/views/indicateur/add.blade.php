@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Nom du indicateur</label>
+                                        <label>Nom de l'indicateur</label>
                                         <input type="text" name="indicateur"  value="{{ old('indicateur') }}" class="form-control"  required>
                                     </div>
                                 </div>

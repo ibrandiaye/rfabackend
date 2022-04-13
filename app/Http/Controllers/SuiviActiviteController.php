@@ -86,6 +86,7 @@ class SuiviActiviteController extends Controller
                  $resultat->debut = $request['dater'];
                  $resultat->fin = $request['dater'];
                  $resultat->commune_id = $request['commune_id'];
+                 $resultat->village_id = $request['village_id'];
                  $resultat->indicateur_id = $indicateurs[$i];
                  $resultat->save();
                  if( $request['valeur']){

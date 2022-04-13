@@ -11,7 +11,7 @@ class IndicateurRepository extends RessourceRepository{
         $this->model = $indicateur;
     }
     public function getIndicateurByProjet($projet_id){
-        return Indicateur::with(['projet','resultats'])
+        return Indicateur::with(['projet','resultats','cibles'])
         ->where('projet_id',$projet_id)
         ->get();
 
@@ -71,6 +71,18 @@ class IndicateurRepository extends RessourceRepository{
                 ->groupBy('indicateurs.indicateur')
                 ->where('projets.id',$projet_id)
                 ->whereBetween('resultats.debut',[$from,$to])
+                ->get();
+    }
+    public function getSumIndicateurByProjetByRegion($projet_id,$region) {
+        return DB::table('projets')
+                ->join('indicateurs','projets.id','=','indicateurs.projet_id')
+                ->join('resultats','indicateurs.id','=','resultats.indicateur_id')
+                ->join('communes','resultats.commune_id','=','communes.id')
+                ->join('departements','communes.departement_id','=','departements.id')
+                ->join('regions','departements.region_id','=','regions.id')
+                ->select('indicateurs.indicateur',DB::raw('sum(resultats.rts) as rts'))
+                ->groupBy('indicateurs.indicateur')
+                ->where([['projets.id',$projet_id],['regions.id',$region]])
                 ->get();
     }
 

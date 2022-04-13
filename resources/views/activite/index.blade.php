@@ -86,7 +86,7 @@
                             <th>Date Fin</th>
                             <th>Responsable</th>
                             <th>Resultats attendus</th>
-                             <th>Fiche de Saisi</th>
+                             <th>Fiches de Collecte</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -98,7 +98,7 @@
                             <td>{{ $activite->fin }}</td>
                             <td>{{ $activite->responsable }}</td>
                             <td>{!! $activite->rts !!}</td>
-                            <td>@if($activite->fs)<a href="{{  asset('fiche/'.$activite->fs)  }}">Fiche de Saisi</a>@endif</td>
+                            <td>@if($activite->fs)<a href="{{  asset('fiche/'.$activite->fs)  }}">Fiche de collecte</a>@endif</td>
                            {{--   <td>
                                 @if($activite->etat=='realise')
                                 <span class="badge badge-success">

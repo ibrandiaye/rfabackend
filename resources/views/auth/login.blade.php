@@ -46,7 +46,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg"><b>Plateforme de Suivi Evaluation des intervention de Enda ECOPOP</b></p>
+      <p class="login-box-msg"><b>Plateforme de Suivi Evaluation des interventions de Enda ECOPOP</b></p>
 
       <form method="POST" action="{{ route('login') }}">
         @csrf

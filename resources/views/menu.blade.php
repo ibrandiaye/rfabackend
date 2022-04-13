@@ -97,7 +97,7 @@
       <div class="col-lg-6">
         <div class="card card-success card-outline">
           <div class="card-header">
-            <h5 class="card-title m-0">Modude de Saisi Planification</h5>
+            <h5 class="card-title m-0">Modude de Saisie Planification</h5>
           </div>
           <div class="card-body">
               <div class="row">
@@ -127,7 +127,7 @@
       <div class="col-lg-6">
         <div class="card card-success card-outline">
           <div class="card-header">
-            <h5 class="card-title m-0">Module de Saisi Suivi Evaluation</h5>
+            <h5 class="card-title m-0">Module de Saisie Suivi Evaluation</h5>
           </div>
           <div class="card-body">
               <div class="row">

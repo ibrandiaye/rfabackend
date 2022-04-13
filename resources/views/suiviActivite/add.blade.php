@@ -38,28 +38,6 @@
                                         </ul>
                                     </div>
                                 @endif
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Activite</label>
-                                        <select class="form-control" id="etat" name="etat" required>
-                                            <option value="">Faites un choix</option>
-                                            <option value="prevu">prévu réalisé</option>
-                                            <option value="non prevu">non prévu réalisé</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="projet" value="{{ $projet_id }}">
-                                <input type="hidden" name="projet_id" value="{{ $projet_id }}">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Date de Réalsation</label>
-                                        <input type="date" name="dater" id="from"  value="{{ old('dater') }}" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="" id="contenu">
-
-                                </div>
-
                                 <div class="col-lg-6" id="prev">
                                     <div class="form-group">
                                         <label>Activite</label>
@@ -71,7 +49,31 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <input type="hidden" name="projet" value="{{ $projet_id }}">
+                                <input type="hidden" name="projet_id" value="{{ $projet_id }}">
                                 <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Date de Réalsation</label>
+                                        <input type="date" name="dater" id="from"  value="{{ old('dater') }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Niveau  de réalisation</label>
+                                        <select class="form-control" id="etat" name="etat" required>
+                                            <option value="">Faites un choix</option>
+                                            <option value="prevu">prévu réalisé</option>
+                                            <option value="non prevu">non prévu réalisé</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="" id="contenu">
+
+                                </div>
+                                <input type="hidden" value="realise" name="niveaur">
+
+                                {{--  <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Niveau  de réalisation</label>
                                         <select class="form-control" name="niveaur" required>
@@ -80,7 +82,7 @@
                                             <option value="non realise">non realise</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div>  --}}
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                     <label>Résultats obtenus (Livrables)</label>
@@ -103,13 +105,21 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Lieu</label>
+                                        <label>Commune</label>
                                         <select class="form-control" id="commune_id" name="commune_id" required="">
                                             <option value="">Selectionnez</option>
                                             @foreach ($communes as $commune)
                                             <option value="{{$commune->id}}">{{$commune->nomc}}</option>
                                                 @endforeach
 
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Village/quartier</label>
+                                        <select class="form-control" id="village_id" name="village_id" >
+                                            <option value="">Selectionnez</option>
                                         </select>
                                     </div>
                                 </div>
@@ -209,6 +219,30 @@
         $("#prev").show();
         $("#contenu").empty();
       }
+
+    });
+    $("#commune_id").change(function () {
+
+        //var selectedClasse = $(this).children("option:selected").val();
+    var commune_id =  $("#commune_id").children("option:selected").val();
+        // alert("You have selected the country - " + commune_id);
+        var village_id = "<option value=''>Veuillez selectionner</option>";
+        $.ajax({
+            type:'GET',
+            url:'/villages/commune/'+commune_id,
+            data:'_token = <?php echo csrf_token() ?>',
+            success:function(data) {
+
+                //var village_id = " <option value=''>Sélectionner</option>";
+                $.each(data,function(index,row){
+                    //alert(row.nomd);
+                    village_id +="<option value="+row.id+">"+row.nomv+"</option>";
+
+                });
+                $("#village_id").empty();
+                $("#village_id").append(village_id);
+            }
+        });
 
     });
 </script>

@@ -10,6 +10,7 @@ use App\Desagrege;
 use App\Indicateur;
 use App\Repositories\CibleRepository;
 use App\Repositories\DesagregeRepository;
+use App\Repositories\RegionRepository;
 use App\Repositories\ResultatDetailRepository;
 use App\ResultatDetail;
 use Illuminate\Support\Facades\Redirect;
@@ -21,16 +22,18 @@ class IndicateurController extends Controller
     protected $resultatDetailRepository;
     protected $desagregeRepository;
     protected $cibleRepository;
+    protected $regionRepository;
 
     public function __construct(IndicateurRepository $indicateurRepository, ProjetRepository $projetRepository,
     ResultatDetailRepository $resultatDetailRepository, DesagregeRepository $desagregeRepository,
-    CibleRepository $cibleRepository){
+    CibleRepository $cibleRepository,RegionRepository $regionRepository){
         $this->middleware('auth');
         $this->indicateurRepository =$indicateurRepository;
         $this->projetRepository = $projetRepository;
         $this->resultatDetailRepository = $resultatDetailRepository;
         $this->desagregeRepository = $desagregeRepository;
         $this->cibleRepository = $cibleRepository;
+        $this->regionRepository = $regionRepository;
     }
 
     /**
@@ -83,7 +86,7 @@ class IndicateurController extends Controller
             'responsable'=> 'Responsable de collecte obligatoire',
             'projet_id'=> 'Nom du projet obligatoire',
         ]);
-        if( $request['quantite'] ){
+        /*  if( $request['quantite'] ){
             $arrlength = count($request['quantite']);
             $quantites = $request['quantite'];
             $titres = $request['titre'];
@@ -91,10 +94,10 @@ class IndicateurController extends Controller
             for ($i=0; $i < $arrlength; $i++) {
                 $quantite = $quantite + $quantites[$i];
             }
-            if($quantite > $request['cible'] || $quantite < $request['cible'] ){
+           if($quantite > $request['cible'] || $quantite < $request['cible'] ){
                 return  Redirect::back()->withErrors(['errors'=>'Valeur cible du projet different des désagrations']);
              }
-          }
+          }*/
           $indicateurs = $this->indicateurRepository->store($request->all());
         if( $request['quantite'] ){
             $arrlength = count($request['quantite']);
@@ -231,7 +234,9 @@ class IndicateurController extends Controller
         }
         $projet = $this->projetRepository->getById($projet_id);
         $annee = null;
-         return view('indicateur.fiche',compact('indicateurs','projet_id','projet','annee'));
+        $region = null;
+        $regions = $this->regionRepository->getRegionByProjet($projet_id);
+         return view('indicateur.fiche',compact('indicateurs','projet_id','projet','annee','region','regions'));
     }
      public function getIndicateurAndResultatAndAnne(Request $request){
 
@@ -256,8 +261,9 @@ class IndicateurController extends Controller
         }
         //dd($sumIndicateurs);
         $indicateurs = $sumIndicateurs;
-
-         return view('indicateur.fiche',compact('indicateurs','projet_id','projet','annee'));
+        $region = null;
+        $regions = $this->regionRepository->getRegionByProjet($projet_id);
+         return view('indicateur.fiche',compact('indicateurs','projet_id','projet','annee','region','regions'));
     }
     public function getIndicateurAndResultatByPeriode(Request $request){
 
@@ -281,7 +287,34 @@ class IndicateurController extends Controller
         }
         //dd($sumIndicateurs);
         $indicateurs = $sumIndicateurs;
+        $region = null;
+        $regions = $this->regionRepository->getRegionByProjet($projet_id);
+         return view('indicateur.fiche',compact('indicateurs','projet_id','projet','annee','region','regions'));
+    }
+    public function getIndicateurAndResultatByRegion(Request $request){
 
-         return view('indicateur.fiche',compact('indicateurs','projet_id','projet','annee'));
+        // $indicateurs = $this->indicateurRepository->getIndicateurByProjetAndResultatByPeriode($request['projet_id'],$request['from'],$request['to']);
+        $annee = null;
+        $sumIndicateurs = $this->indicateurRepository->getSumIndicateurByProjetByRegion($request['projet_id'],$request['region_id']);
+        //dd($sumIndicateurs);
+        $projet_id = $request['projet_id'];
+        //die($request);
+        $projet = $this->projetRepository->getById($projet_id);
+        $listIndicateurs = $this->indicateurRepository->getIndicateurByProjet($request['projet_id']);
+        foreach ($sumIndicateurs as $key => $sumIndicateur) {
+             foreach ( $listIndicateurs as $key1 => $indicateur) {
+                if($indicateur->indicateur === $sumIndicateur->indicateur){
+                        $sumIndicateurs[$key]->sum = $sumIndicateur->rts;
+                        $sumIndicateurs[$key]->cible =  $indicateur->cible/$projet->duree;
+                        $sumIndicateurs[$key]->id = $indicateur->id;
+                }
+             }
+
+        }
+        //dd($sumIndicateurs);
+        $indicateurs = $sumIndicateurs;
+        $region = $this->regionRepository->getById($request['region_id']);
+        $regions = $this->regionRepository->getRegionByProjet($projet_id);
+         return view('indicateur.fiche',compact('indicateurs','projet_id','projet','annee','region','regions'));
     }
 }

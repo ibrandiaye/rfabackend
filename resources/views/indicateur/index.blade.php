@@ -44,6 +44,11 @@
                             <th>indicateur</th>
                             <th>Valeur de référence</th>
                             <th>Cibles en fin de projet</th>
+                            <th>Cibles année 1</th>
+                            <th>Cibles année 2</th>
+                            <th>Cibles année 3</th>
+                            <th>Cibles année 4</th>
+                            <th>Cibles année 5</th>
                             <th>Méthode de collecte des données</th>
                             <th>Fréquence de collecte des données</th>
                             <th>Respondsable de la collecte des données</th>
@@ -58,6 +63,41 @@
                             <td>{{ $indicateur->indicateur }}</td>
                             <td>{{ $indicateur->donneeref }}</td>
                             <td>{{ $indicateur->cible }} {{ $indicateur->unite }}</td>
+                            <th>
+                            @foreach ($indicateur->cibles as $cible )
+                                @if($cible->periode==1 )
+                                    {{ $cible->valeur }}
+                                @endif
+                            @endforeach
+                            </th>
+                            <th>
+                                @foreach ($indicateur->cibles as $cible )
+                                    @if($cible->periode==2 )
+                                        {{ $cible->valeur }}
+                                    @endif
+                                @endforeach
+                                </th>
+                                <th>
+                                    @foreach ($indicateur->cibles as $cible )
+                                        @if($cible->periode==3 )
+                                            {{ $cible->valeur }}
+                                        @endif
+                                    @endforeach
+                                    </th>
+                                    <th>
+                                        @foreach ($indicateur->cibles as $cible )
+                                            @if($cible->periode==4 )
+                                                {{ $cible->valeur }}
+                                            @endif
+                                        @endforeach
+                                        </th>
+                                        <th>
+                                            @foreach ($indicateur->cibles as $cible )
+                                                @if($cible->periode==5 )
+                                                    {{ $cible->valeur }}
+                                                @endif
+                                            @endforeach
+                                            </th>
                             <td>{{ $indicateur->methode }}</td>
                             <td>{{ $indicateur->frequence }}</td>
                             <td>{{ $indicateur->responsable }}</td>

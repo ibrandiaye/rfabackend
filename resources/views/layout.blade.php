@@ -295,7 +295,7 @@
             "searching": false,
             "ordering": false,
             "info": false,
-            "autoWidth": true,
+            "autoWidth": false,
             "scrollX": true,
 
         });

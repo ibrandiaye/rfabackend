@@ -16,8 +16,8 @@ class CreateVillagesTable extends Migration
         Schema::create('villages', function (Blueprint $table) {
             $table->id();
             $table->string('nomv');
-            $table->double('latitude');
-            $table->double('longitude');
+            $table->double('latitudev');
+            $table->double('longitudev');
             $table->unsignedBigInteger('commune_id');
             $table->foreign('commune_id')
             ->references('id')

@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.2/dist/esri-leaflet-geocoder.css"
     integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
     crossorigin="">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
 <style>
     html, body, #container, #map {
     padding: 0;
@@ -28,22 +26,22 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">GESTION DES DEPARTEMENTS</h1>
+                        <h1 class="m-0 text-info">GESTION DES VILLAGES</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('departement.index') }}" role="button" class="btn btn-success">LISTE D'ENREGISTREMENT DES departements</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('village.index') }}" role="button" class="btn btn-success">Liste</a></li>
 
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-        <form action="{{ route('departement.store') }}" method="POST">
+        <form action="{{ route('village.store') }}" method="POST">
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-success text-center">FORMULAIRE D'ENREGISTREMENT D'UN Département</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE D'ENREGISTREMENT D'UNE village</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -56,34 +54,41 @@
                                 @endif
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Nom Département</label>
-                                        <input type="text" name="nomd"  value="{{ old('nomd') }}" class="form-control" min="1" required>
+                                        <label>Nom village</label>
+                                        <input type="text" name="nomv"  value="{{ old('nomv') }}" class="form-control" min="1" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Latitude</label>
-                                        <input type="number" id="latitude" name="latituded"  value="{{ old('latituded') }}" step="any" class="form-control" required>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Latitude</label>
+                                                <input type="number" id="latitude" name="latitudev"  value="{{ old('latitudev') }}" step="any" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Longitude</label>
+                                                    <input type="number" id="longitude" name="longitudev"  value="{{ old('longitudev') }}" step="any" class="form-control" required>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-lg-6">
+
                                     </div>
                                 </div>
 
                                     <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Longitude</label>
-                                            <input type="number" id="longitude" name="longituded"  value="{{ old('longituded') }}" step="any" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label>Nom Région</label>
-                                        <select class="form-control  js-example-basic-single"  name="region_id" required="">
-                                            @foreach ($regions as $region)
-                                            <option value="{{$region->id}}">{{$region->nom}}</option>
+                                        <label>Nom Commune</label>
+                                        <select class="form-control" name="commune_id" required="">
+                                            @foreach ($communes as $commune)
+                                            <option value="{{$commune->id}}">{{$commune->nomc}}</option>
                                                 @endforeach
 
                                         </select>
                                     </div>
                                     <div id="map"></div>
-
                                 <div>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> ENREGISTRER</button>
@@ -100,13 +105,8 @@
 
 
 @endsection
-
-
 @section('script')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-$(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
+
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
 crossorigin=""></script>
@@ -206,4 +206,3 @@ var searchControl = L.esri.Geocoding.geosearch({
 
 </script>
 @endsection
-

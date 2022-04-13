@@ -17,6 +17,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.2/dist/esri-leaflet-geocoder.css"
+    integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+    crossorigin="">
+<style>
+    html, body, #container, #map {
+    padding: 0;
+    margin: 0;
+    }
+    html, body, #map, #container {
+    height: 440px;
+    }
+    </style>
   @yield('css')
 </head>
 <body class="hold-transition layout-top-nav">
@@ -84,6 +97,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <ul aria-labelledby="dropdownSubMenu4" class="dropdown-menu border-0 shadow">
                         <li><a href="{{ route('commune.create') }}" class="dropdown-item">Ajouter Commune </a></li>
                         <li><a href="{{ route('commune.index') }}" class="dropdown-item">Liste Commune</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                  <li class="dropdown-submenu dropdown-hover">
+                      <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Village/Quartier</a>
+                      <ul aria-labelledby="dropdownSubMenu4" class="dropdown-menu border-0 shadow">
+                        <li><a href="{{ route('village.create') }}" class="dropdown-item">Ajouter Village </a></li>
+                        <li><a href="{{ route('village.index') }}" class="dropdown-item">Liste Village</a></li>
                       </ul>
                     </li>
             </ul>

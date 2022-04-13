@@ -101,4 +101,9 @@ class villageController extends Controller
         $this->villageRepository->destroy($id);
         return redirect('village');
 }
+public function getByCommune($commune_id)
+{
+    $villages = $this->villageRepository->getByCommune($commune_id);
+    return response()->json($villages);
+}
 }

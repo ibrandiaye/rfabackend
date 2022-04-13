@@ -90,7 +90,15 @@
                                         </select>
                                     </div>
                                 </div>
-                                @if($projet->typecadre=="Cadre de  resultat")
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Village/quartier</label>
+                                        <select class="form-control" id="village_id" name="village_id" >
+                                            <option value="">Selectionnez</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                {{--  @if($projet->typecadre=="Cadre de  resultat")  --}}
                                 <div class="col-lg-6">
                                     <label>Année</label>
                                     <select class="form-control" name="annee" required="">
@@ -101,7 +109,7 @@
 
                                     </select>
                                 </div>
-                                @endif
+                                {{--  @endif  --}}
                                 <input type="hidden" name="projet_id" value="{{ $projet->id }}">
                                 <div>
                                     <center>
@@ -174,6 +182,30 @@
            $("#fin").val(new_date.format('YYYY-MM-DD'));
            console.log(new_date);
           });
+    });
+    $("#commune_id").change(function () {
+
+        //var selectedClasse = $(this).children("option:selected").val();
+    var commune_id =  $("#commune_id").children("option:selected").val();
+        // alert("You have selected the country - " + commune_id);
+        var village_id = "<option value=''>Veuillez selectionner</option>";
+        $.ajax({
+            type:'GET',
+            url:'/villages/commune/'+commune_id,
+            data:'_token = <?php echo csrf_token() ?>',
+            success:function(data) {
+
+                //var village_id = " <option value=''>Sélectionner</option>";
+                $.each(data,function(index,row){
+                    //alert(row.nomd);
+                    village_id +="<option value="+row.id+">"+row.nomv+"</option>";
+
+                });
+                $("#village_id").empty();
+                $("#village_id").append(village_id);
+            }
+        });
+
     });
 </script>
 
