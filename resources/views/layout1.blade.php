@@ -36,12 +36,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-dark navbar-success ">
+  <nav class="main-header navbar navbar-expand-md navbar-dark ">
     <div class="container">
       <a href="{{ route('home')}}" class="navbar-brand">
-        <img src="{{ asset('assets/dist/img/enda.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('assets/dist/img/logo.png') }}" alt="Enda ECOPOP" class="brand-image  elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">ECOPOP</span>
+        <span class="brand-text font-weight-light"></span>
       </a>
 
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,7 +133,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-            <a class="dropdown-item" href="#"
+            <a class="dropdown-item text-danger" href="#"
                onclick="event.preventDefault();
            document.getElementById('logout-form').submit();">
                 {{ __('Déconnexion') }}

@@ -206,7 +206,9 @@ class SuiviActiviteController extends Controller
     public function getImageByActivite($projet,$sv){
         $projet = $this->projetRepository->getById($projet);
         $images = $this->imageRepository->getImageBySuiviActivite($sv);
-        return view('suiviActivite.galarie',compact('projet','images'));
+        $sv = $this->suiviActiviteRepository->getById($sv);
+       // var_dump($sv);
+        return view('suiviActivite.galarie',compact('projet','images','sv'));
     }
 
 }

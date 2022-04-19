@@ -44,6 +44,9 @@
     <div class="card border-danger border-0">
         <div class="card-header bg-success text-center">Nom Projet : {{ $projet->nom }}</div>
             <div class="card-body">
+                @if($sv->video)
+                <h6>Lien Vidéo : <a href="{{ $sv->video }}" target="blank">{{ $sv->video }}</a></h6>
+                @endif
                 <div class="row">
 
                     @foreach($images as $key => $image)

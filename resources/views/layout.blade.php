@@ -87,10 +87,10 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar elevation-4 sidebar-light-lime">
         <!-- Brand Logo -->
-        <a href="#" class="brand-link navbar-success">
-            <img src="{{ asset('assets/dist/img/enda.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <a href="#" class="brand-link ">
+            <img src="{{ asset('assets/dist/img/logo.png') }}" alt="AdminLTE Logo" class="brand-image  elevation-3"
                  style="opacity: .8">
-            <span class="brand-text font-weight-light">ENDA ECOPOP</span>
+            <span class="brand-text font-weight-light"><br></span>
         </a>
 
         <!-- Sidebar -->

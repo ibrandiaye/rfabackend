@@ -216,15 +216,15 @@ const myChart{{ $key }} = new Chart(ctx{{ $key }}, {
         labels: ['Indicateurs'],
         datasets: [{
           label: 'Valeur Cible',
-          backgroundColor: 'rgba(255, 206, 86, 0.2)',
+          backgroundColor: 'rgba(255, 206, 86, 1)',
           data: ['{{ $indicateur->cible }}']
         }, {
           label: 'Valeur Atteint',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          backgroundColor: 'rgba(0, 128, 0, 1)',
           data: ['{{ $indicateur->sum ?  $indicateur->sum  : 0}}']
         }, {
           label: 'Valeur Ecart',
-          backgroundColor:'rgba(255, 99, 132, 0.2)',
+          backgroundColor:'rgba(255, 0, 0, 1)',
           data:[ '{{$indicateur->cible - $indicateur->sum }}']
         }]
       },
@@ -260,14 +260,14 @@ const pie{{ $key }} = new Chart(ctxpie{{ $key }}, {
             label: 'Indicateur',
             data: ['{{ $indicateur->cible }}', '{{ $indicateur->sum ?  $indicateur->sum  : 0}}', '{{$indicateur->cible - $indicateur->sum }}'],
             backgroundColor: [
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
+                'rgba(255, 206, 86, 1)',
+                'rgba(0, 128, 0, 1)',
+                'rgba(255, 0, 0, 1)'
             ],
             borderColor: [
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
+                'rgba(255, 206, 86, 1)',
+                'rgba(0, 128, 0, 1)',
+                'rgba(255, 0, 0, 1)'
             ],
             borderWidth: 1
         }]
