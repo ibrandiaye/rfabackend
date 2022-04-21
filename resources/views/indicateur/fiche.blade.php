@@ -141,10 +141,10 @@
                     <p>{{ $indicateur->indicateur }}</p>
                     <canvas id="myChart{{ $key }}" width="400" height="400"></canvas>
                 </div>
-                <div class="col-4">
+                {{--  <div class="col-4">
                     <p>{{ $indicateur->indicateur }}</p>
                     <canvas id="pie{{ $key }}" width="400" height="400"></canvas>
-                </div>
+                </div>  --}}
             @endforeach
         </div>
     <div class="card border-danger border-0">
@@ -167,7 +167,7 @@
                             <td>{{ $indicateur->indicateur }}</td>
                             <td>{{ $indicateur->cible }}</td>
                             <td>{{ $indicateur->sum ?  $indicateur->sum  : 0}}</td>
-                            <td>{{$indicateur->cible - $indicateur->sum }}</td>
+                            <td>{{ $indicateur->sum - $indicateur->cible }}</td>
                             <td>
                                {{--  <a href="{{ route('indicateur.edit', $indicateur->id) }}" role="button" class="btn btn-success"><i class="fas fa-edit"></i></a>
                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
@@ -225,7 +225,7 @@ const myChart{{ $key }} = new Chart(ctx{{ $key }}, {
         }, {
           label: 'Valeur Ecart',
           backgroundColor:'rgba(255, 0, 0, 1)',
-          data:[ '{{$indicateur->cible - $indicateur->sum }}']
+          data:[ '{{$indicateur->sum - $indicateur->cible}}']
         }]
       },
 
@@ -248,7 +248,7 @@ const myChart{{ $key }} = new Chart(ctx{{ $key }}, {
 });
 
 @endforeach
-@foreach ( $indicateurs as $key=> $indicateur )
+{{--  @foreach ( $indicateurs as $key=> $indicateur )
 
 
 const ctxpie{{ $key }} = document.getElementById('pie{{ $key }}').getContext('2d');
@@ -258,7 +258,7 @@ const pie{{ $key }} = new Chart(ctxpie{{ $key }}, {
         labels: ['Valeur Cible', 'Valeur atteinte', 'Ecart'],
         datasets: [{
             label: 'Indicateur',
-            data: ['{{ $indicateur->cible }}', '{{ $indicateur->sum ?  $indicateur->sum  : 0}}', '{{$indicateur->cible - $indicateur->sum }}'],
+            data: ['{{ $indicateur->cible }}', '{{ $indicateur->sum ?  $indicateur->sum  : 0}}', '{{ $indicateur->sum - $indicateur->cible }}'],
             backgroundColor: [
                 'rgba(255, 206, 86, 1)',
                 'rgba(0, 128, 0, 1)',
@@ -281,7 +281,7 @@ const pie{{ $key }} = new Chart(ctxpie{{ $key }}, {
     }
 });
 
-@endforeach
+@endforeach  --}}
 </script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>

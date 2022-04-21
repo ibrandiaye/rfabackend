@@ -113,7 +113,7 @@ class HomeController extends Controller
         }
        //dd($listVillages);
         $nbActivite = $this->activiteRepository->countActivite($projet_id);
-        $communes = $this->communeRepository->getCommuneByAndrealisation($projet_id);
+        //$communes = $this->communeRepository->getCommuneByAndrealisation($projet_id);
         //dd($communes);
         $nbEcart = $nbActivite - $nbSuiviActivite;
         $indicateurs = $this->indicateurRepository->getIndicateurByProjetAndResultat($projet_id);

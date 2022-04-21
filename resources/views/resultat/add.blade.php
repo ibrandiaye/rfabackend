@@ -56,13 +56,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Valeur atteinte</label>
-                                        <input type="number" name="rts" class="form-control" required>
+                                        <input type="number" name="rts" class="form-control" step="0.01" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Observation</label>
-                                        <textarea name="observation" class="form-control" required> {{ old('observation') }}</textarea>
+                                        <textarea name="observation" class="form-control" > {{ old('observation') }}</textarea>
                                     </div>
                                 </div>
                                 {{--  <div class="col-lg-6">
@@ -145,7 +145,7 @@
 
                 $.each(data,function(index,row){
                     $(".containers").append("<div class='col-lg-6'> <div class='form-group  test'><label class='fieldlabels'>Valeur pour "+row.titre+":</label>"+
-                    "<input type='number' name='valeur[]'  value='{{ old('valeur') }}' class='form-control'  required >"+
+                    "<input type='number' name='valeur[]'  value='{{ old('valeur') }}' class='form-control' step='0.01' required >"+
                     "<input type='hidden' name='desagrege_id[]'  value="+row.id+" class='form-control'  required >");
                 });
 
@@ -191,7 +191,7 @@
         var village_id = "<option value=''>Veuillez selectionner</option>";
         $.ajax({
             type:'GET',
-            url:'/villages/commune/'+commune_id,
+            url:'http://46.105.120.83/suivievaluation/public/villages/commune/'+commune_id,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
 

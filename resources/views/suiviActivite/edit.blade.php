@@ -54,8 +54,8 @@
                                     <label>Niveau  de réalisation</label>
                                     <select class="form-control" name="niveaur" required>
                                         <option value="">Faites un choix</option>
-                                        <option value="realise" {{old('niveaur', $suiviActivite->niveaur) == 'realise' ? 'selected' : ''}} >realise</option>
-                                        <option value="non realise" {{old('niveaur', $suiviActivite->niveaur) == 'non realise' ? 'selected' : ''}}>non realise</option>
+                                        <option value="realise" {{old('niveaur', $suiviActivite->niveaur) == 'realise' ? 'selected' : ''}} >prévue réalisée</option>
+                                        <option value="non realise" {{old('niveaur', $suiviActivite->niveaur) == 'non realise' ? 'selected' : ''}}>non prévue réalisée</option>
                                     </select>
                                 </div>
                             </div>

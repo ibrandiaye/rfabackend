@@ -175,7 +175,7 @@
                                             <td>{{ $indicateur->indicateur }}</td>
                                             <td>{{ $indicateur->cible }}</td>
                                             <td>{{ $indicateur->sum ?  $indicateur->sum  : 0}}</td>
-                                            <td>{{$indicateur->cible - $indicateur->sum }}</td>
+                                            <td>{{ $indicateur->sum - $indicateur->cible }}</td>
                                             <td>
                                                {{--  <a href="{{ route('indicateur.edit', $indicateur->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
@@ -243,7 +243,7 @@ const myChart{{ $key }} = new Chart(ctx{{ $key }}, {
         }, {
           label: ' Valeur Ecart',
           backgroundColor:'rgba(255, 0, 0, 1)',
-          data:[ '{{$indicateur->cible - $indicateur->sum }}']
+          data:[ '{{ $indicateur->sum  - $indicateur->cible}}']
         }]
       },
 

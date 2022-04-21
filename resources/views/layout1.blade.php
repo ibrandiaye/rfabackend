@@ -58,19 +58,60 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link">Contact</a>
           </li>  --}}
           <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Projet</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="{{ route('projet.create') }}" class="dropdown-item">Ajouter Projet </a></li>
-              <li><a href="{{ route('projet.index') }}" class="dropdown-item">Liste Projets</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Plan Stratégique</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="#" class="dropdown-item">Axes Stratégiques </a></li>
               <li><a href="#" class="dropdown-item">Lignes d'Action</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">ACTIONS</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">PROJETS</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                  <li>
+                    <a tabindex="-1" href="{{ route('projet.create') }}" class="dropdown-item">Ajouter</a>
+                  </li>
+                  <li>
+                    <a tabindex="-1" href="{{ route('projet.index') }}" class="dropdown-item">Lister</a>
+                  </li>
+                  <!-- End Level three -->
+                </ul>
+              </li>
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">PROGRAMMES</a>
+                <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
+                    <li>
+                        <a tabindex="-1" href="{{ route('projet.create') }}" class="dropdown-item">Ajouter</a>
+                      </li>
+                      <li>
+                        <a tabindex="-1" href="{{ route('projet.index') }}" class="dropdown-item">Lister</a>
+                      </li>
+                  <!-- End Level three -->
+                </ul>
+              </li>
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">INTERVENTIONS</a>
+                <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
+                    <li>
+                        <a tabindex="-1" href="{{ route('projet.create') }}" class="dropdown-item">Ajouter</a>
+                      </li>
+                      <li>
+                        <a tabindex="-1" href="{{ route('projet.index') }}" class="dropdown-item">Lister</a>
+                      </li>
+                  <!-- End Level three -->
+                </ul>
+              </li>
+              <!-- End Level two -->
+            </ul>
+
+
+
+
+          </li>
+
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Decoupage Administratif</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">

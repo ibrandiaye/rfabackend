@@ -63,8 +63,8 @@
                                         <label>Niveau  de réalisation</label>
                                         <select class="form-control" id="etat" name="etat" required>
                                             <option value="">Faites un choix</option>
-                                            <option value="prevu">prévu réalisé</option>
-                                            <option value="non prevu">non prévu réalisé</option>
+                                            <option value="prevue">prévue réalisée</option>
+                                            <option value="non prevu">non prévue réalisée</option>
                                         </select>
                                     </div>
                                 </div>
@@ -239,7 +239,7 @@
         var village_id = "<option value=''>Veuillez selectionner</option>";
         $.ajax({
             type:'GET',
-            url:'/villages/commune/'+commune_id,
+            url:'http://46.105.120.83/suivievaluation/public/villages/commune/'+commune_id,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
 

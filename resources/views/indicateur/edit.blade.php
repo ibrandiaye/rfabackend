@@ -103,11 +103,19 @@
                            <input type="hidden" name="ids[]" required value="{{ $cible->id }}">
                            @endforeach
                            <div class="col-lg-6">
-                               <div class="form-group">
-                                   <label>Fréquence de collecte des données</label>
-                                   <input type="text" name="frequence"  value="{{ $indicateur->frequence }}" class="form-control"  required>
-                               </div>
-                           </div>
+                            <div class="form-group">
+                                <label>Fréquence de collecte des données</label>
+                                <select class="form-control" name="frequence" required="">
+                                    <option value="">Veuillez Selectionnez</option>
+                                    <option value="Hebdomadaire" {{ $indicateur->frequence=='Hebdomadaire' ? 'selected' : '' }}>Hebdomadaire</option>
+                                    <option value="Mensuelle" {{ $indicateur->frequence=='Mensuelle' ? 'selected' : '' }}>Mensuelle</option>
+                                    <option value="Trimestrielle" {{ $indicateur->frequence=='Trimestrielle' ? 'selected' : '' }}>Trimestrielle</option>
+                                    <option value="Semestrielle" {{ $indicateur->frequence=='Semestrielle' ? 'selected' : '' }}>Semestrielle</option>
+                                    <option value="Annuelle" {{ $indicateur->frequence=='Annuelle' ? 'selected' : '' }}>Annuelle</option>
+                                    <option value="Fin de projet" {{ $indicateur->frequence=='Fin de projet' ? 'selected' : '' }}>Fin de projet</option>
+                                </select>
+                            </div>
+                        </div>
                           {{--   <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Type Cadre</label>

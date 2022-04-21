@@ -104,12 +104,13 @@
                                             <option value="Trimestrielle">Trimestrielle</option>
                                             <option value="Semestrielle">Semestrielle</option>
                                             <option value="Annuelle">Annuelle</option>
+                                            <option value="Fin de projet">Fin de projet</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Respondsable de la collecte des données</label>
+                                        <label>Responsable de la collecte des données</label>
                                         <input type="text" name="responsable"  value="{{ old('responsable') }}" class="form-control"  required>
                                     </div>
                                 </div>
