@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\PaysRepository;
 use App\Repositories\ProjetRepository;
 use App\Repositories\RegionRepository;
 use Illuminate\Http\Request;
@@ -13,10 +14,13 @@ class ProjetController extends Controller
     protected $projetRepository;
     protected $regionRepository;
 
-    public function __construct(ProjetRepository $projetRepository, RegionRepository $regionRepository){
+    protected $paysRepository;
+    public function __construct(ProjetRepository $projetRepository, RegionRepository $regionRepository,
+    PaysRepository $paysRepository){
         $this->middleware('auth');
         $this->projetRepository =$projetRepository;
         $this->regionRepository = $regionRepository;
+        $this->paysRepository = $paysRepository;
     }
 
     /**
@@ -38,7 +42,8 @@ class ProjetController extends Controller
     public function create()
     {
         $regions = $this->regionRepository->getAll();
-        return view('projet.add',compact('regions'));
+        $payss = $this->paysRepository->getAll();
+        return view('projet.add',compact('regions','payss'));
     }
 
     /**
@@ -103,6 +108,7 @@ class ProjetController extends Controller
            $tab[$index]= $in;
            $index++;
         }
+        $pays = $this->paysRepository->getAll();
       //  dd($tab);
         return view('projet.edit',compact('projet','regions','tab'));
     }

@@ -19,4 +19,9 @@ class RegionRepository extends RessourceRepository{
       ->where('projets.id',$projet)
       ->get();
   }
+  public function getRegionByPays($pays_id){
+      return DB::table('regions')
+      ->where('pays_id',$pays_id)
+      ->get();
+  }
 }

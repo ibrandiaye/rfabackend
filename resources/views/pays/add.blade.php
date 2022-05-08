@@ -1,8 +1,8 @@
 {{-- \resources\views\permissions\create.blade.php --}}
 @extends('layout')
 
-@section('title', '| Enregister Region')
-@section('css')
+@section('title', '| Enregister pays')
+{{--  @section('css')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.2/dist/esri-leaflet-geocoder.css"
     integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
@@ -16,7 +16,7 @@
     height: 440px;
     }
     </style>
-@endsection
+@endsection  --}}
 @section('content')
 
     <div class="content-wrapper">
@@ -26,22 +26,22 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">GESTION DES Regions</h1>
+                        <h1 class="m-0 text-info">GESTION DES PAYS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('region.index') }}" role="button" class="btn btn-success">LISTE D'ENREGISTREMENT DES region</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('pays.index') }}" role="button" class="btn btn-success">LISTE D'ENREGISTREMENT DES PAYS</a></li>
 
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-        <form action="{{ route('region.store') }}" method="POST">
+        <form action="{{ route('pays.store') }}" method="POST">
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-success text-center">FORMULAIRE D'ENREGISTREMENT D'UNE CHAMBRE</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE D'ENREGISTREMENT D'UN PAYS</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -53,21 +53,12 @@
                                     </div>
                                 @endif
                                 <div class="col-lg-6">
-                                    <label>Nom Pays</label>
-                                    <select class="form-control  js-example-basic-single"  name="pays_id" required="">
-                                        @foreach ($payss as $pays)
-                                        <option value="{{$pays->id}}">{{$pays->nomp}}</option>
-                                            @endforeach
-
-                                    </select>
-                                </div>
-                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Nom de la région</label>
-                                        <input type="text" name="nom"  value="{{ old('nom') }}" class="form-control"  required>
+                                        <label>Nom Pays</label>
+                                        <input type="text" name="nomp"  value="{{ old('nomp') }}" class="form-control"  required>
                                     </div>
                                 </div>
-                                    <div class="col-lg-6">
+                                   {{--   <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Latitude</label>
                                             <input type="number" id="latitude" name="latitude"  value="{{ old('latitude') }}" step="any" class="form-control" required>
@@ -80,7 +71,7 @@
                                                 <input type="number" id="longitude" name="longitude"  value="{{ old('longitude') }}" step="any" class="form-control" required>
                                             </div>
                                         </div>
-                                        <div id="map"></div>
+                                        <div id="map"></div>  --}}
 
                                 <div>
                                     <center>
@@ -100,7 +91,7 @@
 @endsection
 
 
-@section('script')
+{{--  @section('script')
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
@@ -201,3 +192,4 @@ var searchControl = L.esri.Geocoding.geosearch({
 
 </script>
 @endsection
+  --}}

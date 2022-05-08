@@ -5,11 +5,11 @@
     <div class="container">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark"> Liste des Projets</small></h1>
+          <h1 class="m-0 text-dark"> Initiatives mise en oeuvre par Enda ECOPOP</small></h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active">Projets</li>
+            <li class="breadcrumb-item active">Initiatives</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->

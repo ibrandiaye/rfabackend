@@ -178,7 +178,7 @@
         $(".containers").empty();
         $.ajax({
             type:'GET',
-            url:'/activite/indicateur/'+idv,
+            url:'/suivievaluation/public/activite/indicateur/'+idv,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
                 console.log(data);

@@ -138,7 +138,7 @@
         var numero_id = "";
         $.ajax({
             type:'GET',
-            url:'/desagrege/by/indicateur/'+idv,
+            url:'/suivievaluation/public/desagrege/by/indicateur/'+idv,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
 

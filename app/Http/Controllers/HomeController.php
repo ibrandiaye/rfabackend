@@ -56,6 +56,7 @@ class HomeController extends Controller
     public function dashboard($projet_id){
   //      $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);
         $communes = $this->communeRepository->getCommuneByProject($projet_id);
+        // dd($communes);
         $villages = $this->villageRepository->getVillageByProject($projet_id);
         $rtsIndicateurs =  array();
         $projet = $this->projetRepository->getById($projet_id);
@@ -88,6 +89,27 @@ class HomeController extends Controller
            }
            $listVillages[$key1]->indicateur = $listIndicateurs;
        }
+      /*  $ct = 0;
+
+        foreach ($projets->indicateurs as $key2 => $indicateur) {
+             //voir si la commune existe dans les resultats
+
+            foreach ($communes as $key1 => $commune) {
+                $test = false;
+            foreach ($indicateur->resultats as $key3 => $resultat) {
+                if($commune->id == $resultat->commune_id){
+                   $test =true;
+                }
+            }
+            if($test==false){
+                $ct = $ct+1;
+                unset($communes[$key1]);
+            }
+
+        }
+
+       }
+       dd($communes); */
         foreach ($communes as $key1 => $commune) {
              // $listCommune[]= '$commune->nomc';
              //dd( $commune->nomc);
@@ -111,7 +133,22 @@ class HomeController extends Controller
             }
             $listCommune[$key1]->indicateur = $listIndicateurs;
         }
-       //dd($listVillages);
+        $ct = 0;
+        foreach ($listCommune as $key => $value) {
+            $test = false;
+            foreach ($value->indicateur as $key1 => $value) {
+               if($value->rts > 0){
+                $test = true;
+               }
+            }
+            if($test==false){
+                unset($listCommune[$key]);
+                $ct = $ct+1;
+            }
+
+        }
+        sort($listCommune);
+       //dd($ct);
         $nbActivite = $this->activiteRepository->countActivite($projet_id);
         //$communes = $this->communeRepository->getCommuneByAndrealisation($projet_id);
         //dd($communes);

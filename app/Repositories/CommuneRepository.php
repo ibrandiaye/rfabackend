@@ -24,9 +24,24 @@ public function getCommuneByProject($projet_id){
     ->join('departements','communes.departement_id','=','departements.id')
     ->join('regions','departements.region_id','=','regions.id')
     ->join('zones','regions.id','=','zones.region_id')
+    ->join('projets','zones.projet_id','=','projets.id')
+    //->join('indicateurs','projets.id','=','indicateurs.projet_id')
+    //->join('resultats','indicateurs.id','=','resultats.indicateur_id')
+    //->join('resultat_details','resultats.id','=','resultat_details.resultat_id')
     ->where('zones.projet_id',$projet_id)
     ->select('communes.id as id', 'communes.nomc as nomc','communes.latitudec','communes.longitudec')
-    ->get();
+    ->get(); /*DB::table('resultats')
+    ->join('indicateurs','indicateurs.id','=','resultats.indicateur_id')
+    ->join('projets','projets.id','=','indicateurs.projet_id')
+    ->join('zones','zones.projet_id','=','projets.id')
+    ->join('regions','regions.id','=','zones.region_id')
+    ->join('departements','departements.region_id','=','regions.id')
+    ->join('communes','communes.departement_id','=','departements.id')
+    ->where('zones.projet_id',$projet_id)
+    ->distinct('resultats.commune_id')
+    ->select('communes.id as id', 'communes.nomc as nomc','communes.latitudec','communes.longitudec','resultats.rts')
+    ->get();*/
+
 }
 public function getCommuneByAndrealisation($projet_id){
     return DB::table('communes')

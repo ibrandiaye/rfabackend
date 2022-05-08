@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\PaysRepository;
-use App\Repositories\RegionRepository;
 use Illuminate\Http\Request;
 
-class RegionController extends Controller
+class paysController extends Controller
 {
-    protected $regionRepository;
     protected $paysRepository;
-    public function __construct(RegionRepository $regionRepository, PaysRepository $paysRepository){
-        $this->middleware('auth');
-        $this->regionRepository =$regionRepository;
-        $this->paysRepository = $paysRepository;
 
+    public function __construct(PaysRepository $paysRepository){
+        $this->middleware('auth');
+        $this->paysRepository =$paysRepository;
     }
 
     /**
@@ -24,8 +21,8 @@ class RegionController extends Controller
      */
     public function index()
     {
-        $regions = $this->regionRepository->getAll();
-        return view('region.index',compact('regions'));
+        $payss = $this->paysRepository->getAll();
+        return view('pays.index',compact('payss'));
     }
 
     /**
@@ -35,8 +32,7 @@ class RegionController extends Controller
      */
     public function create()
     {
-        $payss = $this->paysRepository->getAll();
-        return view('region.add',compact('payss'));
+        return view('pays.add');
     }
 
     /**
@@ -47,8 +43,8 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
-        $regions = $this->regionRepository->store($request->all());
-        return redirect('region');
+        $payss = $this->paysRepository->store($request->all());
+        return redirect('pays');
 
     }
 
@@ -60,8 +56,8 @@ class RegionController extends Controller
      */
     public function show($id)
     {
-        $region = $this->regionRepository->getById($id);
-        return view('region.show',compact('region'));
+        $pays = $this->paysRepository->getById($id);
+        return view('pays.show',compact('pays'));
     }
 
     /**
@@ -72,9 +68,8 @@ class RegionController extends Controller
      */
     public function edit($id)
     {
-        $region = $this->regionRepository->getById($id);
-        $payss = $this->paysRepository->getAll();
-        return view('region.edit',compact('region','payss'));
+        $pays = $this->paysRepository->getById($id);
+        return view('pays.edit',compact('pays'));
     }
 
     /**
@@ -86,8 +81,8 @@ class RegionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->regionRepository->update($id, $request->all());
-        return redirect('region');
+        $this->paysRepository->update($id, $request->all());
+        return redirect('pays');
     }
 
     /**
@@ -98,11 +93,7 @@ class RegionController extends Controller
      */
     public function destroy($id)
     {
-        $this->regionRepository->destroy($id);
-        return redirect('region');
-    }
-    public function getRegionByPays($pays_id){
-        $regions = $this->regionRepository->getRegionByPays($pays_id);
-        return response()->json($regions);
+        $this->paysRepository->destroy($id);
+        return redirect('pays');
     }
 }

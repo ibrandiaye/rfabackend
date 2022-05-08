@@ -118,6 +118,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               <!-- Level two dropdown-->
               <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Pays</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                    <li><a href="{{ route('pays.create') }}" class="dropdown-item">Ajouter Pays </a></li>
+                    <li><a href="{{ route('pays.index') }}" class="dropdown-item">Liste Pays</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu dropdown-hover">
                 <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Région</a>
                 <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                     <li><a href="{{ route('region.create') }}" class="dropdown-item">Ajouter Region </a></li>

@@ -29,6 +29,7 @@ Route::resource('commune', CommuneController::class);
 Route::resource('activite', ActiviteController::class);
 Route::resource('suiviActivite', SuiviActiviteController::class);
 Route::resource('village', VillageController::class);
+Route::resource('pays', PaysController::class);
 Route::get('desagrege/by/indicateur/{indicateur_id}','ResultatController@getDesagregeByIndicateur');
 Route::get('projet/indicateur/{projet_id}','IndicateurController@getIndicateurByProjet')->name('projet.indicateur');
 Route::get('indicateur/resultat/{indicateur}/{projet}','ResultatController@getResultatByIndicateur')->name('indicateur.resultat');
@@ -48,3 +49,11 @@ Route::post('search/periode/indicateur','IndicateurController@getIndicateurAndRe
 Route::get('villages/commune/{commune_id}','VillageController@getByCommune')->name('villages.commune');
 Route::post('search/resultat/by/region','IndicateurController@getIndicateurAndResultatByRegion')->name('search.resultat.region');
 Route::get('galerie/activite/{projet}/{sv}','SuiviActiviteController@getImageByActivite')->name('galerie.suivi.activite');
+
+Route::get('rapport/index/{projet_id}','RapportController@index')->name('rapport.index');
+Route::get('rapport/{projet_id}','RapportController@create')->name('rapport.create');
+Route::get('rapport/edit/{projet_id}','RapportController@edit')->name('rapport.edit');
+Route::post('rapport/store','RapportController@store')->name('rapport.store');
+Route::put('rapport/update','RapportController@update')->name('rapport.update');
+Route::get('pays/region/{pays_id}','RegionController@getRegionByPays')->name('pays.region');
+

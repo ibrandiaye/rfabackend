@@ -139,7 +139,7 @@
         $(".containers").empty();
         $.ajax({
             type:'GET',
-            url:'/desagrege/by/indicateur/'+idv,
+            url:'/suivievaluation/public/desagrege/by/indicateur/'+idv,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
 
@@ -153,7 +153,7 @@
         });
         $.ajax({
             type:'GET',
-            url:'/indicateur/'+idv,
+            url:'/suivievaluation/public/indicateur/'+idv,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
                 if(data.frequence=='Hebdomadaire')

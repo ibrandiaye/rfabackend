@@ -12,12 +12,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">GESTION DES REGIONS</h1>
+                        <h1 class="m-0 text-info">GESTION DES PAYS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('region.index') }}" role="button" class="btn btn-success">RETOUR</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('pays.index') }}" role="button" class="btn btn-success">RETOUR</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -25,10 +25,10 @@
                 </div><!-- /.container-fluid -->
             </div>
 
-        {!! Form::model($region, ['method'=>'PATCH','route'=>['region.update', $region->id]]) !!}
+        {!! Form::model($pays, ['method'=>'PATCH','route'=>['pays.update', $pays->id]]) !!}
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-success text-center">FORMULAIRE DE MODIFICATION TABLE</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE DE MODIFICATION D'UN PAYS</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -39,35 +39,26 @@
                                         </ul>
                                     </div>
                                 @endif
-                                <div class="col-lg-6">
-                                    <label>Pays</label>
-                                    <select class="form-control" name="pays_id" required="">
-                                        @foreach ($payss as $pays)
-                                        <option {{old('pays_id', $region->pays_id) == $pays->id ? 'selected' : ''}}
-                                            value="{{$pays->id}}">{{$pays->nomp}}</option>
-                                            @endforeach
 
-                                    </select>
-                                </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Nom de la région</label>
-                                    <input type="text" name="nom" class="form-control" value="{{$region->nom}}"   required>
+                                        <label>Nom du pays</label>
+                                    <input type="text" name="nomp" class="form-control" value="{{$pays->nomp}}"   required>
                                     </div>
                                 </div>
-                                     <div class="col-lg-6">
+                                    {{--  <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Latitude</label>
-                                            <input type="number" name="latitude"  value="{{$region->latitude }}" step="any" class="form-control" required>
+                                            <input type="number" name="latitude"  value="{{$pays->latitude }}" step="any" class="form-control" required>
                                         </div>
                                     </div>
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>Longitude</label>
-                                                <input type="number" name="longitude"  value="{{$region->longitude }}" step="any" class="form-control" required>
+                                                <input type="number" name="longitude"  value="{{$pays->longitude }}" step="any" class="form-control" required>
                                             </div>
-                                        </div>
+                                        </div>  --}}
 
 
                                 <div>

@@ -67,14 +67,24 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-
                                     <div class="form-group">
-                                        @foreach ($regions as $region )
-                                        <div class="custom-control custom-checkbox">
-                                          <input class="custom-control-input" name="zone[]" type="checkbox" id="customCheckbox{{ $region->id }}" value="{{ $region->id }}">
-                                          <label for="customCheckbox{{ $region->id }}" class="custom-control-label">{{ $region->nom }}</label>
+                                        <label>Pays</label>
+                                        <select class="form-control" id="pays_id" name="pays_id" required="">
+                                            <option value="">Veuillez Selectionnez</option>
+                                            @foreach($payss as $key => $pays)
+                                                <option value="{{ $pays->id }}">{{ $pays->nomp }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group" id="region_id">
+                                        {{--  @foreach ($regions as $region )  --}}
+
+
                                         </div>
-                                        @endforeach
+                                        {{--  @endforeach  --}}
                                     </div>
 
                                 </div>
@@ -96,4 +106,36 @@
 
 @endsection
 
+@section('script')
+<script type='text/javascript'>
+$("#pays_id").change(function () {
 
+    //var selectedClasse = $(this).children("option:selected").val();
+var pays_id =  $("#pays_id").children("option:selected").val();
+    // alert("You have selected the country - " + region_id);
+    //var region_id = "<option value=''>Veuillez selectionner</option>";
+    var region_id ='';
+    $.ajax({
+        type:'GET',
+        url:"http://46.105.120.83/suivievaluation/public/pays/region/"+pays_id,
+        data:'_token = <?php echo csrf_token() ?>',
+        success:function(data) {
+
+            //var region_id = " <option value=''>Sélectionner</option>";
+            $.each(data,function(index,row){
+                //alert(row.nomd);
+                region_id +=" <div class='custom-control custom-checkbox' >"+
+                "<input class='custom-control-input' name='zone[]' type='checkbox' id="+row.id+" value="+row.id+">"+
+                "<label for='"+row.id+"' class='custom-control-label'>"+row.nom+"</label> </div>";
+
+
+
+            });
+            $("#region_id").empty();
+            $("#region_id").append(region_id);
+        }
+    });
+
+});
+</script>
+@endsection
