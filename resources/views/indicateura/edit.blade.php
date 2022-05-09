@@ -12,12 +12,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">GESTION DES AXES STRATEGIQUES</h1>
+                        <h1 class="m-0 text-info">GESTION DES INDICATEURS DE PERFORMANCE</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('axe.index') }}" role="button" class="btn btn-success">RETOUR</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('indicateura.index') }}" role="button" class="btn btn-success">RETOUR</a></li>
 
                         </ol>
                     </div><!-- /.col -->
@@ -25,10 +25,10 @@
                 </div><!-- /.container-fluid -->
             </div>
 
-        {!! Form::model($axe, ['method'=>'PATCH','route'=>['axe.update', $axe->id]]) !!}
+        {!! Form::model($indicateura, ['method'=>'PATCH','route'=>['indicateura.update', $indicateura->id]]) !!}
             @csrf
              <div class="card border-danger border-0">
-                        <div class="card-header bg-success text-center">FORMULAIRE DE MODIFICATION D'UNE AXE STRATEGIQUE</div>
+                        <div class="card-header bg-success text-center">FORMULAIRE DE MODIFICATION D'UN INDICATEUR DE PERFORMANCE</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -41,12 +41,27 @@
                                 @endif
 
                                 <div class="col-lg-6">
+                                    <label>action Stratégique</label>
+                                    <select class="form-control" name="action_id" required="">
+                                        @foreach ($actions as $action)
+                                        <option {{old('action_id', $indicateura->action_id) == $action->id ? 'selected' : ''}}
+                                            value="{{$action->id}}">{{$action->ligne}}</option>
+                                            @endforeach
+
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>AXE STRATEGIQUE</label>
-                                        <textarea name="intitule" class="form-control" required> {{ $axe->intitule}}</textarea>
+                                        <label>Indicateur de Performance</label>
+                                        <textarea name="indicateura" class="form-control" required> {{ $indicateura->indicateura }}</textarea>
                                     </div>
                                 </div>
-
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Unité</label>
+                                        <input type="text" name="unite"  value="{{ $indicateura->unite }}" class="form-control"  required>
+                                    </div>
+                                </div>
                                 <div>
                                     <center>
                                         <button type="submit" class="btn btn-success btn btn-lg "> MODIFIER</button>
