@@ -24,7 +24,7 @@
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-        <form action="{{ route('projet.store') }}" method="POST">
+        <form action="{{ route('projet.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
              <div class="card border-danger border-0">
                         <div class="card-header bg-success text-center">FORMULAIRE D'ENREGISTREMENT D'UN PROJET</div>
@@ -63,6 +63,7 @@
                                             <option value="">Veuillez Selectionnez</option>
                                             <option value="Cadre logique">Cadre Logique</option>
                                             <option value="Cadre de  resultat">Cadre de  resultat</option>
+                                            <option value="Plan d'action">Plan d'action</option>
                                         </select>
                                     </div>
                                 </div>
@@ -75,6 +76,12 @@
                                                 <option value="{{ $pays->id }}">{{ $pays->nomp }}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Image en avant</label>
+                                        <input type="file" name="image"  class="form-control" >
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

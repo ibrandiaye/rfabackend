@@ -13,6 +13,7 @@ use App\Repositories\DesagregeRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\ResultatDetailRepository;
 use App\ResultatDetail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class IndicateurController extends Controller
@@ -212,6 +213,9 @@ class IndicateurController extends Controller
      */
     public function destroy($id)
     {
+        DB::table('cibles')
+            ->where('indicateur_id',$id)
+            ->delete();
         $indicateur = $this->indicateurRepository->getById($id);
         $this->indicateurRepository->destroy($id);
         return redirect()->route('fiche.indicateur.projet',['projet_id'=>$indicateur->projet_id]);

@@ -17,8 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('action.index') }}" role="button" class="btn btn-success">LISTE D'ENREGISTREMENT DES LIGNES D'ACTION</a></li>
-
+                        <li class="breadcrumb-item active"><a href="{{ route('menuax') }}" role="button" class="btn btn-success">Menu</a></li>
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Resultata extends Model
 {
     protected $fillable = [
-        'rtsa','budjet','sf','indicateura_id'
+        'rtsa','budjet','sf','indicateura_id','iccs'
     ];
 
     public function indicateura(){

@@ -11,7 +11,7 @@ class ActionController extends Controller
     protected $actionRepository;
     protected $axeRepository;
     public function __construct(ActionRepository $actionRepository, AxeRepository $axeRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->actionRepository =$actionRepository;
         $this->axeRepository = $axeRepository;
 

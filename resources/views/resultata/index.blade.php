@@ -14,7 +14,7 @@
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
-                                <li class="breadcrumb-item active"><a href="{{ route('resultata.create') }}" role="button" class="btn btn-success">ENREGISTRER UN REALISATION DU PLAN STRATEGIQUE</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('menuax') }}" role="button" class="btn btn-success">Menu</a></li>
                                 </ol>
                             </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -45,6 +45,7 @@
                             <th>RESULTATS ATTENDUS</th>
                             <th>INDICATEURS DE PERFORMANCE</th>
                             <th>Realisation</th>
+                            <th>Interventions (en cours qui cadrent avec les LA et IP de la stratégie)</th>
                             <th>Budget</th>
                             <th>Source de Financement</th>
                             <th>actions</th>
@@ -59,6 +60,7 @@
                             <td>{{ $resultata->indicateura->action->rts }}</td>
                             <td>{{ $resultata->indicateura->indicateura }}</td>
                             <td>{{ $resultata->rtsa }}</td>
+                            <td>{{ $resultata->iccs }}</td>
                             <td>{{ $resultata->budjet }} CFA</td>
                             <td>{{ $resultata->sf }}</td>
                             <td>

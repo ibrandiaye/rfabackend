@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Projet extends Model
 {
     protected $fillable = [
-        'nom','objectif','duree','typecadre','pays_id'
+        'nom','objectif','duree','typecadre','pays_id','logo'
     ];
 
     public function indicateurs(){
@@ -24,5 +24,8 @@ class Projet extends Model
     }
     public function pays(){
         return $this->belongsTo(Pays::class);
+    }
+    public function users(){
+        return $this->hasMany(User::class);
     }
 }

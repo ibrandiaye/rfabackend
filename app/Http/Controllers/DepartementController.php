@@ -12,7 +12,7 @@ class DepartementController extends Controller
     protected $regionRepository;
 
     public function __construct(DepartementRepository $departementRepository, RegionRepository $regionRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->departementRepository =$departementRepository;
         $this->regionRepository = $regionRepository;
     }

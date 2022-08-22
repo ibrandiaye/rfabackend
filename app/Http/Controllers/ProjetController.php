@@ -30,6 +30,7 @@ class ProjetController extends Controller
      */
     public function index()
     {
+        //dd('azlerk');
         $projets = $this->projetRepository->getAllProjetsWithRelations();
         return view('projet.index',compact('projets'));
     }
@@ -60,6 +61,13 @@ class ProjetController extends Controller
             'nom.required' => 'Nom du projet obligatoire',
         ]);
         $length = sizeof($request['zone']);
+        if($request['image']){
+            $destinationPath = 'projet_img/'; // upload path
+            $file = $request['image'];
+            $docName = time().".". $file->getClientOriginalExtension();
+            $file->move($destinationPath, $docName);
+            $request->merge(['logo'=>$docName]);
+        }
         $projets = $this->projetRepository->store($request->all());
         $zones = $request['zone'];
         for ($i=0; $i < $length ; $i++) {
@@ -122,6 +130,13 @@ class ProjetController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request['image']){
+            $destinationPath = 'projet_img/'; // upload path
+            $file = $request['image'];
+            $docName = time().".". $file->getClientOriginalExtension();
+            $file->move($destinationPath, $docName);
+            $request->merge(['logo'=>$docName]);
+        }
         $this->projetRepository->update($id, $request->all());
         $length = sizeof($request['zone']);
         DB::table('zones')->where('projet_id',$id)->delete();

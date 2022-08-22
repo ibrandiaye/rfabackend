@@ -144,7 +144,9 @@ class ActiviteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $activite = $this->activiteRepository->getById($id);
+        $this->activiteRepository->destroy($id);
+        return redirect()->route('liste.activite.projet',['id'=>$activite->projet_id]);
     }
     public function getActiviteByprojet($id){
         $activites = $this->activiteRepository->getActiviteByProjets($id);

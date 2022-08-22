@@ -57,13 +57,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <a href="#" class="nav-link">Contact</a>
           </li>  --}}
-          <li class="nav-item dropdown">
+          <li class="nav-item">
+            <a href="{{ route('cs') }}" class="nav-link">A propos</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('menuax') }}" class="nav-link">Plan Stratégique</a>
+          </li>
+          {{--  <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Plan Stratégique</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <li><a href="#" class="dropdown-item">Axes Stratégiques </a></li>
               <li><a href="#" class="dropdown-item">Lignes d'Action</a></li>
             </ul>
-          </li>
+          </li>  --}}
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">ACTIONS</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -93,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </ul>
               </li>
               <li class="dropdown-submenu dropdown-hover">
-                <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">INTERVENTIONS</a>
+                <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">INITIATIVES</a>
                 <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
                     <li>
                         <a tabindex="-1" href="{{ route('projet.create') }}" class="dropdown-item">Ajouter</a>

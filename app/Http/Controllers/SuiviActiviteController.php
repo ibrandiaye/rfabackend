@@ -11,7 +11,7 @@ use App\Repositories\SuiviActiviteRepository;
 use App\Resultat;
 use App\ResultatDetail;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class SuiviActiviteController extends Controller
 {
@@ -187,7 +187,14 @@ class SuiviActiviteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $suiviActivite = $this->suiviActiviteRepository->getById($id);
+        $activite = $this->activiteRepository->getById($suiviActivite->activite_id);
+        DB::table('images')
+            ->where('suivi_activite_id',$id)
+            ->delete();
+        $this->suiviActiviteRepository->destroy($id);
+        return redirect()->route('suiviactivite.projet',['projet_id'=>$activite->projet_id]);
+
     }
     public function getSuiviActiviteByProjet($projet_id){
         $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);

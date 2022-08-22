@@ -10,7 +10,7 @@ class AxeController extends Controller
     protected $axeRepository;
 
     public function __construct(AxeRepository $axeRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->axeRepository =$axeRepository;
     }
 

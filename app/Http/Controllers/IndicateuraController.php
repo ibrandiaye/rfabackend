@@ -11,7 +11,7 @@ class IndicateuraController extends Controller
     protected $indicateuraRepository;
     protected $actionRepository;
     public function __construct(IndicateuraRepository $indicateuraRepository, ActionRepository $actionRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->indicateuraRepository =$indicateuraRepository;
         $this->actionRepository = $actionRepository;
 

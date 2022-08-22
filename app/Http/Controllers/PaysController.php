@@ -10,7 +10,7 @@ class paysController extends Controller
     protected $paysRepository;
 
     public function __construct(PaysRepository $paysRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->paysRepository =$paysRepository;
     }
 

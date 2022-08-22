@@ -12,7 +12,7 @@ class CommuneController extends Controller
     protected $departementRepository;
 
     public function __construct(CommuneRepository $communeRepository, DepartementRepository $departementRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->communeRepository =$communeRepository;
         $this->departementRepository = $departementRepository;
     }

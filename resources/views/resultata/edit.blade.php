@@ -17,8 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}" role="button" class="btn btn-success">ACCUEIL</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('resultata.index') }}" role="button" class="btn btn-success">RETOUR</a></li>
-
+                        <li class="breadcrumb-item active"><a href="{{ route('menuax') }}" role="button" class="btn btn-success">Menu</a></li>
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -49,7 +48,13 @@
                                             @endforeach
 
                                     </select>
+                                </div><div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Interventions (en cours qui cadrent avec les LA et IP de la stratégie)</label>
+                                        <input type="text" name="iccs" value="{{ $resultata->iccs }}" class="form-control"  required>
+                                    </div>
                                 </div>
+
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Valeur atteinte</label>

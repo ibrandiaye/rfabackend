@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard/{projet_id}', 'HomeController@dashboard')->name('dashboard');
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@index')->name('home.home');
+Route::get('/', 'HomeController@index')->name('home')->middleware('admin');
+//Route::get('/home', 'HomeController@index')->name('home.home')->middleware('admin');;
 Route::resource('projet', ProjetController::class);
 Route::resource('indicateur', IndicateurController::class);
 Route::resource('resultat', ResultatController::class);
@@ -60,4 +60,15 @@ Route::get('rapport/edit/{projet_id}','RapportController@edit')->name('rapport.e
 Route::post('rapport/store','RapportController@store')->name('rapport.store');
 Route::put('rapport/update','RapportController@update')->name('rapport.update');
 Route::get('pays/region/{pays_id}','RegionController@getRegionByPays')->name('pays.region');
+Route::get('/menuax', function () {
+    return view('menuax');
+})->name('menuax')->middleware('admin');
+Route::get('/cs', function () {
+    return view('cs');
+})->name('cs');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('admin');
+//Route::get('/proj', 'ProjetController@index')->name('home')->middleware('admin');;

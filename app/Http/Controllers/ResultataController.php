@@ -11,7 +11,7 @@ class ResultataController extends Controller
     protected $resultataRepository;
     protected $indicateuraRepository;
     public function __construct(ResultataRepository $resultataRepository, IndicateuraRepository $indicateuraRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->resultataRepository =$resultataRepository;
         $this->indicateuraRepository = $indicateuraRepository;
 

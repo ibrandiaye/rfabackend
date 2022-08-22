@@ -25,7 +25,7 @@
                 </div><!-- /.container-fluid -->
             </div>
 
-        {!! Form::model($projet, ['method'=>'PATCH','route'=>['projet.update', $projet->id]]) !!}
+        {!! Form::model($projet, ['method'=>'PATCH','route'=>['projet.update', $projet->id],'enctype'=>'multipart/form-data']) !!}
             @csrf
              <div class="card border-danger border-0">
                         <div class="card-header bg-success text-center">FORMULAIRE DE MODIFICATION TABLE</div>
@@ -65,6 +65,7 @@
                                             <option value="">Veuillez Selectionnez</option>
                                             <option value="Cadre logique" {{old('typecadre', $projet->typecadre) == 'Cadre logique' ? 'selected' : ''}}>Cadre Logique</option>
                                             <option value="Cadre de  resultat"  {{old('typecadre', $projet->typecadre) == 'Cadre de  resultat' ? 'selected' : ''}}>Cadre de  resultat</option>
+                                            <option value="Plan d'action" {{old('typecadre', $projet->typecadre) == 'Plan d\'action' ? 'selected' : ''}}>Plan d'action</option>
                                         </select>
                                     </div>
                                 </div>
@@ -80,6 +81,12 @@
                                         @endforeach
                                     </div>
 
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Image en avant</label>
+                                        <input type="file" name="image"  class="form-control" >
+                                    </div>
                                 </div>
                                 <div>
                                     <center>
