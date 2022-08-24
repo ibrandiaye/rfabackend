@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">{{ $projets->nom }}</h1>
+                    <h1 class="m-0 text-dark">{{ $projet->nom }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -181,7 +181,7 @@
                                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                 {!! Form::close() !!} --}}
-                                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id,'projet'=>$projets->id]) }}" class="btn btn-info">Résultats</a>
+                                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id,'projet'=>$projet->id]) }}" class="btn btn-info">Résultats</a>
 
 
                                             </td>
@@ -190,7 +190,7 @@
                                                 {!! Form::open(['method' => 'DELETE', 'route'=>['indicateur.destroy', $indicateur->id], 'style'=> 'display:inline', 'onclick'=>"if(!confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?')) { return false; }"]) !!}
                                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                 {!! Form::close() !!}
-                                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id,'projet'=>$projets->id]) }}" class="btn btn-info">Résultats</a>
+                                                <a href="{{ route('indicateur.resultat', ['indicateur'=>$indicateur->id,'projet'=>$projet->id]) }}" class="btn btn-info">Résultats</a>
 
 
                                             </td> --}}

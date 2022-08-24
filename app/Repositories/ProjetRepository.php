@@ -30,4 +30,9 @@ class ProjetRepository extends RessourceRepository{
         ->where('id',$projet_id)
         ->first();
     }
+    public function getProjetWithIndicateur($projet_id){
+           return Projet::with(['indicateurs','indicateurs.resultats','indicateurs.resultats.resultatDetails'])
+        ->where('id',$projet_id)
+        ->get();
+    }
 }
