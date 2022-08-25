@@ -290,7 +290,7 @@ const myChart = new Chart(ctx, {
 })
 
 
-/*  var map = L.map('address-map').setView([parseFloat(document.getElementById('latitude').value),parseFloat(document.getElementById('longitude').value)],8);
+var map = L.map('address-map').setView([parseFloat(document.getElementById('latitude').value),parseFloat(document.getElementById('longitude').value)],8);
 L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=r7UvRXibthwur7YWRkfQ',{
     attribution : '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
 }).addTo(map);
@@ -332,8 +332,6 @@ marker.bindPopup('  <h6> Village/quartier de {{ $village->nomv }}</h6>@foreach (
 
 
 
-
-*/
 </script>
 
 @endsection
