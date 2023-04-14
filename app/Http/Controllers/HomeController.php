@@ -65,9 +65,11 @@ class HomeController extends Controller
         $indicateurs = $this->indicateurRepository->getIndicateurByProjetAndResultat($projet_id);
         $ct = 0;
         $listCommune = array();
+        $nbActivite=0;
+        $nbEcart=0;
         //dd($communes);
         $listVillages =array();
-       /*  foreach ($villages as $key1 => $village) {
+        foreach ($villages as $key1 => $village) {
             // $listCommune[]= '$commune->nomc';
             //dd($key1);
             $listVillages[$key1] =  new Village();
@@ -93,7 +95,7 @@ class HomeController extends Controller
            $listVillages[$key1]->indicateur = $listIndicateurs;
        }
     //}
-        foreach ($communes as $key1 => $commune) {
+         foreach ($communes as $key1 => $commune) {
              // $listCommune[]= '$commune->nomc';
              //dd( $commune->nomc);
              $listCommune[$key1] = new Commune();
@@ -102,7 +104,7 @@ class HomeController extends Controller
             $listCommune[$key1]->longitude= $commune->longitudec;
             $listIndicateurs = array();
            // foreach ($projets as $key => $proj) {
-            foreach ($indicateurs as $key2 => $indicateur) {
+           foreach ($indicateurs as $key2 => $indicateur) {
                 $listIndicateurs[$key2] = new Indicateur ();
                 $listIndicateurs[$key2]->indicateur = $indicateur->indicateur;
                 $ctrts = 0;
@@ -120,19 +122,19 @@ class HomeController extends Controller
 
     }
        //dd($listVillages);
-        $nbActivite = $this->activiteRepository->countActivite($projet_id);
-        $communes = $this->communeRepository->getCommuneByAndrealisation($projet_id);
+       $nbActivite = $this->activiteRepository->countActivite($projet_id);
+       // $communes = $this->communeRepository->getCommuneByAndrealisation($projet_id);
         //dd($communes);
         $nbEcart = $nbActivite - $nbSuiviActivite;
        // $indicateurs = $this->indicateurRepository->getIndicateurByProjetAndResultat($projet_id);
         $sumIndicateurs = $this->indicateurRepository->getSumIndicateurByProjet($projet_id);
-        foreach ($indicateurs as $key => $indicateur) {
+          foreach ($indicateurs as $key => $indicateur) {
              foreach ($sumIndicateurs as $key1 => $sumIndicateur) {
                 if($indicateur->indicateur === $sumIndicateur->indicateur){
                         $indicateurs[$key]->sum = $sumIndicateur->rts;
                 }
              }
-        }*/
+        }
 
         $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);
        // dd($suiviActivites);
