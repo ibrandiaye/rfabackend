@@ -91,7 +91,7 @@ class HomeController extends Controller
                $listIndicateurs[$key2]->rts = $listResultats;
            }
            $listVillages[$key1]->indicateur = $listIndicateurs;
-       } */
+       }
     //}
         foreach ($communes as $key1 => $commune) {
              // $listCommune[]= '$commune->nomc';
@@ -132,7 +132,7 @@ class HomeController extends Controller
                         $indicateurs[$key]->sum = $sumIndicateur->rts;
                 }
              }
-        }
+        }*/
 
         $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);
        // dd($suiviActivites);
