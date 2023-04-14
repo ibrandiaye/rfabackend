@@ -15,7 +15,7 @@ class SuiviActiviteRepository extends RessourceRepository{
       return DB::table('suivi_activites')
       ->join('activites','suivi_activites.activite_id','=','activites.id')
       ->join('projets','activites.projet_id','=','projets.id')
-      ->where('projets.id',$projet_id)
+     ->where('projets.id',$projet_id)
       ->select('suivi_activites.*','activites.nom as noma','projets.nom')
       ->get();
   }

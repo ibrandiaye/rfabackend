@@ -54,7 +54,7 @@ class HomeController extends Controller
     }
     public function dashboard($projet_id){
 
-  //      $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);
+  //    $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);
         $communes = $this->communeRepository->getCommuneByProject($projet_id);
         $villages = $this->villageRepository->getVillageByProject($projet_id);
         $rtsIndicateurs =  array();
@@ -103,7 +103,7 @@ class HomeController extends Controller
             $listIndicateurs = array();
            // foreach ($projets as $key => $proj) {
             foreach ($indicateurs as $key2 => $indicateur) {
-                $listIndicateurs[$key2] = new Indicateur();
+                $listIndicateurs[$key2] = new Indicateur ();
                 $listIndicateurs[$key2]->indicateur = $indicateur->indicateur;
                 $ctrts = 0;
                 $listResultats = 0;
@@ -133,7 +133,9 @@ class HomeController extends Controller
                 }
              }
         }
+
         $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);
+       // dd($suiviActivites);
         $nbActiviteNonPrevu = $this->suiviActiviteRepository->countSuiviActiviteNonPrevu($projet_id);
         return view('welcome',compact('projet','projet_id','nbSuiviActivite',
     'nbActivite','nbEcart','indicateurs',/*'projets',*/'listCommune','suiviActivites','nbActiviteNonPrevu',

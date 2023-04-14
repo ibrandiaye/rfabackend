@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{!! asset('assets/dist/css/adminlte.min.css') !!}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{!! asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') !!}">
-    <!-- Daterange picker -->
+    <!-- Daterange picker --
     <link rel="stylesheet" href="{!! asset('assets/plugins/daterangepicker/daterangepicker.css') !!}">
     <!-- summernote -->
     <link rel="stylesheet" href="{!! asset('assets/plugins/summernote/summernote-bs4.css') !!}">
