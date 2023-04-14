@@ -67,7 +67,7 @@ class HomeController extends Controller
         $listCommune = array();
         //dd($communes);
         $listVillages =array();
-      /*   foreach ($villages as $key1 => $village) {
+       /*  foreach ($villages as $key1 => $village) {
             // $listCommune[]= '$commune->nomc';
             //dd($key1);
             $listVillages[$key1] =  new Village();
@@ -91,7 +91,7 @@ class HomeController extends Controller
                $listIndicateurs[$key2]->rts = $listResultats;
            }
            $listVillages[$key1]->indicateur = $listIndicateurs;
-       }
+       } */
     //}
         foreach ($communes as $key1 => $commune) {
              // $listCommune[]= '$commune->nomc';
@@ -132,7 +132,7 @@ class HomeController extends Controller
                         $indicateurs[$key]->sum = $sumIndicateur->rts;
                 }
              }
-        } */
+        }
 
         $suiviActivites = $this->suiviActiviteRepository->getSuiviActiviteByProjet($projet_id);
        // dd($suiviActivites);
