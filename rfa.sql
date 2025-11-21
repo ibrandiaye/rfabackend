@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 25 août 2022 à 13:07
--- Version du serveur :  10.4.14-MariaDB
--- Version de PHP : 7.2.34
+-- Généré le : ven. 21 nov. 2025 à 13:56
+-- Version du serveur :  10.4.16-MariaDB
+-- Version de PHP : 7.3.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -78,6 +78,40 @@ INSERT INTO `activites` (`id`, `nom`, `debut`, `fin`, `rts`, `responsable`, `ema
 (7, 'Organisation d\'un atelier virtuel d\'habilitation de l\'équipe du projet', '2021-08-01', '2021-08-31', '<p>Les équipes régionales du projet sont habilités en prélude du déroulement des activités<br></p>', 'Coord ECOPOP  UGP Staff BR', 'ecopop@endaecopop.org', 1, '2022-04-04 13:45:14', '2022-04-04 13:45:14', 'non realise', NULL),
 (8, 'Ouverture officielle des bureaux régionaux et installation des équipes régionales du projet RFA', '2021-09-01', '2021-11-30', '<p>les buraux régioanaux sont officiellement opérationnels<br></p>', 'Coord ECOPOP  UGP Staff BR', 'ecopop@endaecopop.org', 1, '2022-04-04 13:58:43', '2022-04-04 13:58:43', 'non realise', NULL),
 (9, 'Ateliers d\'apprentissage collectifs', '2021-10-01', '2022-09-30', '<p>le suivi du déroulement des activités est effectif, les interventions sont harmonisées et les bonnes pratiques partagées<br></p>', 'UGP  Staff BR   RAF', 'ecopop@endaecopop.org', 1, '2022-04-04 14:03:43', '2022-04-04 14:03:43', 'non realise', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `appels`
+--
+
+CREATE TABLE `appels` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `titre` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `theme` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `association` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pays` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `montant` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dater` date NOT NULL,
+  `dates` date NOT NULL,
+  `personne` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `document` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `etat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dateb` date DEFAULT NULL,
+  `datet` date DEFAULT NULL,
+  `dateexp` date DEFAULT NULL,
+  `region` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ct` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bailleur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `axe` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ligne` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `secteur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -377,6 +411,49 @@ INSERT INTO `desagreges` (`id`, `quantite`, `titre`, `indicateur_id`, `created_a
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `documents`
+--
+
+CREATE TABLE `documents` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `intitule` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `appel_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `doc_appels`
+--
+
+CREATE TABLE `doc_appels` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nomdoc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `appel_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `employes`
+--
+
+CREATE TABLE `employes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `failed_jobs`
 --
 
@@ -482,6 +559,24 @@ CREATE TABLE `indicateur_activites` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `matrices`
+--
+
+CREATE TABLE `matrices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tache` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `datelimite` date NOT NULL,
+  `personneimplique` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comentaire` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `appel_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `employe_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `migrations`
 --
 
@@ -544,7 +639,24 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (50, '2022_05_09_120952_update_table_resultats_add_column', 31),
 (51, '2022_05_18_101415_update_table_users_add_column', 32),
 (52, '2022_05_18_112822_update_table_users_add_column_projet_id', 33),
-(53, '2022_06_01_094159_update_table_projets_add_column_logo', 34);
+(53, '2022_06_01_094159_update_table_projets_add_column_logo', 34),
+(54, '2021_05_10_113838_create_types_table', 35),
+(55, '2021_05_10_113914_create_appels_table', 35),
+(56, '2021_05_27_115235_add_column_in_appel', 35),
+(57, '2022_10_20_105645_create_matrices_table', 35),
+(58, '2022_10_20_110442_create_employes_table', 35),
+(59, '2022_10_20_111223_update_table_add_columm_employe_id', 35),
+(60, '2022_10_24_102621_update_table_appels_add_column', 35),
+(61, '2022_10_24_104512_update_table_appels_add_column_date', 35),
+(62, '2025_02_24_104429_create_documents_table', 35),
+(63, '2025_03_04_141804_add_column_to_appels_table', 35),
+(64, '2025_04_25_121924_add_column_ct_region_to_appels_table', 35),
+(65, '2025_05_16_095230_add_column_reference_to_appels_table', 35),
+(66, '2025_05_20_130708_create_doc_appels_table', 35),
+(67, '2025_06_16_130912_add_column_user_id_to_appels_table', 35),
+(68, '2025_09_18_151803_create_conventions_table', 35),
+(69, '2025_10_13_115913_update_column_to_partenariats_table', 36),
+(70, '2025_10_13_155447_add_date_fin_column_to_partenariats_table', 37);
 
 -- --------------------------------------------------------
 
@@ -639,6 +751,49 @@ CREATE TABLE `oauth_refresh_tokens` (
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `partenariats`
+--
+
+CREATE TABLE `partenariats` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `numero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `volet_partenariat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `denomination_partenaire` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `personne_contact` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fonction` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telephone_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `signature_convention` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_signature_convention` date DEFAULT NULL,
+  `annee` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `duree_partenariat` int(11) DEFAULT NULL,
+  `feuille_de_route` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `axes_collaboration` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `axe_plan_strategique` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lignes_action_strategique` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `odd` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '(DC2Type:json)',
+  `point_focal_ecopop` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `integrer_convention` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `etat_avancement` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `commentaire` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `date_fin` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `partenariats`
+--
+
+INSERT INTO `partenariats` (`id`, `numero`, `volet_partenariat`, `denomination_partenaire`, `personne_contact`, `fonction`, `telephone_email`, `signature_convention`, `date_signature_convention`, `annee`, `duree_partenariat`, `feuille_de_route`, `axes_collaboration`, `axe_plan_strategique`, `lignes_action_strategique`, `odd`, `point_focal_ecopop`, `integrer_convention`, `etat_avancement`, `commentaire`, `created_at`, `updated_at`, `date_fin`) VALUES
+(1, NULL, 'Collectivités Territoriales', 'GIZ', 'Modou fall', 'Chef Bureau', 'ibra789ndiaye@gmail.com', 'Oui', NULL, '2024', 3, 'Oui', NULL, 'Axe 1 : Renforcement de la démocratie, de la gouvernance, de la participation et de l’engagement citoyen aux différentes échelles du local à l’international', 'Axe 1 LA 2: Accompagnement des collectivités territoriales pour renforcer les processus de dématérialisation des procédures administratives et fiscales, de transparence et de suivi budgétaire', '\"[\\\"5 - \\\\u00c9galit\\\\u00e9 entre les sexes\\\",\\\"6 - Eau propre et assainissement\\\"]\"', NULL, '1761509150.docx', NULL, NULL, '2025-10-09 15:08:33', '2025-10-26 20:05:50', '2026-01-18'),
+(2, NULL, 'Agences Projets et Programmes de l\'Etat', 'qsdd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Axe 1 : Renforcement de la démocratie, de la gouvernance, de la participation et de l’engagement citoyen aux différentes échelles du local à l’international', 'Axe 1 LA 2: Accompagnement des collectivités territoriales pour renforcer les processus de dématérialisation des procédures administratives et fiscales, de transparence et de suivi budgétaire', NULL, NULL, NULL, NULL, NULL, '2025-10-13 11:42:12', '2025-10-13 11:42:12', NULL),
+(8, NULL, 'Agences Projets et Programmes de l\'Etat', 'qsdd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Axe 1 : Renforcement de la démocratie, de la gouvernance, de la participation et de l’engagement citoyen aux différentes échelles du local à l’international', 'Axe 1 LA 2: Accompagnement des collectivités territoriales pour renforcer les processus de dématérialisation des procédures administratives et fiscales, de transparence et de suivi budgétaire', NULL, NULL, NULL, NULL, NULL, '2025-10-13 11:53:10', '2025-10-13 11:53:10', '2025-10-31'),
+(12, NULL, 'Collectivités Territoriales', 'qsdd', NULL, NULL, NULL, NULL, '2028-10-13', '2025', 36, NULL, NULL, 'Axe 2 : Renforcement de la sécurité, de la réponse aux changements climatiques, de la résilience et de l’attractivité des territoires', 'Axe 2 LA 8: Appui aux initiatives de développement de l’économie bleue et de l’économie verte à travers l’implication du secteur privé local ;', '\"null\"', NULL, NULL, NULL, NULL, '2025-10-13 16:12:43', '2025-10-13 16:12:43', '2025-10-01'),
+(13, NULL, 'Collectivités Territoriales', 'qsdd', NULL, NULL, NULL, NULL, '2025-10-13', '2025', 36, NULL, NULL, 'Axe 2 : Renforcement de la sécurité, de la réponse aux changements climatiques, de la résilience et de l’attractivité des territoires', 'Axe 2 LA 8: Appui aux initiatives de développement de l’économie bleue et de l’économie verte à travers l’implication du secteur privé local ;', '\"null\"', NULL, NULL, NULL, NULL, '2025-10-13 16:13:31', '2025-10-13 16:13:31', '2028-10-13');
 
 -- --------------------------------------------------------
 
@@ -1466,6 +1621,19 @@ INSERT INTO `suivi_activites` (`id`, `niveaur`, `resultat`, `observation`, `acti
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `types`
+--
+
+CREATE TABLE `types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nom` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
@@ -1577,6 +1745,14 @@ ALTER TABLE `activites`
   ADD KEY `activites_projet_id_foreign` (`projet_id`);
 
 --
+-- Index pour la table `appels`
+--
+ALTER TABLE `appels`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `appels_type_id_foreign` (`type_id`),
+  ADD KEY `appels_user_id_foreign` (`user_id`);
+
+--
 -- Index pour la table `axes`
 --
 ALTER TABLE `axes`
@@ -1609,6 +1785,26 @@ ALTER TABLE `departements`
 ALTER TABLE `desagreges`
   ADD PRIMARY KEY (`id`),
   ADD KEY `desagreges_indicateur_id_foreign` (`indicateur_id`);
+
+--
+-- Index pour la table `documents`
+--
+ALTER TABLE `documents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `documents_appel_id_foreign` (`appel_id`);
+
+--
+-- Index pour la table `doc_appels`
+--
+ALTER TABLE `doc_appels`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `doc_appels_appel_id_foreign` (`appel_id`);
+
+--
+-- Index pour la table `employes`
+--
+ALTER TABLE `employes`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `failed_jobs`
@@ -1644,6 +1840,14 @@ ALTER TABLE `indicateur_activites`
   ADD PRIMARY KEY (`id`),
   ADD KEY `indicateur_activites_indicateur_id_foreign` (`indicateur_id`),
   ADD KEY `indicateur_activites_activite_id_foreign` (`activite_id`);
+
+--
+-- Index pour la table `matrices`
+--
+ALTER TABLE `matrices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `matrices_appel_id_foreign` (`appel_id`),
+  ADD KEY `matrices_employe_id_foreign` (`employe_id`);
 
 --
 -- Index pour la table `migrations`
@@ -1684,6 +1888,12 @@ ALTER TABLE `oauth_personal_access_clients`
 ALTER TABLE `oauth_refresh_tokens`
   ADD PRIMARY KEY (`id`),
   ADD KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
+
+--
+-- Index pour la table `partenariats`
+--
+ALTER TABLE `partenariats`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `password_resets`
@@ -1751,6 +1961,12 @@ ALTER TABLE `suivi_activites`
   ADD KEY `suivi_activites_commune_id_foreign` (`commune_id`);
 
 --
+-- Index pour la table `types`
+--
+ALTER TABLE `types`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
@@ -1790,6 +2006,12 @@ ALTER TABLE `activites`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT pour la table `appels`
+--
+ALTER TABLE `appels`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `axes`
 --
 ALTER TABLE `axes`
@@ -1818,6 +2040,24 @@ ALTER TABLE `departements`
 --
 ALTER TABLE `desagreges`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT pour la table `documents`
+--
+ALTER TABLE `documents`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `doc_appels`
+--
+ALTER TABLE `doc_appels`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `employes`
+--
+ALTER TABLE `employes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`
@@ -1850,10 +2090,16 @@ ALTER TABLE `indicateur_activites`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `matrices`
+--
+ALTER TABLE `matrices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT pour la table `oauth_clients`
@@ -1866,6 +2112,12 @@ ALTER TABLE `oauth_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `partenariats`
+--
+ALTER TABLE `partenariats`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `pays`
@@ -1916,6 +2168,12 @@ ALTER TABLE `suivi_activites`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT pour la table `types`
+--
+ALTER TABLE `types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
@@ -1950,6 +2208,13 @@ ALTER TABLE `activites`
   ADD CONSTRAINT `activites_projet_id_foreign` FOREIGN KEY (`projet_id`) REFERENCES `projets` (`id`);
 
 --
+-- Contraintes pour la table `appels`
+--
+ALTER TABLE `appels`
+  ADD CONSTRAINT `appels_type_id_foreign` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`),
+  ADD CONSTRAINT `appels_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Contraintes pour la table `cibles`
 --
 ALTER TABLE `cibles`
@@ -1974,6 +2239,18 @@ ALTER TABLE `desagreges`
   ADD CONSTRAINT `desagreges_indicateur_id_foreign` FOREIGN KEY (`indicateur_id`) REFERENCES `indicateurs` (`id`);
 
 --
+-- Contraintes pour la table `documents`
+--
+ALTER TABLE `documents`
+  ADD CONSTRAINT `documents_appel_id_foreign` FOREIGN KEY (`appel_id`) REFERENCES `appels` (`id`);
+
+--
+-- Contraintes pour la table `doc_appels`
+--
+ALTER TABLE `doc_appels`
+  ADD CONSTRAINT `doc_appels_appel_id_foreign` FOREIGN KEY (`appel_id`) REFERENCES `appels` (`id`);
+
+--
 -- Contraintes pour la table `images`
 --
 ALTER TABLE `images`
@@ -1991,6 +2268,13 @@ ALTER TABLE `indicateuras`
 ALTER TABLE `indicateur_activites`
   ADD CONSTRAINT `indicateur_activites_activite_id_foreign` FOREIGN KEY (`activite_id`) REFERENCES `activites` (`id`),
   ADD CONSTRAINT `indicateur_activites_indicateur_id_foreign` FOREIGN KEY (`indicateur_id`) REFERENCES `indicateurs` (`id`);
+
+--
+-- Contraintes pour la table `matrices`
+--
+ALTER TABLE `matrices`
+  ADD CONSTRAINT `matrices_appel_id_foreign` FOREIGN KEY (`appel_id`) REFERENCES `appels` (`id`),
+  ADD CONSTRAINT `matrices_employe_id_foreign` FOREIGN KEY (`employe_id`) REFERENCES `employes` (`id`);
 
 --
 -- Contraintes pour la table `projets`
