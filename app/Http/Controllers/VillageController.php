@@ -12,7 +12,7 @@ class villageController extends Controller
     protected $communeRepository;
 
     public function __construct(VillageRepository $villageRepository, CommuneRepository $communeRepository){
-        $this->middleware(['auth','admin']);
+        $this->middleware(['auth']);
         $this->villageRepository =$villageRepository;
         $this->communeRepository = $communeRepository;
     }

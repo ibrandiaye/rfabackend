@@ -19,6 +19,12 @@ class IsAdmin
             return $next($request);
 
         }
-        return redirect()->route('go.menu',['projet_id'=>auth()->user()->projet_id])->with('error','Vous n\'êtes pas autorisé');
+       /* elseif(auth()->user()->role=='sv')
+        {
+            return redirect()->route('go.menu',['projet_id'=>auth()->user()->projet_id])->with('error','Vous n\'êtes pas autorisé');
+        }*/
+       // return redirect()->route('go.menu',['projet_id'=>auth()->user()->projet_id])->with('error','Vous n\'êtes pas autorisé');
+     return redirect()->back()->withErrors( ['error' => "Vous n'avez l'autorisation d'acceder à cette page"]);
+
     }
 }

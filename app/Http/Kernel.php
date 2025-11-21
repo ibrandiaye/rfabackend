@@ -23,6 +23,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\Cors::class,
         \App\Http\Middleware\IsVolontaire::class,
+       //  \App\Http\Middleware\IsAppel::class,
+       //   \App\Http\Middleware\IsSv::class,
 
     ];
 
@@ -69,5 +71,7 @@ class Kernel extends HttpKernel
         'cors' => \App\Http\Middleware\Cors::class,
         'volontaire' => \App\Http\Middleware\IsVolontaire::class,
         'admin' => \App\Http\Middleware\IsAdmin::class,
+        'appel' => \App\Http\Middleware\IsAppel::class,
+        'sv' => \App\Http\Middleware\IsSv::class,
     ];
 }

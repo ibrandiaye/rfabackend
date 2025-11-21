@@ -17,7 +17,7 @@ class ProjetController extends Controller
     protected $paysRepository;
     public function __construct(ProjetRepository $projetRepository, RegionRepository $regionRepository,
     PaysRepository $paysRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->projetRepository =$projetRepository;
         $this->regionRepository = $regionRepository;
         $this->paysRepository = $paysRepository;

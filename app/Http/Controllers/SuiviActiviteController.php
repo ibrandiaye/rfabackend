@@ -25,7 +25,7 @@ class SuiviActiviteController extends Controller
     ProjetRepository $projetRepository,CommuneRepository $communeRepository,
      ImageRepository $imageRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','sv']);
         $this->activiteRepository = $activiteRepository;
         $this->suiviActiviteRepository = $suiviActiviteRepository;
         $this->projetRepository = $projetRepository;
@@ -69,7 +69,7 @@ class SuiviActiviteController extends Controller
            // 'activite_id'=> 'restring',
             'dater'=> 'required|date',
         ]);
-        if($request['rp']){
+       if($request['rp']){
             $destinationPath = 'rp/'; // upload path
             $file = $request['rp'];
             $docName = time().".". $file->getClientOriginalExtension();

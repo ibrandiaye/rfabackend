@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Commune;
 use App\Indicateur;
 use App\Repositories\ActiviteRepository;
+use App\Repositories\AppelRepository;
 use App\Repositories\CommuneRepository;
 use App\Repositories\IndicateurRepository;
 use App\Repositories\ProjetRepository;
@@ -20,6 +21,7 @@ class HomeController extends Controller
     protected $activiteRepository;
     protected $communeRepository;
     protected $villageRepository;
+    protected $appelRepository;
     /**
      * Create a new controller instance.
      *
@@ -27,7 +29,7 @@ class HomeController extends Controller
      */
     public function __construct(ProjetRepository $projetRepository, SuiviActiviteRepository $suiviActiviteRepository,
     IndicateurRepository $indicateurRepository,ActiviteRepository $activiteRepository,
-     CommuneRepository $communeRepository, VillageRepository $villageRepository)
+     CommuneRepository $communeRepository, VillageRepository $villageRepository,AppelRepository $appelRepository)
     {
         $this->middleware('auth');
       $this->projetRepository = $projetRepository;
@@ -36,6 +38,7 @@ class HomeController extends Controller
       $this->activiteRepository = $activiteRepository;
       $this->communeRepository = $communeRepository;
       $this->villageRepository = $villageRepository;
+        $this->appelRepository = $appelRepository;
     }
 
     /**
@@ -142,5 +145,13 @@ class HomeController extends Controller
         return view('welcome',compact('projet','projet_id','nbSuiviActivite',
     'nbActivite','nbEcart','indicateurs',/*'projets',*/'listCommune','suiviActivites','nbActiviteNonPrevu',
     'listVillages'));
+    }
+    public function homeAppel()
+    {
+        $nbLoading = $this->appelRepository->getNbProjectLoading();
+        $nbApprouved = $this->appelRepository->getNbProjectApprouved();
+        $nbNotApprouved = $this->appelRepository->getNbProjectNotApprouved();
+        $appels = $this->appelRepository->getAll();
+        return view('appelprojet.dashboard',compact('nbLoading','nbApprouved','nbNotApprouved','appels'));
     }
 }

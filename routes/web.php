@@ -18,7 +18,7 @@ Route::get('/dashboard/{projet_id}', 'HomeController@dashboard')->name('dashboar
 
 //Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home')->middleware('admin');
+Route::get('/menus', 'HomeController@index')->name('home')->middleware('admin');
 //Route::get('/home', 'HomeController@index')->name('home.home')->middleware('admin');;
 Route::resource('projet', ProjetController::class);
 Route::resource('indicateur', IndicateurController::class);
@@ -34,6 +34,8 @@ Route::resource('axe', AxeController::class);
 Route::resource('action', ActionController::class);
 Route::resource('indicateura', IndicateuraController::class);
 Route::resource('resultata', ResultataController::class);
+Route::resource('user', UserController::class);
+
 Route::get('desagrege/by/indicateur/{indicateur_id}','ResultatController@getDesagregeByIndicateur');
 Route::get('projet/indicateur/{projet_id}','IndicateurController@getIndicateurByProjet')->name('projet.indicateur');
 Route::get('indicateur/resultat/{indicateur}/{projet}','ResultatController@getResultatByIndicateur')->name('indicateur.resultat');
@@ -70,5 +72,21 @@ Route::get('/cs', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('admin');
+Route::get('/home', 'HomeController@index')->name('home')->middleware(['auth','sv']);
 //Route::get('/proj', 'ProjetController@index')->name('home')->middleware('admin');;
+
+Route::get('/', function () {
+    return view('menup');
+})->name('menup')->middleware("auth");
+
+Route::resource('/type', TypeController::class)->middleware(['auth','appel']);
+Route::resource('/appel', AppelController::class)->middleware(['auth','appel']);
+Route::resource('/employe', EmployeController::class)->middleware(['auth','appel']);
+Route::resource('/matrice', MatriceController::class)->middleware(['auth','appel']);
+Route::resource('/document_appel', DocumentController::class)->middleware(['auth','appel']);
+
+Route::get('/home/appel', 'HomeController@homeAppel')->name('home.appel')->middleware(['auth','appel']);
+
+
+
+Route::resource('partenariat', PartenariatController::class);

@@ -27,7 +27,7 @@ class ResultatController extends Controller
     public function __construct(ResultatRepository $resultatRepository, IndicateurRepository $indicateurRepository,
     ResultatDetailRepository $resultatDetailRepository, DesagregeRepository $desagregeRepository,CommuneRepository $communeRepository,
     ProjetRepository $projetRepository,VillageRepository $villageRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','sv']);
         $this->resultatRepository =$resultatRepository;
         $this->indicateurRepository = $indicateurRepository;
         $this->resultatDetailRepository = $resultatDetailRepository;

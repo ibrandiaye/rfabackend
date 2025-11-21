@@ -28,7 +28,7 @@ class IndicateurController extends Controller
     public function __construct(IndicateurRepository $indicateurRepository, ProjetRepository $projetRepository,
     ResultatDetailRepository $resultatDetailRepository, DesagregeRepository $desagregeRepository,
     CibleRepository $cibleRepository,RegionRepository $regionRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','sv']);
         $this->indicateurRepository =$indicateurRepository;
         $this->projetRepository = $projetRepository;
         $this->resultatDetailRepository = $resultatDetailRepository;

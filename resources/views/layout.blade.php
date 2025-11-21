@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,7 +7,6 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
-    <script src="{!! asset('assets/plugins/jquery/jquery.min.js') !!}"></script>
     <link rel="stylesheet" href="{!! asset('assets/plugins/fontawesome-free/css/all.min.css') !!}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -27,11 +25,10 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{!! asset('assets/plugins/summernote/summernote-bs4.css') !!}">
     <!-- Google Font: Source Sans Pro -->
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 
-    <script src=https://cdn.datatables.net/plug-ins/1.10.20/i18n/French.json></script>
 
     @yield('calendar')
     @yield('carte')
@@ -222,7 +219,10 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+<script src="{!! asset('assets/plugins/jquery/jquery.min.js') !!}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 
+<script src="https://cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{!! asset('assets/plugins/jquery-ui/jquery-ui.min.js') !!}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

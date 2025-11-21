@@ -12,7 +12,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-info">GESTION DES Projets</h1>
+                        <h1 class="m-0 text-info">GESTION DES PROJETS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -87,11 +87,9 @@
                                 <div class="col-lg-6">
 
                                     <div class="form-group" id="region_id">
-                                        {{--  @foreach ($regions as $region )  --}}
 
 
                                         </div>
-                                        {{--  @endforeach  --}}
                                     </div>
 
                                 </div>
@@ -121,15 +119,16 @@ $("#pays_id").change(function () {
 var pays_id =  $("#pays_id").children("option:selected").val();
     // alert("You have selected the country - " + region_id);
     //var region_id = "<option value=''>Veuillez selectionner</option>";
-    var region_id ='';
+    var region_id ="<label>Région d'intervention</label>";
     $.ajax({
         type:'GET',
-        url:"http://46.105.120.83/suivievaluation/public/pays/region/"+pays_id,
+       // url:"http://46.105.120.83/suivievaluation/public/pays/region/"+pays_id,
+       url:"http://127.0.0.1:8000/pays/region/"+pays_id,
         data:'_token = <?php echo csrf_token() ?>',
         success:function(data) {
-
+            //alert(data);
             //var region_id = " <option value=''>Sélectionner</option>";
-            $.each(data,function(index,row){
+           $.each(data,function(index,row){
                 //alert(row.nomd);
                 region_id +=" <div class='custom-control custom-checkbox' >"+
                 "<input class='custom-control-input' name='zone[]' type='checkbox' id="+row.id+" value="+row.id+">"+

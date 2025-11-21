@@ -13,7 +13,7 @@ class rapportController extends Controller
 
     public function __construct(RapportRepository $rapportRepository,
     ProjetRepository $projetRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','sv']);
         $this->rapportRepository =$rapportRepository;
         $this->projetRepository = $projetRepository;
     }

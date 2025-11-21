@@ -191,7 +191,8 @@
         var village_id = "<option value=''>Veuillez selectionner</option>";
         $.ajax({
             type:'GET',
-            url:'http://46.105.120.83/suivievaluation/public/villages/commune/'+commune_id,
+           // url:'http://46.105.120.83/suivievaluation/public/villages/commune/'+commune_id,
+            url:'http://127.0.0.1:8000/villages/commune/'+commune_id,
             data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
 
