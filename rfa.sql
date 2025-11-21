@@ -1957,7 +1957,7 @@ ALTER TABLE `resultat_details`
 --
 ALTER TABLE `suivi_activites`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `suivi_activites_activite_id_foreign` (`activite_id`),
+--  ADD KEY `suivi_activites_activite_id_foreign` (`activite_id`),
   ADD KEY `suivi_activites_commune_id_foreign` (`commune_id`);
 
 --
