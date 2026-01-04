@@ -90,3 +90,12 @@ Route::get('/home/appel', 'HomeController@homeAppel')->name('home.appel')->middl
 
 
 Route::resource('partenariat', PartenariatController::class);
+
+// ENDA ET ODD Module Routes
+Route::group(['prefix' => 'odd', 'as' => 'odd.', 'middleware' => ['auth']], function () {
+    Route::get('/dashboard', 'OddDashboardController@index')->name('dashboard');
+    Route::resource('projects', 'OddProjectController');
+    Route::post('results/store', 'OddResultController@store')->name('results.store');
+    Route::delete('results/{id}', 'OddResultController@destroy')->name('results.destroy');
+    Route::get('targets/{odd_id}', 'OddResultController@getTargets')->name('targets.get');
+});
